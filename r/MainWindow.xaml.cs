@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace CrossyWords
+namespace r
 {
     /// <summary>
     /// Логика взаимодействия для MainWindow.xaml
@@ -23,7 +23,6 @@ namespace CrossyWords
         public MainWindow()
         {
             InitializeComponent();
-            Frame_main.Navigate(new LogInPage());
         }
     }
 }

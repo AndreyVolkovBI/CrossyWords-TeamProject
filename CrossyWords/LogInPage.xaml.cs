@@ -16,14 +16,23 @@ using System.Windows.Shapes;
 namespace CrossyWords
 {
     /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
+    /// Логика взаимодействия для LogInPage.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class LogInPage : Page
     {
-        public MainWindow()
+        public LogInPage()
         {
             InitializeComponent();
-            Frame_main.Navigate(new LogInPage());
+        }
+
+        private void LogIn_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new GamePage());
+        }
+
+        private void SignUp_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new SignUpPage());
         }
     }
 }
