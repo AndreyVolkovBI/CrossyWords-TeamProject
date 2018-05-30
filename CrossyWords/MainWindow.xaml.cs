@@ -23,7 +23,7 @@ namespace CrossyWords
         public MainWindow()
         {
             InitializeComponent();
-            Frame_main.Navigate(new LogInPage());
+            Frame_main.Navigate(new GamePage()); //for testing
         }
     }
 }

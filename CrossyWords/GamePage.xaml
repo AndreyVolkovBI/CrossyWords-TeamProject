@@ -10,11 +10,13 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
-            <RowDefinition Height="3*" />
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="3*"/>
         </Grid.RowDefinitions>
         <TextBlock Grid.Row="0" Text="Crossy Words" TextAlignment="Center" VerticalAlignment="Center" FontSize="35" FontFamily="./#FARRAY"/>
         <Button Name="Header" Opacity="0" Click="Header_Click"/>
+        <TextBlock x:Name="CurrentWord_textblock" TextAlignment="Center" FontSize="20" VerticalAlignment="Bottom" HorizontalAlignment="Center" MinHeight="30" MinWidth="300"/>
+        <TextBlock/>
         <Grid Grid.Row="1" Margin="200 0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
@@ -32,7 +34,7 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
 
-            <Button Name="btn1" Grid.Row="0" Grid.Column="0"/>
+            <Button Name="btn1" Grid.Row="0" Grid.Column="0" Click="Click_Button_btn1"/>
             <Button Name="btn2" Grid.Row="0" Grid.Column="1"/>
             <Button Name="btn3" Grid.Row="0" Grid.Column="2"/>
             <Button Name="btn4" Grid.Row="0" Grid.Column="3"/>
