@@ -8,6 +8,7 @@ namespace CrossyWords.Core
 {
     public interface IRepository
     {
+        int Dimension { get; set; }
         List<string> Words { get; set; }
         List<Cell> Cells { get; set; }
 
