@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CrossyWords.Core.Users;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,6 +21,8 @@ namespace CrossyWords.Core
             }
         }
 
+        UsersData _usersdata = new UsersData(); //repo ?
+
         IRepository _Repository = new Repository();
         //IRepository _dbRepository = new DatabaseRepository();
 
@@ -30,6 +33,11 @@ namespace CrossyWords.Core
             //if (typeof(T) == typeof(DatabaseRepository))
             //    return _dbRepository;
             return null;
+        }
+
+        public UsersData GetUsersData()
+        {
+            return _usersdata;
         }
     }
 }

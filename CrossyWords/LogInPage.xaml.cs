@@ -1,4 +1,6 @@
-﻿using System;
+﻿using CrossyWords.Core;
+using CrossyWords.Core.Users;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,6 +22,7 @@ namespace CrossyWords
     /// </summary>
     public partial class LogInPage : Page
     {
+        UsersData _usersdata = Factory.Default.GetUsersData();
         public LogInPage()
         {
             InitializeComponent();
@@ -27,12 +30,32 @@ namespace CrossyWords
 
         private void LogIn_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new GamePage());
+            if (CheckNullFields())
+            {
+                var user = _usersdata.FindUser(textbox_NickName.Text, textbox_Password.Password);
+                if (user == null)
+                    MessageBox.Show("Your account was not found", "Wrong data", MessageBoxButton.OK, MessageBoxImage.Stop);
+                else                
+                    NavigationService.Navigate(new GamePage(user));
+            }
         }
 
         private void SignUp_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new SignUpPage());
         }
+
+        private bool CheckNullFields()
+        {
+            if (string.IsNullOrWhiteSpace(textbox_NickName.Text) || string.IsNullOrWhiteSpace(textbox_Password.Password))
+            {
+                MessageBox.Show("You should fill all fields for registration");
+                return false;
+            }
+            else
+                return true;
+        }
+
+
     }
 }
