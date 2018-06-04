@@ -4,13 +4,14 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 
 namespace CrossyWords.Core
 {
     public class Cell
     {
         public int Id { get; set; }
-        public char Value { get; set; }
+        public Button Button { get; set; } = new Button();
     }
 
     public class Word
@@ -21,6 +22,8 @@ namespace CrossyWords.Core
 
     public class Repository : IRepository
     {
+        public int Dimension { get; set; } = 5;
+
         public List<string> Words { get; set; } = new List<string>(); // список всех слов
 
         public List<Cell> Cells { get; set; } = new List<Cell>(); // список всех ячеек

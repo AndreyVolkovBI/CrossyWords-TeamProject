@@ -1,5 +1,4 @@
 ﻿using CrossyWords.Core;
-using CrossyWords.Core.Users;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,32 +21,97 @@ namespace CrossyWords
     /// </summary>
     public partial class GamePage : Page
     {
+        bool _trackOn = false;
+        List<Cell> trackedCell;
+        List<Cell> cells = new List<Cell>();
+        Cell previousCell;
+
+        int idOfCell = 1;
+
         IRepository _repo = Factory.Default.GetRepository<Repository>();
 
-        List<Button> _butons;
+        //List<Button> _butons;
 
-        User _user;
-
-        public GamePage(User user)
+        public GamePage()
         {
             InitializeComponent();
+            Init();
+            //_butons = new List<Button> { btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9, btn10, btn11, btn12, btn13, btn14, btn15, btn16, btn17, btn18, btn19, btn20, btn21, btn22, btn23, btn24, btn25};
+            //FillButtons();
+        }
 
-            _user = user;
-            _butons = new List<Button> { btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9, btn10, btn11, btn12, btn13, btn14, btn15, btn16, btn17, btn18, btn19, btn20, btn21, btn22, btn23, btn24, btn25};
-            FillButtons();
+        private bool CheckPreviousButton(int id)
+        {
+            foreach (var item in _repo.GetIds(id))
+                if (previousCell.Id == item)
+                    return true;
+            return false;
         }
 
         private void FillButtons()
         {
             List<char> chars = new List<char> { 'Н','Р', 'Т', 'Р', 'И', 'Ы', 'Ы', 'Я', 'А', 'Н', 'И', 'Й', 'Д', 'В', 'Ш', 'Р', 'Р', 'О', 'А', 'Н', 'У', 'Т', 'Й', 'Ы', 'Н' };
 
-            for (int i = 0; i < _butons.Count; i++)
-            {
-                _butons[i].Content = chars[i];
-            }
+            //for (int i = 0; i < _butons.Count; i++)
+            //{
+            //    _butons[i].Content = chars[i];
+            //}
          //this list must be filled from repository
          
             
+        }
+
+        private void Init()
+        {
+            //buttons = new Cell[_repo.Dimension, _repo.Dimension];
+
+            for (int i = 0; i < _repo.Dimension; i++)
+            {
+                mainGrid.RowDefinitions.Add(new RowDefinition());
+                mainGrid.ColumnDefinitions.Add(new ColumnDefinition());
+            }
+
+            for (int i = 0; i < _repo.Dimension; i++)
+                for (int j = 0; j < _repo.Dimension; j++)
+                {
+                    var button = new Button();
+                    
+                    button.Click += btn_Click;
+                    button.MouseEnter += Button_MouseEnter;
+
+                    cells.Add(new Cell { Id = idOfCell, Button = button});
+                    idOfCell++;
+                    mainGrid.Children.Add(button);
+                    Grid.SetRow(button, i);
+                    Grid.SetColumn(button, j);
+                }
+        }
+
+        private void Button_MouseEnter(object sender, MouseEventArgs e)
+        {
+            if (_trackOn)
+            {
+                foreach (var item in cells)
+                    if (item.Button == (sender as Button) && CheckPreviousButton(cells.First(x => x.Button == (sender as Button)).Id))
+                    {
+                        previousCell = item;
+                        item.Button.Background = Brushes.LightBlue;
+                    }
+            }
+        }
+
+        private void btn_Click(object sender, RoutedEventArgs e)
+        {
+            _trackOn = !_trackOn;
+            if (_trackOn)
+            {
+                foreach (var item in cells)
+                    if (item.Button == (sender as Button))
+                    {
+                        previousCell = item;
+                        item.Button.Background = Brushes.LightBlue;
+                    }
+            }
         }
 
         private void Header_Click(object sender, RoutedEventArgs e)
@@ -62,15 +126,7 @@ namespace CrossyWords
 
         private void Click_Button_btn1(object sender, RoutedEventArgs e)
         {
-            CurrentWord_textblock.Text = btn1.Content.ToString();
-           
-          
-        }
-        int i = 0;
-        private void MouseDown_OnAllGrid(object sender, MouseButtonEventArgs e)
-        {
-            i++;
-            CurrentWord_textblock.Text = i.ToString();
+           // CurrentWord_textblock.Text = btn1.Content.ToString();
         }
     }
 }

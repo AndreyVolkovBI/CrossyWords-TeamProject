@@ -8,7 +8,7 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="GamePage">
 
-    <Grid Background="DeepSkyBlue" MouseDown="MouseDown_OnAllGrid">
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="3*"/>
@@ -17,52 +17,6 @@
         <Button Name="Header" Opacity="0" Click="Header_Click"/>
         <TextBlock x:Name="CurrentWord_textblock" TextAlignment="Center" FontSize="20" VerticalAlignment="Bottom" HorizontalAlignment="Center" MinHeight="30" MinWidth="300"/>
         <TextBlock/>
-        <Grid Grid.Row="1" Margin="200 0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-
-            <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
-
-            <Button Name="btn1" FontSize="33" FontWeight="Normal" Foreground="Gray" Background="White" Grid.Row="0" Grid.Column="0" Click="Click_Button_btn1"/>
-            <Button Name="btn2" FontSize="33" FontWeight="Normal" Foreground="Gray" Background="White" Grid.Row="0" Grid.Column="1"/>
-            <Button Name="btn3" FontSize="33" FontWeight="Normal" Foreground="Gray" Background="White" Grid.Row="0" Grid.Column="2"/>
-            <Button Name="btn4" FontSize="33" FontWeight="Normal" Foreground="Gray" Background="White" Grid.Row="0" Grid.Column="3"/>
-            <Button Name="btn5" FontSize="33" FontWeight="Normal" Foreground="Gray" Background="White" Grid.Row="0" Grid.Column="4"/>
-
-            <Button Name="btn6" FontSize="33" FontWeight="Normal" Foreground="Gray" Background="White" Grid.Row="1" Grid.Column="0"/>
-            <Button Name="btn7" FontSize="33" FontWeight="Normal" Foreground="Gray" Background="White" Grid.Row="1" Grid.Column="1"/>
-            <Button Name="btn8" FontSize="33" FontWeight="Normal" Foreground="Gray" Background="White" Grid.Row="1" Grid.Column="2"/>
-            <Button Name="btn9" FontSize="33" FontWeight="Normal" Foreground="Gray" Background="White" Grid.Row="1" Grid.Column="3"/>
-            <Button Name="btn10" FontSize="33" FontWeight="Normal" Foreground="Gray" Background="White" Grid.Row="1" Grid.Column="4"/>
-
-            <Button Name="btn11" FontSize="33" FontWeight="Normal" Foreground="Gray" Background="White" Grid.Row="2" Grid.Column="0"/>
-            <Button Name="btn12" FontSize="33" FontWeight="Normal" Foreground="Gray" Background="White" Grid.Row="2" Grid.Column="1"/>
-            <Button Name="btn13" FontSize="33" FontWeight="Normal" Foreground="Gray" Background="White" Grid.Row="2" Grid.Column="2"/>
-            <Button Name="btn14" FontSize="33" FontWeight="Normal" Foreground="Gray" Background="White" Grid.Row="2" Grid.Column="3"/>
-            <Button Name="btn15" FontSize="33" FontWeight="Normal" Foreground="Gray" Background="White" Grid.Row="2" Grid.Column="4"/>
-
-            <Button Name="btn16" FontSize="33" FontWeight="Normal" Foreground="Gray" Background="White" Grid.Row="3" Grid.Column="0"/>
-            <Button Name="btn17" FontSize="33" FontWeight="Normal" Foreground="Gray" Background="White" Grid.Row="3" Grid.Column="1"/>
-            <Button Name="btn18" FontSize="33" FontWeight="Normal" Foreground="Gray" Background="White" Grid.Row="3" Grid.Column="2"/>
-            <Button Name="btn19" FontSize="33" FontWeight="Normal" Foreground="Gray" Background="White" Grid.Row="3" Grid.Column="3"/>
-            <Button Name="btn20" FontSize="33" FontWeight="Normal" Foreground="Gray" Background="White" Grid.Row="3" Grid.Column="4"/>
-
-            <Button Name="btn21" FontSize="33" FontWeight="Normal" Foreground="Gray" Background="White" Grid.Row="4" Grid.Column="0"/>
-            <Button Name="btn22" FontSize="33" FontWeight="Normal" Foreground="Gray" Background="White" Grid.Row="4" Grid.Column="1"/>
-            <Button Name="btn23" FontSize="33" FontWeight="Normal" Foreground="Gray" Background="White" Grid.Row="4" Grid.Column="2"/>
-            <Button Name="btn24" FontSize="33" FontWeight="Normal" Foreground="Gray" Background="White" Grid.Row="4" Grid.Column="3"/>
-            <Button Name="btn25" FontSize="33" FontWeight="Normal" Foreground="Gray" Background="White" Grid.Row="4" Grid.Column="4"/>
-        </Grid>
+        <Grid Grid.Row="1" Name="mainGrid" Margin="200 0"/>
     </Grid>
 </Page>
