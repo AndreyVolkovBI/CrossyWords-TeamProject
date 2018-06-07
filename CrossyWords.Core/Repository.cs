@@ -11,6 +11,7 @@ namespace CrossyWords.Core
     public class Cell
     {
         public int Id { get; set; }
+        public string Value { get; set; }
         public Button Button { get; set; } = new Button();
     }
 
@@ -38,14 +39,85 @@ namespace CrossyWords.Core
         public void FillGaps()
         {
             Random r = new Random();
-            string word = Words[r.Next(0, 17)];
+            string word = Words[r.Next(0, 5)];
             Word currentWord = new Word { Value = word, Count = word.Length };
         }
 
-        public void FillAllCells(List<int> list, Word word)
+        public List<Cell> FillAllCells()
         {
+            Random r = new Random();
+            string word = Words[r.Next(0, 6)];
 
+            for (int l = 0; l < Words.Count; l++)
+            {
+                string currentWord = Words[l];
+                Cell currentCell = new Cell();
+
+                foreach (var item in Cells) // если есть первая буква, то начни строить от неё
+                {
+                    if (item.Value == currentWord[0].ToString())
+                        currentCell = item;
+                }
+
+                do // проверка на занятость ячейки
+                {
+                    currentCell = Cells[r.Next(25)];
+
+                } while (currentCell.Value != null);
+
+
+                for (int i = 0; i < currentWord.Length; i++)
+                {
+                    currentCell.Value = currentWord[i].ToString();
+                    List<int> idOfCurrentCell = GetIds(currentCell.Id);
+
+                    Stack<List<Cell>> st = new Stack<List<Cell>>();
+
+
+                    for (int k = 0; k < idOfCurrentCell.Count; k++)
+                    {
+                        if (Cells[idOfCurrentCell[k] - 1].Value == null)
+                        {
+                            currentCell = Cells[idOfCurrentCell[k] - 1];
+                            break;
+                        }
+                    }
+                }
+            }
+            return Cells;
         }
+
+        public List<int> GetIdsNew(int id) // новая функция для id соседей для матриц разной размерности
+        {
+            List<int> list = new List<int>();
+
+            if (Dimension == 2)
+            {
+                for (int i = id + 1; i <= 4; i++)
+                    list.Add(i);
+                for (int i = 1; i >= id - 1; i++)
+                    list.Add(i);
+            }
+            else if (Dimension == 3)
+            {
+
+            }
+            else if (Dimension == 4)
+            {
+
+            }
+            else if (Dimension == 5)
+            {
+
+            }
+            else if (Dimension == 6)
+            {
+
+            }
+
+            return new List<int>();
+        }
+
 
         public List<int> GetIds(int id) // возвращает список id ячеек
         {

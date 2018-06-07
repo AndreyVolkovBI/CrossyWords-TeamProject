@@ -1,5 +1,4 @@
 ﻿using CrossyWords.Core;
-using CrossyWords.Core.Users;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,11 +31,11 @@ namespace CrossyWords
         {
             if (CheckNullFields())
             {
-                var user = _usersdata.FindUser(textbox_NickName.Text, textbox_Password.Password);
-                if (user == null)
-                    MessageBox.Show("Your account was not found", "Wrong data", MessageBoxButton.OK, MessageBoxImage.Stop);
-                else                
-                    NavigationService.Navigate(new GamePage(user));
+                //var user = _usersdata.FindUser(textbox_NickName.Text, textbox_Password.Password);
+                //if (user == null)
+                //    MessageBox.Show("Your account was not found", "Wrong data", MessageBoxButton.OK, MessageBoxImage.Stop);
+                //else                
+                //    NavigationService.Navigate(new GamePage());
             }
         }
 

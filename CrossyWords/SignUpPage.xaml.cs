@@ -1,5 +1,4 @@
 ﻿using CrossyWords.Core;
-using CrossyWords.Core.Users;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,14 +32,14 @@ namespace CrossyWords
         {
             if (CheckNullFields())
             {
-                if (_users.UniqueNickName(textbox_NickName.Text))
-                {
-                    _users.AddNewUser(textbox_NickName.Text, textbox_Password.Text);
-                    MessageBox.Show("You have successfully registered!", "Thank You", MessageBoxButton.OK);
-                    NavigationService.Navigate(new LogInPage());
-                }
-                else
-                    MessageBox.Show("Unfortunately, your nickname already exists. Please, choose another nickname.", "Notification", MessageBoxButton.OK, MessageBoxImage.Asterisk);
+                //if (_users.UniqueNickName(textbox_NickName.Text))
+                //{
+                //    _users.AddNewUser(textbox_NickName.Text, textbox_Password.Text);
+                //    MessageBox.Show("You have successfully registered!", "Thank You", MessageBoxButton.OK);
+                //    NavigationService.Navigate(new LogInPage());
+                //}
+                //else
+                //    MessageBox.Show("Unfortunately, your nickname already exists. Please, choose another nickname.", "Notification", MessageBoxButton.OK, MessageBoxImage.Asterisk);
                 
             }
 

@@ -17,6 +17,6 @@
         <Button Name="Header" Opacity="0" Click="Header_Click"/>
         <TextBlock x:Name="CurrentWord_textblock" TextAlignment="Center" FontSize="20" VerticalAlignment="Bottom" HorizontalAlignment="Center" MinHeight="30" MinWidth="300"/>
         <TextBlock/>
-        <Grid Grid.Row="1" Name="mainGrid" Margin="200 0"/>
+        <Grid Grid.Row="1" Name="mainGrid" Margin="200 0" Background="Black"/>
     </Grid>
 </Page>
