@@ -29,31 +29,35 @@ namespace CrossyWords
 
         private void LogIn_Click(object sender, RoutedEventArgs e)
         {
-            if (CheckNullFields())
+            if (string.IsNullOrWhiteSpace(textbox_NickName.Text) || string.IsNullOrWhiteSpace(textbox_Password.Password))
+                MessageBox.Show("You should fill all fields");
+            else
             {
-                //var user = _usersdata.FindUser(textbox_NickName.Text, textbox_Password.Password);
-                //if (user == null)
-                //    MessageBox.Show("Your account was not found", "Wrong data", MessageBoxButton.OK, MessageBoxImage.Stop);
-                //else                
-                //    NavigationService.Navigate(new GamePage());
+                try
+                {
+                    var user = _usersdata.FindUser(textbox_NickName.Text, textbox_Password.Password);
+                    if (user != null)
+                    {
+                        NavigationService.Navigate(new GamePage());           // var user must be got by other window ... I will do it         
+                    }
+                    else
+                        MessageBox.Show("This account was not found");
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Error operation to data. We will try to solve this problem in the nearest time.", "Sorry for inconvenience", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+
+
             }
         }
 
         private void SignUp_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new SignUpPage());
+            NavigationService.Navigate(new SignUpPage(_usersdata));
         }
 
-        private bool CheckNullFields()
-        {
-            if (string.IsNullOrWhiteSpace(textbox_NickName.Text) || string.IsNullOrWhiteSpace(textbox_Password.Password))
-            {
-                MessageBox.Show("You should fill all fields for registration");
-                return false;
-            }
-            else
-                return true;
-        }
+        
 
 
     }

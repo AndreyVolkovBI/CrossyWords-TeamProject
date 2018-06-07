@@ -1,10 +1,10 @@
-﻿using CrossyWords.Core.Users;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data.Entity;
+using CrossyWords.Core.Users;
 
 namespace CrossyWords.Core
 {
@@ -27,7 +27,9 @@ namespace CrossyWords.Core
         {
             protected override void Seed(Context context)
             {
-                
+
+
+                //context.SaveChanges();
 
             }
         }

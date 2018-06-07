@@ -28,6 +28,10 @@ namespace CrossyWords
 
         int idOfCell = 1;
 
+        List<char> _currentword = new List<char>();
+        List<Button> _chosenbuttons = new List<Button>();
+        //currentword_textblock
+
         IRepository _repo = Factory.Default.GetRepository<Repository>();
 
         //List<Button> _butons;
@@ -47,7 +51,7 @@ namespace CrossyWords
             return false;
         }
 
-        private void FillButtons()
+        private void FillButtons() //
         {
             List<Cell> cellsTemp = _repo.FillAllCells();
 
@@ -81,6 +85,11 @@ namespace CrossyWords
                     Grid.SetRow(button, i);
                     Grid.SetColumn(button, j);
                 }
+            /*
+            for (int i = 0; i < cells.Count; i++)
+            {
+                cells[i].Button.Content = chars[i].ToString();
+            }*/
         }
 
         private void Button_MouseLeave(object sender, MouseEventArgs e)
@@ -94,10 +103,24 @@ namespace CrossyWords
             if (_trackOn)
             {
                 foreach (var item in cells)
-                    if (item.Button == (sender as Button) && CheckPreviousButton(cells.First(x => x.Button == (sender as Button)).Id))
+                    if (item.Button == (sender as Button) && CheckPreviousButton(cells.First(x => x.Button == (sender as Button)).Id) && _chosenbuttons.FirstOrDefault(b => b == item.Button) == null)
                     {
                         previousCell = item;
                         item.Button.Background = Brushes.Yellow;
+                        _chosenbuttons.Add(item.Button);
+                        _currentword.Add(char.Parse(item.Button.Content.ToString()));
+                        FillTextBox();
+                        //need?
+                        break;
+                    }
+                    else if (item.Button == (sender as Button) && _chosenbuttons.Count > 1 && _chosenbuttons[_chosenbuttons.Count - 2] == item.Button)
+                    {
+                        _chosenbuttons.Last().Background = Brushes.LightGray;
+                        _chosenbuttons.Remove(_chosenbuttons.Last());
+                        _currentword.RemoveAt(_currentword.Count - 1); //smt wrong with Last()
+                        previousCell = item;
+                        FillTextBox();
+                        break; //need?
                     }
             }
         }
@@ -112,8 +135,35 @@ namespace CrossyWords
                     {
                         previousCell = item;
                         item.Button.Background = Brushes.Yellow;
+                        //my
+                        _chosenbuttons.Add(item.Button);
+                        _currentword.Add(char.Parse(item.Button.Content.ToString()));
+                        FillTextBox();
                     }
             }
+            else
+            {
+                foreach (var button in _chosenbuttons)
+                {
+                    button.Background = Brushes.LightGray;
+                }
+                _chosenbuttons = new List<Button>();
+                //find currentwordtextbox in database
+                _currentword = new List<char>();
+                previousCell = new Cell();
+
+            }
+        }
+
+        private void FillTextBox()
+        {
+            string currentword = null;
+
+            for (int i = 0; i < _currentword.Count; i++)
+            {
+                currentword = currentword + _currentword[i];
+            }
+            CurrentWord_textblock.Text = currentword;
         }
 
         private void Header_Click(object sender, RoutedEventArgs e)

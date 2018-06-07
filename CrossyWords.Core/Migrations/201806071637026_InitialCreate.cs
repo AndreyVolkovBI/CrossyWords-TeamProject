@@ -12,8 +12,8 @@ namespace CrossyWords.Core.Migrations
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        NickName = c.String(),
-                        Password = c.String(),
+                        Name = c.String(nullable: false, maxLength: 50),
+                        Password = c.String(nullable: false, maxLength: 50),
                     })
                 .PrimaryKey(t => t.Id);
             

@@ -1,11 +1,12 @@
-﻿using System;
+﻿using CrossyWords.Core.Users;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CrossyWords.Core.Users
+namespace CrossyWords.Core
 {
     public class UsersData
     {
@@ -14,11 +15,11 @@ namespace CrossyWords.Core.Users
 
         }
 
-        public void AddNewUser(string nick, string password)
+        public void AddNewUser(string name, string password)
         {
             var user = new User
             {
-                NickName = nick,
+                Name = name,
                 Password = GetHash(password)
             };
 
@@ -30,27 +31,31 @@ namespace CrossyWords.Core.Users
 
         }
 
-        public bool UniqueNickName(string nickname)
+        public bool UniqueName(string name)
         {
+
             using (var context = new Context())
             {
-                if (context.Users.FirstOrDefault(u => u.NickName == nickname) == null)
+                if (context.Users.FirstOrDefault(u => u.Name == name) == null)
                     return true;
                 else
                     return false;
             }
+
         }
 
-        public User FindUser(string nick, string password)
+
+        public User FindUser(string name, string password)
         {
             password = GetHash(password);
             using (var context = new Context())
             {
-                var user = context.Users.FirstOrDefault(u => u.NickName == nick && u.Password == password);
+                var user = context.Users.FirstOrDefault(u => u.Name == name && u.Password == password);
                 return user;
             }
 
         }
+
         private static string GetHash(string password)
         {
             var md5 = MD5.Create();
@@ -58,5 +63,8 @@ namespace CrossyWords.Core.Users
             password));
             return Convert.ToBase64String(hash);
         }
+
+        
+  
     }
 }
