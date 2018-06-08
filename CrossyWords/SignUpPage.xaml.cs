@@ -40,12 +40,12 @@ namespace CrossyWords
                         try
                         {
                             _usersdata.AddNewUser(textbox_NickName.Text, textbox_Password.Text);
+                            NavigationService.Navigate(new LogInPage());
                         }
                         catch (Exception)
                         {
                             MessageBox.Show("Error with adding your account. We will try to solve this problem in the nearest time. Sorry for inconvenience.", "Error with data base", MessageBoxButton.OK, MessageBoxImage.Error);
                         }
-                        NavigationService.Navigate(new LogInPage());
                     }
                     else
                         MessageBox.Show("User with such email addres has already been registrated. Please, choose another email or login if you have account or if it application error - wait for some time while we will fix this problem.", "Email is not unique or data error", MessageBoxButton.OK, MessageBoxImage.Warning);
@@ -72,7 +72,7 @@ namespace CrossyWords
 
         private bool CheckLengthOfFields()
         {
-            if (textbox_NickName.Text.Length < 3 || textbox_Password.Text.Length < 3)
+            if (textbox_NickName.Text.Length < 4 || textbox_Password.Text.Length < 4)
             {
                 MessageBox.Show("All fields must contain more than 3 letters");
                 return false;

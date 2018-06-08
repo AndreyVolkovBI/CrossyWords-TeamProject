@@ -15,7 +15,7 @@ namespace CrossyWords.Core
         public Button Button { get; set; } = new Button();
     }
 
-    public class Word
+    public class Word_DB
     {
         public string Value { get; set; }
         public int Count { get; set; }
@@ -40,7 +40,7 @@ namespace CrossyWords.Core
         {
             Random r = new Random();
             string word = Words[r.Next(0, 5)];
-            Word currentWord = new Word { Value = word, Count = word.Length };
+            Word_DB currentWord = new Word_DB { Value = word, Count = word.Length };
         }
 
         public List<Cell> FillAllCells()
