@@ -14,5 +14,6 @@ namespace CrossyWords.Core
 
         List<int> GetIds(int id);
         List<Cell> FillAllCells();
+        List<string> ReadWords();
     }
 }

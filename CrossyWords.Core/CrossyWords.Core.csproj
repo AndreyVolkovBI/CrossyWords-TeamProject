@@ -51,9 +51,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="API\OxfordDictionary\DTO\ResultItem.cs" />
-    <Compile Include="API\OxfordDictionary\DTO\WordsResult.cs" />
+    <Compile Include="API\OxfordDictionary\DTO_Categories\ResultItem.cs" />
+    <Compile Include="API\OxfordDictionary\DTO_Categories\WordsResult.cs" />
+    <Compile Include="API\OxfordDictionary\DTO_Words\ResultItem.cs" />
+    <Compile Include="API\OxfordDictionary\DTO_Words\WordsResult.cs" />
     <Compile Include="API\OxfordDictionary\RequestManager.cs" />
+    <Compile Include="API\OxfordDictionary\Word.cs" />
     <Compile Include="API\OxfordDictionary\WordsResult.cs" />
     <Compile Include="Context.cs" />
     <Compile Include="Factory.cs" />

@@ -223,7 +223,7 @@ namespace CrossyWords.Core
 
         public List<string> ReadWords()
         {
-            using (var sr = new StreamReader("../../../words.txt", encoding: Encoding.GetEncoding(1251)))
+            using (var sr = new StreamReader("../../../basic.txt", encoding: Encoding.GetEncoding(1251)))
             {
                 string line = sr.ReadLine();
                 do

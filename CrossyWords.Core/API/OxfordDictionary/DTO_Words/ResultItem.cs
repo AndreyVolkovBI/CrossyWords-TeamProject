@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CrossyWords.Core.API.OxfordDictionary.DTO
+namespace CrossyWords.Core.API.OxfordDictionary.DTO_Words
 {
     public class ResultItem
     {

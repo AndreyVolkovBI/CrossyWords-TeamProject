@@ -180,5 +180,10 @@ namespace CrossyWords
         {
             // CurrentWord_textblock.Text = btn1.Content.ToString();
         }
+
+        private void ToSettingsPage_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new SettingsPage());
+        }
     }
 }

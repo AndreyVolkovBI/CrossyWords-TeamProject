@@ -13,12 +13,11 @@ namespace CrossyWords.Core
     {
 
         public DbSet<User> Users { get; set; }
-        public DbSet<WordsResult> Words { get; set; }
+        public DbSet<string> BasicWords { get; set; }
+        public DbSet<Word> Categories { get; set; }
 
-        public Context()
-            // To specify an explicit connection or DB name call the base class constructor
-            : base("DefaultConnection")
-        { }
+        // To specify an explicit connection or DB name call the base class constructor
+        public Context() : base("DefaultConnection") { }
 
         static Context()
         {
@@ -29,10 +28,14 @@ namespace CrossyWords.Core
         {
             protected override void Seed(Context context)
             {
-                var r = new RequestManager();
+                RequestManager request = new RequestManager();
+                IRepository repo = Factory.Default.GetRepository<Repository>();
 
-                foreach(var item in r.GetWords())
-                    context.Words.Add(item);
+                foreach(var item in request.GetCategories())
+                    context.Categories.Add(item);
+
+                foreach (var item in repo.ReadWords())
+                    context.BasicWords.Add(item);
 
                 context.SaveChanges();
 

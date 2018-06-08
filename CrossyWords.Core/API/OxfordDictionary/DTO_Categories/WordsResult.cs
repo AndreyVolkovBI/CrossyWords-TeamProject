@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CrossyWords.Core.API.OxfordDictionary.DTO
+namespace CrossyWords.Core.API.OxfordDictionary.DTO_Categories
 {
     public class WordsResult
     {
-        public int Id { get; set; }
-        public List<ResultItem> Results { get; set; }
+        public Dictionary<string, ResultItem> Results { get; set; }
     }
 }

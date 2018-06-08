@@ -21,17 +21,19 @@ namespace CrossyWords.Core.API.OxfordDictionary
         string language = "en";
         string filters = "domains=Art";
 
-        private string GetRequestUrl()
-            //=> $"https://od-api.oxforddictionaries.com:443/api/v1/domains/en";
+        private string GetRequestUrlWords(string language, string filters)
             => $"https://od-api.oxforddictionaries.com/api/v1/wordlist/{language}/{filters}";
 
-        public List<WordsResult> GetWords()
+        private string GetRequestUrlCategories()
+            => $"https://od-api.oxforddictionaries.com:443/api/v1/domains/en";
+
+        public List<WordsResult> GetWords(string language, string filters)
         {
             using (HttpClient client = new HttpClient())
             {
                 client.DefaultRequestHeaders.Add("app_id", _appId);
                 client.DefaultRequestHeaders.Add("app_key", _key);
-                var result = client.GetAsync(GetRequestUrl()).Result;
+                var result = client.GetAsync(GetRequestUrlWords(language, filters)).Result;
                 Console.WriteLine(result);
 
                 if (!result.IsSuccessStatusCode)
@@ -39,11 +41,37 @@ namespace CrossyWords.Core.API.OxfordDictionary
                 else
                 {
                     var jsonResult = result.Content.ReadAsStringAsync().Result;
-                    var searchResult = JsonConvert.DeserializeObject<DTO.WordsResult>(jsonResult);
+                    var searchResult = JsonConvert.DeserializeObject<DTO_Words.WordsResult>(jsonResult);
                     return searchResult.Results
                         .Select(x => new WordsResult()
                         {
                             Word = x.Word,
+                        }).ToList();
+                }
+
+            }
+        }
+
+        public List<Word> GetCategories()
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                client.DefaultRequestHeaders.Add("app_id", _appId);
+                client.DefaultRequestHeaders.Add("app_key", _key);
+                var result = client.GetAsync(GetRequestUrlCategories()).Result;
+                Console.WriteLine(result);
+
+                if (!result.IsSuccessStatusCode)
+                    throw new Exception("Invalid server reply");
+                else
+                {
+                    var jsonResult = result.Content.ReadAsStringAsync().Result;
+                    var searchResult = JsonConvert.DeserializeObject<DTO_Categories.WordsResult>(jsonResult);
+                    return searchResult.Results
+                        .Select(x => new Word()
+                        {
+                            Name = x.Key,
+                            En = x.Value.en
                         }).ToList();
                 }
 
