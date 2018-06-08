@@ -85,6 +85,8 @@ namespace CrossyWords
                     Grid.SetRow(button, i);
                     Grid.SetColumn(button, j);
                 }
+
+            bool isWordInList = _repo.IsWordInList();
             /*
             for (int i = 0; i < cells.Count; i++)
             {

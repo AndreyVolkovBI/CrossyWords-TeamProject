@@ -46,7 +46,7 @@ namespace CrossyWords.Core
         public List<Cell> FillAllCells()
         {
             Random r = new Random();
-            string word = Words[r.Next(0, 6)];
+            string word = Words[r.Next(0, 5)];
 
             for (int l = 0; l < Words.Count; l++)
             {
@@ -85,6 +85,14 @@ namespace CrossyWords.Core
                 }
             }
             return Cells;
+        }
+
+        public bool IsWordInList(string word)
+        {
+            foreach (var item in Words)
+                if (item == word)
+                    return true;
+            return false;
         }
 
         public List<int> GetIdsNew(int id) // новая функция для id соседей для матриц разной размерности
