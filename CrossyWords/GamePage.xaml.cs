@@ -86,7 +86,6 @@ namespace CrossyWords
                     Grid.SetColumn(button, j);
                 }
 
-            bool isWordInList = _repo.IsWordInList();
             /*
             for (int i = 0; i < cells.Count; i++)
             {
@@ -153,6 +152,8 @@ namespace CrossyWords
                 //find currentwordtextbox in database
                 _currentword = new List<char>();
                 previousCell = new Cell();
+                bool isWordInList = _repo.IsWordInList(CurrentWord_textblock.Text); //here we check the final word and give balls
+
 
             }
         }

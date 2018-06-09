@@ -13,11 +13,14 @@ namespace CrossyWords.Core
     {
 
         public DbSet<User> Users { get; set; }
-        public DbSet<string> BasicWords { get; set; }
+        public DbSet<BasicWord> BasicWords { get; set; }
         public DbSet<Word> Categories { get; set; }
 
         // To specify an explicit connection or DB name call the base class constructor
-        public Context() : base("DefaultConnection") { }
+        public Context()
+            // To specify an explicit connection or DB name call the base class constructor
+            : base("DefaultConnection")
+        { }
 
         static Context()
         {

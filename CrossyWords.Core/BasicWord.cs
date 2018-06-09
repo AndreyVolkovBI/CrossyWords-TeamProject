@@ -4,12 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CrossyWords.Core.API.OxfordDictionary
+namespace CrossyWords.Core
 {
-    public class Word
+    public class BasicWord
     {
         public int Id { get; set; }
-        public string Name { get; set; }
-        public string En { get; set; }
+        public string Word { get; set; }
     }
 }

@@ -10,11 +10,12 @@ namespace CrossyWords.Core
     {
         int Dimension { get; set; }
         List<string> Words { get; set; }
+        List<BasicWord> BasicWords { get; set; }
         List<Cell> Cells { get; set; }
 
         List<int> GetIds(int id);
         List<Cell> FillAllCells();
-        List<string> ReadWords();
+        List<BasicWord> ReadWords();
         bool IsWordInList(string word);
     }
 }

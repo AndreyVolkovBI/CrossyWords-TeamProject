@@ -26,6 +26,7 @@ namespace CrossyWords.Core
         public int Dimension { get; set; } = 5;
 
         public List<string> Words { get; set; } = new List<string>(); // список всех слов
+        public List<BasicWord> BasicWords { get; set; } = new List<BasicWord>();
 
         public List<Cell> Cells { get; set; } = new List<Cell>(); // список всех ячеек
 
@@ -39,18 +40,18 @@ namespace CrossyWords.Core
         public void FillGaps()
         {
             Random r = new Random();
-            string word = Words[r.Next(0, 5)];
+            string word = BasicWords[r.Next(0, 5)].Word;
             Word_DB currentWord = new Word_DB { Value = word, Count = word.Length };
         }
 
         public List<Cell> FillAllCells()
         {
             Random r = new Random();
-            string word = Words[r.Next(0, 5)];
+            string word = BasicWords[r.Next(0, 5)].Word;
 
-            for (int l = 0; l < Words.Count; l++)
+            for (int l = 0; l < BasicWords.Count; l++)
             {
-                string currentWord = Words[l];
+                string currentWord = BasicWords[l].Word;
                 Cell currentCell = new Cell();
 
                 foreach (var item in Cells) // если есть первая буква, то начни строить от неё
@@ -89,8 +90,8 @@ namespace CrossyWords.Core
 
         public bool IsWordInList(string word)
         {
-            foreach (var item in Words)
-                if (item == word)
+            foreach (var item in BasicWords)
+                if (item.Word == word)
                     return true;
             return false;
         }
@@ -229,20 +230,21 @@ namespace CrossyWords.Core
                 Cells.Add(new Cell { Id = i });
         }
 
-        public List<string> ReadWords()
+        public List<BasicWord> ReadWords()
         {
             using (var sr = new StreamReader("../../../basic.txt", encoding: Encoding.GetEncoding(1251)))
             {
                 string line = sr.ReadLine();
                 do
                 {
-                    Words.Add(line);
+                    var word = new BasicWord { Word = line };
+                    BasicWords.Add(word);
                     line = sr.ReadLine();
 
                 } while (!string.IsNullOrWhiteSpace(line));
             }
 
-            return Words;
+            return BasicWords;
         }
     }
 }
