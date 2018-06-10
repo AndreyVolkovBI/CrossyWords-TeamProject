@@ -1,9 +1,10 @@
-abolish 
-addiction 
-agriculture 
+abolish
+addiction
 amateur
-ambassador 
 
+agriculture 
+
+ambassador 
 ambulance
 anger 
 approve 

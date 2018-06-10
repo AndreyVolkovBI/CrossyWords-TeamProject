@@ -18,8 +18,8 @@ namespace CrossyWords.Core.API.OxfordDictionary
         const string _key = "3c7de0fed12121b3bf32942871c0620a";
         const string _appId = "d11b3c45";
 
-        string language = "en";
-        string filters = "domains=Art";
+        //string language = "en";
+        //string filters = "domains=Art";
 
         private string GetRequestUrlWords(string language, string filters)
             => $"https://od-api.oxforddictionaries.com/api/v1/wordlist/{language}/{filters}";

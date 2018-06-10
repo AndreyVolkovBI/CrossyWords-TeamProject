@@ -45,12 +45,12 @@ namespace CrossyWords
 
         private void SaveChanges_Click(object sender, RoutedEventArgs e)
         {
-
+            //NavigationService.Navigate(new GamePage());
         }
 
         private void Header_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new LogInPage());
+            //NavigationService.Navigate(new GamePage());
         }
     }
 }

@@ -40,14 +40,14 @@ namespace CrossyWords.Core
         public void FillGaps()
         {
             Random r = new Random();
-            string word = BasicWords[r.Next(0, 5)].Word;
+            string word = BasicWords[r.Next(0, 3)].Word;
             Word_DB currentWord = new Word_DB { Value = word, Count = word.Length };
         }
 
         public List<Cell> FillAllCells()
         {
             Random r = new Random();
-            string word = BasicWords[r.Next(0, 5)].Word;
+            string word = BasicWords[r.Next(0, 3)].Word;
 
             for (int l = 0; l < BasicWords.Count; l++)
             {
