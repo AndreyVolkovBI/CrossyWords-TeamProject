@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace CrossyWords
 {
@@ -21,6 +22,12 @@ namespace CrossyWords
     /// </summary>
     public partial class GamePage : Page
     {
+
+        DispatcherTimer _disptchertimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
+
+
+        int _timeforgameleft = 90;
+        int _points = 0;
         bool _trackOn = false;
         List<Cell> trackedCell; // selected cells
         List<Cell> cells = new List<Cell>(); // all the cells (id, button)
@@ -41,8 +48,51 @@ namespace CrossyWords
             InitializeComponent();
             Init();
             FillButtons();
+            MakeHandlerForTimer();
+            TextBlock_Points.Text = "Points: \n 0";
+            
         }
 
+        private void MakeHandlerForTimer()
+        {
+            EventHandler handler = (sender, args) =>
+            {
+                Timer();
+            };
+
+            _disptchertimer.Tick += handler;
+            _disptchertimer.Start();
+            handler(null, null);
+            ShowTimerToUser(); //and show info
+        }
+
+
+        private void Timer()
+        {
+            if (_timeforgameleft == 0)
+            {
+                //NavigationService.Navigate(new SettingsPage()); FOR SOME REASON IT GIVES ERROR AND DO NOT NAVIGATE
+            }
+            else
+            {
+                _timeforgameleft--;
+                ShowTimerToUser();
+            }
+
+        }
+
+        private void ShowTimerToUser()
+        {
+            int minutes = _timeforgameleft / 60;
+            int seconds = _timeforgameleft - minutes * 60;
+            string secondshow;
+            if (seconds < 10)
+                secondshow = "0" + seconds.ToString();
+            else
+                secondshow = seconds.ToString();
+            TextBlock_Timer.Text = "Time: \n" + minutes.ToString() + ":" + secondshow;
+        }
+   
         private bool CheckPreviousButton(int id)
         {
             foreach (var item in _repo.GetIds(id))
@@ -51,9 +101,9 @@ namespace CrossyWords
             return false;
         }
 
-        private void FillButtons() //
+        private void FillButtons() 
         {
-            List<Cell> cellsTemp = _repo.FillAllCells();
+            List<Cell> cellsTemp = _repo.FillAllCells(); 
 
             for (int i = 0; i < cells.Count; i++)
                 cells[i].Button.Content = cellsTemp[i].Value;
@@ -73,9 +123,9 @@ namespace CrossyWords
                     var button = new Button();
 
                     button.FontSize = 30;
-                    button.Margin = new Thickness(2);
+                    button.Margin = new Thickness(7);
 
-                    button.Click += btn_Click;
+                    button.Click += Buttotn_Click;
                     button.MouseEnter += Button_MouseEnter;
                     button.MouseLeave += Button_MouseLeave;
 
@@ -97,11 +147,13 @@ namespace CrossyWords
 
         private void Button_MouseLeave(object sender, MouseEventArgs e)
         {
-            (sender as Button).Margin = new Thickness(2);
+            (sender as Button).Margin = new Thickness(7);
         }
 
         private void Button_MouseEnter(object sender, MouseEventArgs e)
         {
+
+
             (sender as Button).Margin = new Thickness(5);
             if (_trackOn)
             {
@@ -109,7 +161,7 @@ namespace CrossyWords
                     if (item.Button == (sender as Button) && CheckPreviousButton(cells.First(x => x.Button == (sender as Button)).Id) && _chosenbuttons.FirstOrDefault(b => b == item.Button) == null)
                     {
                         previousCell = item;
-                        item.Button.Background = Brushes.Yellow;
+                        item.Button.Background = Brushes.Orange;
                         _chosenbuttons.Add(item.Button);
                         _currentword.Add(char.Parse(item.Button.Content.ToString()));
                         FillTextBox();
@@ -128,7 +180,7 @@ namespace CrossyWords
             }
         }
 
-        private void btn_Click(object sender, RoutedEventArgs e)
+        private void Buttotn_Click(object sender, RoutedEventArgs e)
         {
             _trackOn = !_trackOn;
             if (_trackOn)
@@ -137,7 +189,7 @@ namespace CrossyWords
                     if (item.Button == (sender as Button))
                     {
                         previousCell = item;
-                        item.Button.Background = Brushes.Yellow;
+                        item.Button.Background = Brushes.Orange;
                         //my
                         _chosenbuttons.Add(item.Button);
                         _currentword.Add(char.Parse(item.Button.Content.ToString()));
@@ -154,11 +206,21 @@ namespace CrossyWords
                 //find currentwordtextbox in database
                 _currentword = new List<char>();
                 previousCell = new Cell();
-                bool isWordInList = _repo.IsWordInList(CurrentWord_textblock.Text); //here we check the final word and give balls
-
-
+                CheckFinalWord();             
             }
         }
+
+
+        private void CheckFinalWord()
+        {
+            bool isWordInList = _repo.IsWordInList(CurrentWord_textblock.Text.ToString()); //here we check the final word and give balls
+            if (isWordInList)
+            {
+                _points = _points + CurrentWord_textblock.Text.Length * 2;
+                TextBlock_Points.Text = "Points: \n" + _points.ToString();
+            }
+        }
+
 
         private void FillTextBox()
         {
