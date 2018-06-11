@@ -59,6 +59,8 @@
     <Compile Include="API\OxfordDictionary\Word.cs" />
     <Compile Include="API\OxfordDictionary\WordsResult.cs" />
     <Compile Include="BasicWord.cs" />
+    <Compile Include="BruteForce\Algorithm.cs" />
+    <Compile Include="BruteForce\WordsHelper.cs" />
     <Compile Include="Context.cs" />
     <Compile Include="Factory.cs" />
     <Compile Include="IRepository.cs" />
