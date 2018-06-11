@@ -58,13 +58,28 @@ namespace CrossyWords.Core
 
         public void ChangeUserInformation(string name = null, string password = null)
         {
+
+            if (password !=null)
+            {
+                password = GetHash(password);
+            }
+            
             using (var context = new Context())
             {
                 if (name != null && password != null)
                 {
                     context.Users.First(u => u.Id == User.Id).Name = name;
-                    context.Users.First(u => u.Id == User.Id).Password = name;
+                    context.Users.First(u => u.Id == User.Id).Password = password;
                 }
+                else if(name !=null)
+                {
+                    context.Users.First(u => u.Id == User.Id).Name = name;
+                }
+                else if(password !=null)
+                {
+                    context.Users.First(u => u.Id == User.Id).Password = password;
+                }
+                context.SaveChanges();
             }
             
         }
