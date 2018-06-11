@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CrossyWords.Core.BruteForce;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -44,12 +45,20 @@ namespace CrossyWords.Core
             Word_DB currentWord = new Word_DB { Value = word, Count = word.Length };
         }
 
+        public void FillBlankCells()
+        {
+            Random r = new Random();
+            foreach (var cell in Cells)
+                if (cell.Value == null)
+                    cell.Value = GetAlphabet()[r.Next(25)];
+        }
+
         public List<Cell> FillAllCells()
         {
             Random r = new Random();
-            string word = BasicWords[r.Next(0, 3)].Word;
+            string word = BasicWords[r.Next(0, BasicWords.Count - 1)].Word;
 
-            for (int l = 0; l < BasicWords.Count; l++)
+            for (int l = 0; l < 5; l++)
             {
                 string currentWord = BasicWords[l].Word;
                 Cell currentCell = new Cell();
@@ -85,6 +94,8 @@ namespace CrossyWords.Core
                     }
                 }
             }
+
+            FillBlankCells();
             return Cells;
         }
 
@@ -237,14 +248,36 @@ namespace CrossyWords.Core
                 string line = sr.ReadLine();
                 do
                 {
-                    var word = new BasicWord { Word = line };
-                    BasicWords.Add(word);
+                    line.Trim();
+                    if (line.Length > 2)
+                    {
+                        var word = new BasicWord { Word = line };
+                        BasicWords.Add(word);
+                    }
                     line = sr.ReadLine();
 
                 } while (!string.IsNullOrWhiteSpace(line));
             }
 
             return BasicWords;
+        }
+
+        public List<string> GetAlphabet()
+        {
+            List<string> alphabet = new List<string>();
+            using (var sr = new StreamReader("../../../alphabet.txt", encoding: Encoding.GetEncoding(1251)))
+            {
+                string line = sr.ReadLine();
+                do
+                {
+                    line.Trim();
+                    alphabet.Add(line);
+                    line = sr.ReadLine();
+
+                } while (!string.IsNullOrWhiteSpace(line));
+            }
+
+            return alphabet;
         }
     }
 }

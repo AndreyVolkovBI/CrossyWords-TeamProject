@@ -71,7 +71,7 @@ namespace CrossyWords
         {
             if (_timeforgameleft == 0)
             {
-                //NavigationService.Navigate(new SettingsPage()); FOR SOME REASON IT GIVES ERROR AND DO NOT NAVIGATE
+                //NavigationService.Navigate(new SettingsPage()); //FOR SOME REASON IT GIVES ERROR AND DO NOT NAVIGATE
             }
             else
             {
@@ -135,14 +135,6 @@ namespace CrossyWords
                     Grid.SetRow(button, i);
                     Grid.SetColumn(button, j);
                 }
-
-            bool isWord = _repo.IsWordInList("abolish"); // example
-
-            /*
-            for (int i = 0; i < cells.Count; i++)
-            {
-                cells[i].Button.Content = chars[i].ToString();
-            }*/
         }
 
         private void Button_MouseLeave(object sender, MouseEventArgs e)
@@ -152,8 +144,6 @@ namespace CrossyWords
 
         private void Button_MouseEnter(object sender, MouseEventArgs e)
         {
-
-
             (sender as Button).Margin = new Thickness(5);
             if (_trackOn)
             {
@@ -220,7 +210,6 @@ namespace CrossyWords
                 TextBlock_Points.Text = "Points: \n" + _points.ToString();
             }
         }
-
 
         private void FillTextBox()
         {

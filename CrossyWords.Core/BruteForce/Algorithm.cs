@@ -51,5 +51,20 @@ namespace CrossyWords.Core.BruteForce
 
             return lists;
         }
+
+        public List<List<string>> GetLists() // how far from top should we go
+        {
+            List<List<string>> temp = new List<List<string>>();
+
+            for (int i = 0; i < lists.Count; i++)
+            {
+                for (int j = 0; j < lists[i].Count; j++)
+                {
+                    if (temp.Count < lists[i][j].Count)
+                        temp = lists[i][j];
+                }
+            }
+            return temp;
+        }
     }
 }
