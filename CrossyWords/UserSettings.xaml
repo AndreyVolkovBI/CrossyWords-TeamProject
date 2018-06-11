@@ -35,19 +35,23 @@
             </Grid.ColumnDefinitions>
 
                 <TextBlock Text="Name:" Margin="0 0 20 0" MinHeight="30" FontSize="20" VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
-                <TextBox MinWidth="150" FontSize="20" Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
+                <TextBox x:Name="TextBox_Name" MinWidth="150" FontSize="20" Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
 
                 <TextBlock Grid.Row="1" Text="New Password:" Margin="0 20 20 0" MinHeight="30" FontSize="20" VerticalAlignment="Top" HorizontalAlignment="Right"/>
-            <PasswordBox Grid.Row="1" Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0 20 0 0" MinWidth="150" FontSize="20"/>
+            <PasswordBox x:Name="TextBox_Password" Grid.Row="1" Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0 20 0 0" MinWidth="150" FontSize="20"/>
             <TextBlock Grid.Row="1" Text="Repeat Password:" Margin="0 0 20 35" MinHeight="30" FontSize="20" VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
-            <PasswordBox Grid.Row="1" Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="0 0 0 35" MinWidth="150" FontSize="20"/>
+            <PasswordBox x:Name="TextBox_RepeatPassword" Grid.Row="1" Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="0 0 0 35" MinWidth="150" FontSize="20"/>
 
             <TextBlock Grid.Row="2" Text="Review:" Margin="0 30 20 0" MinHeight="30" FontSize="20" VerticalAlignment="Top" HorizontalAlignment="Right"/>
-            <TextBox Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Row="2" MinWidth="250" MinHeight="30" Margin="0 30 0 0" FontSize="15"/>
+            <TextBox x:Name="TextBox_Review" Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Row="2" Width="250" MinHeight="30" Margin="0 30 0 0" FontSize="15"/>
 
 
 
             <Button Content="Save Changes" Grid.ColumnSpan="2" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" Click="Button_SaveChanges"/>
+
+            <Button Grid.Column="1" Grid.Row="2" VerticalAlignment="Top" HorizontalAlignment="Right" Background="White" MinHeight="30" MinWidth="30" Margin="0 30 0 0" Click="Button_SendReview_Click">
+                <Image Source="../TelegrammPhoto.png" Width="30" Height="30"/>
+            </Button>
 
 
         </Grid>

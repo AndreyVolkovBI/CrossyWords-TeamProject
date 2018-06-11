@@ -16,6 +16,7 @@ namespace CrossyWords.Core
         public DbSet<Battle> Battles { get; set; }
         public DbSet<BasicWord> BasicWords { get; set; }
         public DbSet<Word> Categories { get; set; }
+        public DbSet<Review> Reviews { get; set; }
 
         // To specify an explicit connection or DB name call the base class constructor
         public Context()

@@ -96,10 +96,15 @@
     <Compile Include="Migrations\201806110748085_FixDBFinal.Designer.cs">
       <DependentUpon>201806110748085_FixDBFinal.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201806111158173_AddNewClass.cs" />
+    <Compile Include="Migrations\201806111158173_AddNewClass.Designer.cs">
+      <DependentUpon>201806111158173_AddNewClass.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository.cs" />
     <Compile Include="Users\Battle.cs" />
+    <Compile Include="Users\Review.cs" />
     <Compile Include="Users\User.cs" />
     <Compile Include="Users\UsersData.cs" />
   </ItemGroup>
@@ -131,7 +136,12 @@
     <EmbeddedResource Include="Migrations\201806110748085_FixDBFinal.resx">
       <DependentUpon>201806110748085_FixDBFinal.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806111158173_AddNewClass.resx">
+      <DependentUpon>201806111158173_AddNewClass.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Images\TelegrammPhoto.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

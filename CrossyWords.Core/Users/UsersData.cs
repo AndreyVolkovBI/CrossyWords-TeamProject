@@ -46,6 +46,38 @@ namespace CrossyWords.Core
 
         }
 
+        public bool AllowChanges(string name)
+        {
+            if (name == User.Name)
+                return true;
+            else if (UniqueName(name))
+                return true;
+            else
+                return false;
+        }
+
+        public void ChangeUserInformation(string name = null, string password = null)
+        {
+            using (var context = new Context())
+            {
+                if (name != null && password != null)
+                {
+                    context.Users.First(u => u.Id == User.Id).Name = name;
+                    context.Users.First(u => u.Id == User.Id).Password = name;
+                }
+            }
+            
+        }
+
+        public void SendReview(string message)
+        {
+            Review _review = new Review { Text = message };
+            using (var context = new Context())
+            {
+                context.Reviews.Add(_review);
+            }
+        }
+
 
         public bool FindUser(string name, string password)
         {
