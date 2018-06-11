@@ -124,35 +124,96 @@ namespace CrossyWords.Core
         {
             using (var context = new Context())
             {
-                var users = context.Users.Where(s => s.Name.Contains(begginingOfName)).ToList();
+                var users = context.Users.Where(u => u.Name.Contains(begginingOfName) && u.Id != User.Id && context.Battles.FirstOrDefault(b => b.User_1.Id == User.Id && b.User_2.Id == u.Id || b.User_1.Id == u.Id && b.User_2.Id == User.Id) == null).ToList();
                 return users;
             }
         }
 
-        public void CreateBattle(User opponent)
+        public bool IsMakingBattleAllowable()
         {
-            var Battle = new Battle
-            {
-                User_1 = User,
-                User_2 = opponent
-
-            };
-
             using (var context = new Context())
             {
-                context.Battles.Add(Battle);
+                var users = context.Users.Where(u => u.Id != User.Id && context.Battles.FirstOrDefault(b => b.User_1.Id == User.Id && b.User_2.Id == u.Id || b.User_1.Id == u.Id && b.User_2.Id == User.Id) == null).ToList();
+                if (users.Count == 0)
+                    return false;
+                else
+                    return true;
+            }
+        }
+
+
+        public bool CheckLimitationsInGames()
+        {
+            using (var context = new Context())
+            {
+                var battles = context.Battles.Where(b => b.User_1.Id == User.Id || b.User_2.Id == User.Id).ToList();
+
+                if (battles.Count > 4)
+                    return false;
+                else
+                    return true;
+            }
+        }
+
+
+        public void MakeRandomBattle()
+        {
+            User opponent;
+            using (var context = new Context())
+            {
+                Random r = new Random();
+                do
+                {
+                    int random = r.Next(0, context.Users.Count());
+                    opponent = context.Users.ToList()[random];
+                } while (opponent.Id == User.Id || context.Battles.FirstOrDefault(b => b.User_1.Id == User.Id && b.User_2.Id == opponent.Id || b.User_1.Id == opponent.Id && b.User_2.Id == User.Id) != null);
+            }
+            MakeBattle(opponent);
+        }
+
+        public void MakeBattle(User opponent)
+        {  
+            using (var context = new Context())
+            {
+                context.Battles.Add(new Battle { User_1 = context.Users.First(u => u.Id == User.Id), User_2 = context.Users.First(u => u.Id == opponent.Id)});
                 context.SaveChanges();
             }
         }
 
-        public List<Battle> GetAllCurrentBattles()
+        public List<BattleForInfo> GetAllCurrentBattles()
         {
             using (var context = new Context())
             {
                 var battles = context.Battles.Include("User_1").Include("User_2").Where(b => b.User_1.Id == User.Id || b.User_2.Id == User.Id).ToList();
-                return battles;
+
+                List<BattleForInfo> battleForInfos = new List<BattleForInfo>();
+
+                foreach (var battle in battles)
+                {
+                    User opponent;
+                    string score;
+                    if (battle.User_1.Id == User.Id)
+                    {
+                        opponent = battle.User_2;
+                        score = battle.Score_User1.ToString() + ":" + battle.Score_User2.ToString();
+                    }
+                    else
+                    {
+                        opponent = battle.User_1;
+                        score = battle.Score_User2.ToString() + ":" + battle.Score_User1.ToString();
+                    }
+
+                    var batfori = new BattleForInfo
+                    {
+                        Opponent = opponent,
+                        Score = score
+                    };
+                    battleForInfos.Add(batfori);
+                }
+                return battleForInfos;
             }
         }
+
         
   
     }

@@ -31,8 +31,8 @@ namespace CrossyWords
         private void ShowAllInformation()
         {
             TextBlock_Win.Text = "Win: \n" + _usersData.User.Win.ToString();
-            TextBlock_Win.Text = "Draw: \n" + _usersData.User.Draw.ToString();
-            TextBlock_Win.Text = "Win: \n" + _usersData.User.Lose.ToString();
+            TextBlock_Draw.Text = "Draw: \n" + _usersData.User.Draw.ToString();
+            TextBLock_Lose.Text = "Lose: \n" + _usersData.User.Lose.ToString();
 
             DataGridInfoBattles.ItemsSource = _usersData.GetAllCurrentBattles();
 

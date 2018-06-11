@@ -37,8 +37,8 @@
 
             <DataGrid x:Name="DataGridInfoBattles" Grid.Row="1" Margin="30 0 15 15" AutoGenerateColumns="False" IsReadOnly="True">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Opponent" Width="2*" Binding="{Binding User}" />
-                    <DataGridTextColumn Header="Score" Width="1*" Binding="{Binding MinutesLeft}" />
+                    <DataGridTextColumn Header="Score" Width="1*" Binding="{Binding Score}" />
+                    <DataGridTextColumn Header="Opponent" Width="2*" Binding="{Binding Opponent.Name}" />
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>

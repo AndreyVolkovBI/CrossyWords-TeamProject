@@ -9,6 +9,6 @@ namespace CrossyWords.Core.Users
     public class BattleForInfo
     {
         public User Opponent { get; set; }
-
+        public string Score { get; set; }
     }
 }
