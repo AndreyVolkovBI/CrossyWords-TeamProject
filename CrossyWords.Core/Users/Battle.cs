@@ -14,10 +14,10 @@ namespace CrossyWords.Core.Users
         public User User_1 { get; set; }
         public User User_2 { get; set; }
         public string AllWords { get; set; }
-        public int Score_User1 { get; set; }
-        public int Score_User2 { get; set; }
-        public int PointsLastGame_User1 { get; set; }
-        public int PointsLastGame_User2 { get; set; }
+        public int? Score_User1 { get; set; }
+        public int? Score_User2 { get; set; }
+        public int? PointsLastGame_User1 { get; set; }
+        public int? PointsLastGame_User2 { get; set; }
 
     }
 }

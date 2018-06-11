@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CrossyWords.Core;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,6 +21,7 @@ namespace CrossyWords
     /// </summary>
     public partial class UserChallenge : Page
     {
+        UsersData _usersdata = Factory.Default.GetUsersData();
         public UserChallenge()
         {
             InitializeComponent();
@@ -41,6 +43,18 @@ namespace CrossyWords
         {
             NavigationService.Navigate(new UserSettings());
 
+        }
+
+        
+
+        private void TextBox_FindOpponent_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (!string.IsNullOrWhiteSpace(TextBox_FindUser.Text))
+            {
+                DataGridOpponents.ItemsSource = null;
+                DataGridOpponents.ItemsSource = _usersdata.FindOpponents(TextBox_FindUser.Text);
+            }
+            
         }
     }
 }

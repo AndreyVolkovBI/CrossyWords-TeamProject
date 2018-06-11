@@ -120,6 +120,39 @@ namespace CrossyWords.Core
             return Convert.ToBase64String(hash);
         }
 
+        public List<User> FindOpponents(string begginingOfName)
+        {
+            using (var context = new Context())
+            {
+                var users = context.Users.Where(s => s.Name.Contains(begginingOfName)).ToList();
+                return users;
+            }
+        }
+
+        public void CreateBattle(User opponent)
+        {
+            var Battle = new Battle
+            {
+                User_1 = User,
+                User_2 = opponent
+
+            };
+
+            using (var context = new Context())
+            {
+                context.Battles.Add(Battle);
+                context.SaveChanges();
+            }
+        }
+
+        public List<Battle> GetAllCurrentBattles()
+        {
+            using (var context = new Context())
+            {
+                var battles = context.Battles.Include("User_1").Include("User_2").Where(b => b.User_1.Id == User.Id || b.User_2.Id == User.Id).ToList();
+                return battles;
+            }
+        }
         
   
     }
