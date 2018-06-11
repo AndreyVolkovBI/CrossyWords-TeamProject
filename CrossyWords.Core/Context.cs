@@ -13,6 +13,7 @@ namespace CrossyWords.Core
     {
 
         public DbSet<User> Users { get; set; }
+        public DbSet<Battle> Battles { get; set; }
         public DbSet<BasicWord> BasicWords { get; set; }
         public DbSet<Word> Categories { get; set; }
 

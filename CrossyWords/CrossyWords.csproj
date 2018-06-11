@@ -76,6 +76,18 @@
     <Compile Include="SignUpPage.xaml.cs">
       <DependentUpon>SignUpPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserChallenge.xaml.cs">
+      <DependentUpon>UserChallenge.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserGames.xaml.cs">
+      <DependentUpon>UserGames.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserRating.xaml.cs">
+      <DependentUpon>UserRating.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserSettings.xaml.cs">
+      <DependentUpon>UserSettings.xaml</DependentUpon>
+    </Compile>
     <Page Include="GamePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -101,6 +113,22 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="SignUpPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserChallenge.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserGames.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserRating.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserSettings.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

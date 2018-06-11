@@ -71,7 +71,7 @@ namespace CrossyWords
         {
             if (_timeforgameleft == 0)
             {
-                //NavigationService.Navigate(new SettingsPage()); //FOR SOME REASON IT GIVES ERROR AND DO NOT NAVIGATE
+                //NavigationService.Navigate(new UserGames()); //FOR SOME REASON IT GIVES ERROR AND DO NOT NAVIGATE
             }
             else
             {

@@ -35,11 +35,10 @@ namespace CrossyWords
             {
                 string text = textbox_Password.Password;
                 try
-                {
-                    var user = _usersdata.FindUser(textbox_NickName.Text, textbox_Password.Password);
-                    if (user != null)
+                {                    
+                    if (_usersdata.FindUser(textbox_NickName.Text, textbox_Password.Password))
                     {
-                        NavigationService.Navigate(new GamePage());           // var user must be got by other window ... I will do it         
+                        NavigationService.Navigate(new UserGames());           // var user must be got by other window ... I will do it         
                     }
                     else
                         MessageBox.Show("This account was not found");

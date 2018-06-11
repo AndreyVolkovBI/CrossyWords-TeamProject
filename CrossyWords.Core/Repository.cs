@@ -1,4 +1,5 @@
 ﻿using CrossyWords.Core.BruteForce;
+using CrossyWords.Core.Users;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -24,6 +25,9 @@ namespace CrossyWords.Core
 
     public class Repository : IRepository
     {
+
+
+
         public int Dimension { get; set; } = 5;
 
         public List<string> Words { get; set; } = new List<string>(); // список всех слов

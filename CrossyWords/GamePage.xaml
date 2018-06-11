@@ -18,7 +18,6 @@
         <TextBlock x:Name="CurrentWord_textblock" TextAlignment="Center" FontSize="20" VerticalAlignment="Bottom" HorizontalAlignment="Center" MinHeight="30" MinWidth="300"/>
         <TextBlock/>
         <Grid Grid.Row="1" Name="mainGrid" Margin="200 0"/>
-        <Button Grid.Row="1" Name="ToSettingsPage" Content="To Settings Page" FontSize="15" FontFamily="./#FARRAY" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="10" MinHeight="30" Click="ToSettingsPage_Click"/>
         <StackPanel Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="35 0 0 0">
             <TextBlock x:Name="TextBlock_Timer" Margin="5" MinWidth="130" MinHeight="50" FontSize="20" FontWeight="DemiBold"/>
             <TextBlock x:Name="TextBlock_Points" Margin="5" MinWidth="130" MinHeight="50" FontSize="20" FontWeight="DemiBold"/>

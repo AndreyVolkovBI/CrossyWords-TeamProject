@@ -10,6 +10,8 @@ namespace CrossyWords.Core
 {
     public class UsersData
     {
+        public User User { get; set; }
+
         public UsersData()
         {
 
@@ -45,13 +47,20 @@ namespace CrossyWords.Core
         }
 
 
-        public User FindUser(string name, string password)
+        public bool FindUser(string name, string password)
         {
             password = GetHash(password);
             using (var context = new Context())
             {
                 var user = context.Users.FirstOrDefault(u => u.Name == name && u.Password == password);
-                return user;
+                if (user == null)                
+                    return false;
+                else
+                {
+                    User = user;
+                    return true;
+                }
+                
             }
 
         }

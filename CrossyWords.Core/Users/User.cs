@@ -19,5 +19,11 @@ namespace CrossyWords.Core.Users
         [MaxLength(50)]
         public string Password { get; set; }
         //achievements
+
+        public int Win { get; set; }
+        public int Draw { get; set; }
+        public int Lose { get; set; }
+        public int Rating { get; set; }
+
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CrossyWords.Core.Users;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,7 @@ namespace CrossyWords.Core
 {
     public interface IRepository
     {
+
         int Dimension { get; set; }
         List<string> Words { get; set; }
         List<BasicWord> BasicWords { get; set; }
