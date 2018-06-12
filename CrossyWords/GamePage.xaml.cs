@@ -123,7 +123,10 @@ namespace CrossyWords
                     var button = new Button();
 
                     button.FontSize = 30;
-                    button.Margin = new Thickness(2);
+                    button.Background = Brushes.White;
+                    button.Foreground = Brushes.Black;
+                    button.Height = 60;
+                    button.Margin = new Thickness(7);
 
                     button.Click += Buttotn_Click;
                     button.MouseEnter += Button_MouseEnter;

@@ -26,6 +26,7 @@ namespace CrossyWords
         public ChallangePage()
         {
             InitializeComponent();
+            TextBox_FindUser.Focus();
         }
 
         private void Button_Game_Click(object sender, RoutedEventArgs e)

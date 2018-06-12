@@ -9,49 +9,32 @@
       Title="UserChallenge">
 
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition Width="3*"/>
-            <ColumnDefinition Width="0.15*"/>
-        </Grid.ColumnDefinitions>
-
-        <StackPanel>
-            <Button Content="Game" MinHeight="40" FontSize="20" Margin="0 50 0 20" Click="Button_Game_Click"/>
-            <Button Content="Challenge" MinHeight="40" FontSize="20" Margin="0 0 0 20" Background="White"/>
-            <Button Content="Rating" MinHeight="40" FontSize="20" Margin="0 0 0 20" Click="Button_Rating_Click"/>
-            <Button Content="Settings" MinHeight="40" FontSize="20" Margin="0 0 0 20" Click="Button_Settings_Click"/>
-        </StackPanel>
-        <Grid Grid.Column="1">
+        <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="0.2*"/>
+                <RowDefinition Height="0.4*"/>
+                <RowDefinition/>
                 <RowDefinition Height="0.5*"/>
-                <RowDefinition/>
-                <RowDefinition/>
             </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
 
-            <StackPanel Grid.ColumnSpan="2" Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
-                <TextBlock Text="Find opponent:" TextAlignment="Center" FontSize="20"/>
+            <StackPanel Grid.ColumnSpan="2" Grid.Row="0" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <TextBlock Text="Find opponent:" TextAlignment="Center" FontSize="20" FontFamily="./#FARRAY"/>
                 <TextBox x:Name="TextBox_FindUser" MinWidth="150" MinHeight="30" Margin="20 0 00 0" FontSize="20" TextChanged="TextBox_FindUser_TextChanged"/>
             </StackPanel>
 
-            <DataGrid x:Name="DataGridOpponents" Grid.Row="2" Grid.ColumnSpan="2" Margin="50 0 50 0" AutoGenerateColumns="False" IsReadOnly="True">
+            <DataGrid x:Name="DataGridOpponents" Grid.Row="1" Grid.ColumnSpan="2" Margin="30 0" AutoGenerateColumns="False" IsReadOnly="True">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Name" Width="2*" Binding="{Binding Name}" />
                     <DataGridTextColumn Header="Rating" Width="1*" Binding="{Binding Rating}" />
                     <DataGridTextColumn Header="Win" Width="1*" Binding="{Binding Win}" />
                     <DataGridTextColumn Header="Draw" Width="1*" Binding="{Binding Draw}" />
-                    <DataGridTextColumn Header="Lose" Width="1*" Binding="{Binding Lose}" />
+                    <DataGridTextColumn Header="Loss" Width="1*" Binding="{Binding Lose}" />
 
                 </DataGrid.Columns>
             </DataGrid>
 
-            <StackPanel Grid.Row="3" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
-                <Button Content="Make Battle!" Click="Button_MakeBattle_Click"/>
-                <Button Content="Make Randow Battle" Click="Button_MakeRandomBattle_Click"/>
+            <StackPanel Grid.Row="2" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
+                <Button Content="Make Battle!" Click="Button_MakeBattle_Click" Margin="10" Width="200"/>
+                <Button Content="Make Randow Battle" Click="Button_MakeRandomBattle_Click" Width="200"/>
             </StackPanel>
 
         </Grid>

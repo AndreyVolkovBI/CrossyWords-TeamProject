@@ -1,5 +1,6 @@
 ﻿using CrossyWords.Core.BruteForce;
 using CrossyWords.Core.Users;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -37,15 +38,41 @@ namespace CrossyWords.Core
 
         public Repository()
         {
-            ReadWords();
+            //FilterWords();
+
+            BasicWords = ReadWords();
             FullIdCells();
             FillGaps();
         }
 
+        //public List<BasicWord> FilterWords()
+        //{
+        //    List<BasicWord> wordsNew = new List<BasicWord>();
+
+        //    foreach(var item in ReadWords())
+        //    {
+        //        if (wordsNew.FirstOrDefault(x => x.Word == item.Word) == null)
+        //            wordsNew.Add(item);
+        //    }
+
+        //    WriteToJson(wordsNew);
+
+        //    return wordsNew;
+
+        //}
+
+        //public void WriteToJson(List<BasicWord> list)
+        //{
+        //    using (var writer = new StreamWriter($"../../../BasicWords.json"))
+        //    {
+        //        writer.Write(JsonConvert.SerializeObject(list, Formatting.Indented));
+        //    }
+        //}
+
         public void FillGaps()
         {
             Random r = new Random();
-            string word = BasicWords[r.Next(0, 3)].Word;
+            string word = BasicWords[r.Next(0, BasicWords.Count - 1)].Word;
             Word_DB currentWord = new Word_DB { Value = word, Count = word.Length };
         }
 
@@ -247,23 +274,34 @@ namespace CrossyWords.Core
 
         public List<BasicWord> ReadWords()
         {
-            using (var sr = new StreamReader("../../../basic.txt", encoding: Encoding.GetEncoding(1251)))
+            try
             {
-                string line = sr.ReadLine();
-                do
+                using (var reader = new StreamReader($"../../../BasicWords.json"))
                 {
-                    line.Trim();
-                    if (line.Length > 2)
-                    {
-                        var word = new BasicWord { Word = line };
-                        BasicWords.Add(word);
-                    }
-                    line = sr.ReadLine();
-
-                } while (!string.IsNullOrWhiteSpace(line));
+                    return JsonConvert.DeserializeObject<List<BasicWord>>(reader.ReadToEnd());
+                }
+            }
+            catch
+            {
+                throw new Exception("Error reading data");
             }
 
-            return BasicWords;
+
+            //using (var sr = new StreamReader("../../../basic.txt", encoding: Encoding.GetEncoding(1251)))
+            //{
+            //    string line = sr.ReadLine();
+            //    do
+            //    {
+            //        line.Trim();
+            //        if (line.Length > 2)
+            //        {
+            //            var word = new BasicWord { Word = line };
+            //            BasicWords.Add(word);
+            //        }
+            //        line = sr.ReadLine();
+
+            //    } while (!string.IsNullOrWhiteSpace(line));
+            //}
         }
 
         public List<string> GetAlphabet()

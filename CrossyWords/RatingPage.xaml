@@ -9,17 +9,6 @@
       Title="UserRating">
 
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition Width="3*"/>
-            <ColumnDefinition Width="0.15*"/>
-        </Grid.ColumnDefinitions>
-
-        <StackPanel>
-            <Button Content="Game" MinHeight="40" FontSize="20" Margin="0 50 0 20" Click="Button_Game_Click"/>
-            <Button Content="Challenge" MinHeight="40" FontSize="20" Margin="0 0 0 20" Click="Button_ChallengePage_Click"/>
-            <Button Content="Rating" MinHeight="40" FontSize="20" Margin="0 0 0 20" Background="White"/>
-            <Button Content="Settings" MinHeight="40" FontSize="20" Margin="0 0 0 20" Click="Button_Settings_Click"/>
-        </StackPanel>
+        
     </Grid>
 </Page>

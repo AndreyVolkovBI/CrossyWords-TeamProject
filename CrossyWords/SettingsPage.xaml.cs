@@ -58,7 +58,7 @@ namespace CrossyWords
         private void Button_SaveChanges(object sender, RoutedEventArgs e)
         {
 
-            if (string.IsNullOrWhiteSpace(TextBox_Name.Text)) //прописать причем пароль может быть пустым
+            if (string.IsNullOrWhiteSpace(textbox_NickName.Text)) //прописать причем пароль может быть пустым
             {
                 if (true) //AllowChanges
                 {
