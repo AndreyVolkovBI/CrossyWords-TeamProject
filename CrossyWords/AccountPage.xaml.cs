@@ -63,7 +63,7 @@ namespace CrossyWords
             if (battleForInfo != null)
             {
                 var battle = _usersData.FindCertainBattle(battleForInfo);
-                NavigationService.Navigate(new WatchInfoAboutCertainBattle(battle));
+                //NavigationService.Navigate(new WatchInfoAboutCertainBattle(battle));
             }
         }
     }

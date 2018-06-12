@@ -48,7 +48,7 @@ namespace CrossyWords
             Init();
             FillButtons();
             MakeHandlerForTimer();
-            TextBlock_Points.Text = "Points: \n 0";
+            TextBlock_Points.Text = "Points: 0";
             
         }
 
@@ -90,7 +90,7 @@ namespace CrossyWords
                 secondshow = "0" + seconds.ToString();
             else
                 secondshow = seconds.ToString();
-            TextBlock_Timer.Text = "Time: \n" + minutes.ToString() + ":" + secondshow;
+            TextBlock_Timer.Text = "Time: " + minutes.ToString() + ":" + secondshow;
         }
    
         private bool CheckPreviousButton(int id)
