@@ -140,8 +140,5 @@
       <DependentUpon>201806111158173_AddNewClass.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\TelegrammPhoto.png" />
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
