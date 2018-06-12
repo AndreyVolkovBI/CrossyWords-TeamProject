@@ -163,7 +163,7 @@ namespace CrossyWords
                     }
                     else if (item.Button == (sender as Button) && _chosenButtons.Count > 1 && _chosenButtons[_chosenButtons.Count - 2] == item.Button)
                     {
-                        _chosenButtons.Last().Background = Brushes.LightGray;
+                        _chosenButtons.Last().Background = Brushes.White;
                         _chosenButtons.Remove(_chosenButtons.Last());
                         _currentWord.RemoveAt(_currentWord.Count - 1); //smt wrong with Last()
                         previousCell = item;

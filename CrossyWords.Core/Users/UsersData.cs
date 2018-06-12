@@ -44,40 +44,26 @@ namespace CrossyWords.Core
                     return false;
             }
 
-        }
+        }        
 
-        public bool AllowChanges(string name)
-        {
-            if (name == User.Name)
-                return true;
-            else if (UniqueName(name))
-                return true;
-            else
-                return false;
-        }
+       
 
         public void ChangeUserInformation(string name = null, string password = null)
         {
-
             if (password !=null)
-            {
                 password = GetHash(password);
-            }
             
             using (var context = new Context())
             {
-                if (name != null && password != null)
+                if (password == null)
                 {
                     context.Users.First(u => u.Id == User.Id).Name = name;
-                    context.Users.First(u => u.Id == User.Id).Password = password;
+                    User.Name = name;
                 }
-                else if(name !=null)
-                {
-                    context.Users.First(u => u.Id == User.Id).Name = name;
-                }
-                else if(password !=null)
+                else
                 {
                     context.Users.First(u => u.Id == User.Id).Password = password;
+                    User.Password = password;
                 }
                 context.SaveChanges();
             }

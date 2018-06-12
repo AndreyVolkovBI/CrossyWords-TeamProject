@@ -15,11 +15,11 @@
                 <TextBlock Text="Settings" TextAlignment="Center" FontSize="25" FontFamily="./#FARRAY" Margin="0 10"/>
 
                 <TextBlock Text="Nickname:" Margin="0 10 0 0" FontSize="15" FontFamily="./#FARRAY"/>
-                <TextBlock Name="textbox_NickName" FontSize="25"/>
+                <TextBox Name="textbox_NickName" FontSize="25"/>
 
                 <TextBlock Text="Change password" FontSize="20" FontFamily="./#FARRAY" TextAlignment="Center"/>
                 <TextBlock Text="Current password:" Margin="0 10 0 0" FontSize="15" FontFamily="./#FARRAY"/>
-                <PasswordBox Name="textbox_Password" Padding="2" FontSize="25"/>
+                <PasswordBox Name="textbox_CurrentPassword" Padding="2" FontSize="25"/>
 
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -28,7 +28,7 @@
                     </Grid.ColumnDefinitions>
                     <StackPanel Grid.Column="0">
                         <TextBlock Text="New password:" Margin="0 10 0 0" FontSize="15" FontFamily="./#FARRAY"/>
-                        <PasswordBox x:Name="TextBox_Password" Padding="2" FontSize="25"/>
+                        <PasswordBox x:Name="TextBox_NewPassword" Padding="2" FontSize="25"/>
                     </StackPanel>
                     <StackPanel Grid.Column="1">
                         <TextBlock Text="Repeat password:" Margin="0 10 0 0" FontSize="15" FontFamily="./#FARRAY"/>
