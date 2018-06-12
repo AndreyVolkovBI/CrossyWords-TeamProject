@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27703.2000
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrossyWords", "CrossyWords\CrossyWords.csproj", "{BB6FB349-6B87-4524-B701-4D15AF734DE7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrossyWords.UI", "CrossyWords\CrossyWords.UI.csproj", "{BB6FB349-6B87-4524-B701-4D15AF734DE7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrossyWords.Core", "CrossyWords.Core\CrossyWords.Core.csproj", "{7B240E2E-94AD-4445-AF34-71F136567265}"
 EndProject

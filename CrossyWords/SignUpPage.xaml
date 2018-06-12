@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:CrossyWords"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="550" d:DesignWidth="860"
       Title="SignUpPage">
 
     <Grid>
@@ -13,17 +13,19 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="3*" />
         </Grid.RowDefinitions>
-        <TextBlock Grid.Row="0" Text="Crossy Words" TextAlignment="Center" VerticalAlignment="Center" FontSize="35" FontFamily="./#FARRAY"/>
+        <TextBlock Grid.Row="0" Text="Crossy Words" TextAlignment="Center" VerticalAlignment="Center" FontSize="45" FontFamily="./#FARRAY"/>
         <Button Name="Header" Opacity="0" Click="Header_Click"/>
-        <Grid Grid.Row="1" Margin="230 0 230 40" Background="LightGray">
-            <StackPanel Orientation="Vertical" Margin="20 10">
+        <Grid Grid.Row="1" Margin="210 0 210 40" Background="LightGray">
+            <StackPanel Orientation="Vertical" Margin="20 20">
                 <TextBlock Text="Create New Account" TextAlignment="Center" FontSize="22" FontFamily="./#FARRAY"/>
                 <TextBlock Text="It's free and always will be." Margin="0 10 0 0" TextAlignment="Center" FontSize="15"  FontFamily="./#FARRAY"/>
 
-                <TextBox Name="textbox_NickName" Padding="2" FontSize="25" Margin="0 30 0 0" Foreground="Gray"/>
+                <TextBlock Text="Nickname:" Margin="0 30 0 0" FontSize="15" FontFamily="./#FARRAY"/>
+                <TextBox Name="textbox_NickName" FontSize="25" Foreground="Gray"/>
 
-                <TextBox Name="textbox_Password" Margin="0 20" Padding="2" FontSize="25" Foreground="Gray"/>
-                <Button Name="CreateAccount" Content="Create Account" FontSize="25" IsDefault="True" Background="White" Click="CreateAccount_Click"/>
+                <TextBlock Text="Password:" Margin="0 10 0 0" FontSize="15" FontFamily="./#FARRAY"/>
+                <TextBox Name="textbox_Password" Padding="2" FontSize="25" Foreground="Gray"/>
+                <Button Name="CreateAccount" Content="Create Account" Margin="0 20 0 0" FontSize="20" IsDefault="True" Background="White" Foreground="Black" Height="40" FontFamily="./#FARRAY" Click="CreateAccount_Click"/>
 
             </StackPanel>
         </Grid>

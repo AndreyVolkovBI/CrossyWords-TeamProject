@@ -71,7 +71,7 @@ namespace CrossyWords
             if (_timeForGameLeft == 0)
             {
                 _disptchertimer.Stop();
-                NavigationService.Navigate(new UserGames()); 
+                NavigationService.Navigate(new AccountPage()); 
             }
             else
             {
@@ -123,7 +123,7 @@ namespace CrossyWords
                     var button = new Button();
 
                     button.FontSize = 30;
-                    button.Margin = new Thickness(7);
+                    button.Margin = new Thickness(2);
 
                     button.Click += Buttotn_Click;
                     button.MouseEnter += Button_MouseEnter;
@@ -239,7 +239,7 @@ namespace CrossyWords
 
         private void ToSettingsPage_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new SettingsPage());
+            NavigationService.Navigate(new GameSettingsPage());
         }
     }
 }

@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:CrossyWords"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="550" d:DesignWidth="800"
       Title="GamePage">
 
     <Grid>
@@ -16,7 +16,6 @@
         <TextBlock Grid.Row="0" Text="Crossy Words" TextAlignment="Center" VerticalAlignment="Center" FontSize="35" FontFamily="./#FARRAY"/>
         <Button Name="Header" Opacity="0" Click="Header_Click"/>
         <TextBlock x:Name="CurrentWord_textblock" TextAlignment="Center" FontSize="20" VerticalAlignment="Bottom" HorizontalAlignment="Center" MinHeight="30" MinWidth="300"/>
-        <TextBlock/>
         <Grid Grid.Row="1" Name="mainGrid" Margin="200 0"/>
         <StackPanel Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="35 0 0 0">
             <TextBlock x:Name="TextBlock_Timer" Margin="5" MinWidth="130" MinHeight="50" FontSize="20" FontWeight="DemiBold"/>

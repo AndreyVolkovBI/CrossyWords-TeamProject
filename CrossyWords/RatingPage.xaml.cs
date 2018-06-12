@@ -18,28 +18,28 @@ namespace CrossyWords
     /// <summary>
     /// Логика взаимодействия для UserRating.xaml
     /// </summary>
-    public partial class UserRating : Page
+    public partial class RatingPage : Page
     {
-        public UserRating()
+        public RatingPage()
         {
             InitializeComponent();
         }
 
         private void Button_Game_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new UserGames());
+            NavigationService.Navigate(new AccountPage());
 
         }
 
         private void Button_ChallengePage_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new UserChallenge());
+            NavigationService.Navigate(new ChallangePage());
 
         }
 
         private void Button_Settings_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new UserSettings());
+            NavigationService.Navigate(new SettingsPage());
 
         }
     }

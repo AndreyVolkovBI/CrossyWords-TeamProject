@@ -1,0 +1,33 @@
+﻿<Page x:Class="CrossyWords.AccountPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:CrossyWords"
+      mc:Ignorable="d" 
+      d:DesignHeight="550" d:DesignWidth="800"
+      Title="UserGames">
+
+    <Grid>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="3.5*"/>
+            </Grid.RowDefinitions>
+
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0 30 0 0" Orientation="Horizontal">
+                <TextBlock x:Name="TextBlock_Win" MinHeight="40" MinWidth="70" FontSize="20" Margin="0 0 30 0" FontFamily="./#FARRAY"/>
+                <TextBlock x:Name="TextBlock_Draw" MinHeight="40" MinWidth="70" FontSize="20" Margin="0 0 30 0" FontFamily="./#FARRAY"/>
+                <TextBlock x:Name="TextBlock_Loss" MinHeight="40" MinWidth="70" FontSize="20" FontFamily="./#FARRAY"/>
+            </StackPanel>
+
+            <DataGrid x:Name="DataGridInfoBattles" Grid.Row="1" Margin="30 0 15 15" AutoGenerateColumns="False" IsReadOnly="True">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Score" Width="1*" Binding="{Binding Score}" />
+                    <DataGridTextColumn Header="Opponent" Width="2*" Binding="{Binding Opponent.Name}" />
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+    </Grid>
+</Page>

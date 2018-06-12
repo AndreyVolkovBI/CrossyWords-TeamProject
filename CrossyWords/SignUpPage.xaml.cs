@@ -26,6 +26,7 @@ namespace CrossyWords
         public SignUpPage(UsersData usersdata)
         {
             InitializeComponent();
+            textbox_NickName.Focus();
             _usersdata = usersdata;
         }
 

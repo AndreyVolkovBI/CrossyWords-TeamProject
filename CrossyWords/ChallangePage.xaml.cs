@@ -20,29 +20,29 @@ namespace CrossyWords
     /// <summary>
     /// Логика взаимодействия для UserChallenge.xaml
     /// </summary>
-    public partial class UserChallenge : Page
+    public partial class ChallangePage : Page
     {
         UsersData _usersdata = Factory.Default.GetUsersData();
-        public UserChallenge()
+        public ChallangePage()
         {
             InitializeComponent();
         }
 
         private void Button_Game_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new UserGames());
+            NavigationService.Navigate(new AccountPage());
 
         }
 
         private void Button_Rating_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new UserRating());
+            NavigationService.Navigate(new RatingPage());
 
         }
 
         private void Button_Settings_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new UserSettings());
+            NavigationService.Navigate(new SettingsPage());
 
         }
 

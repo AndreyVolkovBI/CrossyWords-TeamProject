@@ -25,6 +25,7 @@ namespace CrossyWords
         public LogInPage()
         {
             InitializeComponent();
+            textbox_NickName.Focus();
         }
 
         private void LogIn_Click(object sender, RoutedEventArgs e)
@@ -38,7 +39,7 @@ namespace CrossyWords
                 {                    
                     if (_usersdata.FindUser(textbox_NickName.Text, textbox_Password.Password))
                     {
-                        NavigationService.Navigate(new UserGames());           // var user must be got by other window ... I will do it         
+                        NavigationService.Navigate(new NavigationDrawer()); //User Games           // var user must be got by other window ... I will do it         
                     }
                     else
                         MessageBox.Show("This account was not found");

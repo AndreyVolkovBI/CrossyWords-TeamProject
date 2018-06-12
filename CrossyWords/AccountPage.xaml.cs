@@ -19,10 +19,10 @@ namespace CrossyWords
     /// <summary>
     /// Логика взаимодействия для UserGames.xaml
     /// </summary>
-    public partial class UserGames : Page
+    public partial class AccountPage : Page
     {
         UsersData _usersData = Factory.Default.GetUsersData(); 
-        public UserGames()
+        public AccountPage()
         {
             InitializeComponent();
             ShowAllInformation();
@@ -30,36 +30,29 @@ namespace CrossyWords
 
         private void ShowAllInformation()
         {
-            TextBlock_Win.Text = "Win: \n" + _usersData.User.Win.ToString();
-            TextBlock_Draw.Text = "Draw: \n" + _usersData.User.Draw.ToString();
-            TextBLock_Lose.Text = "Lose: \n" + _usersData.User.Lose.ToString();
+            TextBlock_Win.Text = "Win: " + _usersData.User.Win.ToString();
+            TextBlock_Draw.Text = "Draw: " + _usersData.User.Draw.ToString();
+            TextBlock_Loss.Text = "Loss: " + _usersData.User.Lose.ToString();
 
             DataGridInfoBattles.ItemsSource = _usersData.GetAllCurrentBattles();
 
         }
 
-
-
-        private void Button_FastGame_Click(object sender, RoutedEventArgs e)
-        {
-            NavigationService.Navigate(new GamePage());
-        }
-
         private void Button_ChallengePage_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new UserChallenge());
+            NavigationService.Navigate(new ChallangePage());
 
         }
 
         private void Button_Rating_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new UserRating());
+            NavigationService.Navigate(new RatingPage());
 
         }
 
         private void Button_Settings_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new UserSettings());
+            NavigationService.Navigate(new SettingsPage());
 
         }
     }
