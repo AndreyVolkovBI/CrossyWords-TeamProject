@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CrossyWords.Core;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,21 @@ namespace CrossyWords
     /// </summary>
     public partial class UserGames : Page
     {
+        UsersData _usersData = Factory.Default.GetUsersData(); 
         public UserGames()
         {
             InitializeComponent();
+            ShowAllInformation();
+        }
+
+        private void ShowAllInformation()
+        {
+            TextBlock_Win.Text = "Win: \n" + _usersData.User.Win.ToString();
+            TextBlock_Draw.Text = "Draw: \n" + _usersData.User.Draw.ToString();
+            TextBLock_Lose.Text = "Lose: \n" + _usersData.User.Lose.ToString();
+
+            DataGridInfoBattles.ItemsSource = _usersData.GetAllCurrentBattles();
+
         }
 
 

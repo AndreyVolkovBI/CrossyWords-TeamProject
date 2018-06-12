@@ -100,10 +100,23 @@
     <Compile Include="Migrations\201806111158173_AddNewClass.Designer.cs">
       <DependentUpon>201806111158173_AddNewClass.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201806111753011_AllowToIntBeNullForBattle.cs" />
+    <Compile Include="Migrations\201806111753011_AllowToIntBeNullForBattle.Designer.cs">
+      <DependentUpon>201806111753011_AllowToIntBeNullForBattle.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201806112013511_MakeZero.cs" />
+    <Compile Include="Migrations\201806112013511_MakeZero.Designer.cs">
+      <DependentUpon>201806112013511_MakeZero.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201806112210553_FixFeatures.cs" />
+    <Compile Include="Migrations\201806112210553_FixFeatures.Designer.cs">
+      <DependentUpon>201806112210553_FixFeatures.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository.cs" />
     <Compile Include="Users\Battle.cs" />
+    <Compile Include="Users\BattleForInfo.cs" />
     <Compile Include="Users\Review.cs" />
     <Compile Include="Users\User.cs" />
     <Compile Include="Users\UsersData.cs" />
@@ -138,6 +151,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201806111158173_AddNewClass.resx">
       <DependentUpon>201806111158173_AddNewClass.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806111753011_AllowToIntBeNullForBattle.resx">
+      <DependentUpon>201806111753011_AllowToIntBeNullForBattle.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806112013511_MakeZero.resx">
+      <DependentUpon>201806112013511_MakeZero.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806112210553_FixFeatures.resx">
+      <DependentUpon>201806112210553_FixFeatures.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

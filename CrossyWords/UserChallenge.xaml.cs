@@ -1,4 +1,6 @@
-﻿using System;
+﻿using CrossyWords.Core;
+using CrossyWords.Core.Users;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,6 +22,7 @@ namespace CrossyWords
     /// </summary>
     public partial class UserChallenge : Page
     {
+        UsersData _usersdata = Factory.Default.GetUsersData();
         public UserChallenge()
         {
             InitializeComponent();
@@ -42,5 +45,62 @@ namespace CrossyWords
             NavigationService.Navigate(new UserSettings());
 
         }
+
+        
+
+      
+        private void UpdateDataGrid()
+        {
+            DataGridOpponents.ItemsSource = null;
+            DataGridOpponents.ItemsSource = _usersdata.FindOpponents(TextBox_FindUser.Text);
+        }
+
+        private void Button_MakeBattle_Click(object sender, RoutedEventArgs e)
+        {
+            var selectedUser = DataGridOpponents.SelectedItem as User;
+            if (selectedUser == null)
+                MessageBox.Show("Please, choose opponent for making battle", "Opponent", MessageBoxButton.OK, MessageBoxImage.Asterisk);
+            else
+            {
+                if (_usersdata.CheckLimitationsInGames())
+                {
+                    _usersdata.MakeBattle(selectedUser);
+                    UpdateDataGrid();
+                }
+                else
+                    MessageBox.Show("You already have more than 4 games. Please, finish them.", "Limitations", MessageBoxButton.OK, MessageBoxImage.Hand);
+                
+            }
+        }
+
+        private void Button_MakeRandomBattle_Click(object sender, RoutedEventArgs e)
+        {
+            if (_usersdata.IsMakingBattleAllowable())
+            {
+                if (_usersdata.CheckLimitationsInGames())
+                {
+                    _usersdata.MakeRandomBattle();
+                    DataGridOpponents.ItemsSource = null;
+                    TextBox_FindUser.Text = null;
+                }
+                else
+                    MessageBox.Show("You already have more than 4 games. Please, finish them.", "Limitations", MessageBoxButton.OK, MessageBoxImage.Hand);               
+            }
+            else
+                MessageBox.Show("There's no any suitable user at the moment for you", "Try later", MessageBoxButton.OK, MessageBoxImage.None);
+        }
+
+        private void TextBox_FindUser_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(TextBox_FindUser.Text))
+            {
+                DataGridOpponents.ItemsSource = null;
+            }
+            else
+                UpdateDataGrid();
+
+        }
+
+
     }
 }

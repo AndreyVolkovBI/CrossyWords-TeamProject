@@ -30,15 +30,15 @@
 
             <Button VerticalAlignment="Top" HorizontalAlignment="Right" Content="FastGame" MinHeight="30" MinWidth="90" FontSize="18" Margin="5" Click="Button_FastGame_Click"/>
             <StackPanel VerticalAlignment="Center" HorizontalAlignment="Left" Margin="50 0 0 0" Orientation="Horizontal">
-                <TextBlock Text="Win:" MinHeight="40" MinWidth="70" FontSize="18" Margin="0 0 30 0"/>
-                <TextBlock Text="Draw:" MinHeight="40" MinWidth="70" FontSize="18" Margin="0 0 30 0"/>
-                <TextBlock Text="Lose:" MinHeight="40" MinWidth="70" FontSize="18"/>
+                <TextBlock x:Name="TextBlock_Win" MinHeight="40" MinWidth="70" FontSize="18" Margin="0 0 30 0"/>
+                <TextBlock x:Name="TextBlock_Draw" MinHeight="40" MinWidth="70" FontSize="18" Margin="0 0 30 0"/>
+                <TextBlock x:Name="TextBLock_Lose" MinHeight="40" MinWidth="70" FontSize="18"/>
             </StackPanel>
 
             <DataGrid x:Name="DataGridInfoBattles" Grid.Row="1" Margin="30 0 15 15" AutoGenerateColumns="False" IsReadOnly="True">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Opponent" Width="2*" Binding="{Binding Destination.Name}" />
-                    <DataGridTextColumn Header="Score" Width="1*" Binding="{Binding MinutesLeft}" />
+                    <DataGridTextColumn Header="Score" Width="1*" Binding="{Binding Score}" />
+                    <DataGridTextColumn Header="Opponent" Width="2*" Binding="{Binding Opponent.Name}" />
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>
