@@ -71,11 +71,18 @@ namespace CrossyWords
                     {
                         if (TextBox_NewPassword.Password == TextBox_RepeatPassword.Password)
                         {
-                            _usersdata.ChangeUserInformation(null, TextBox_NewPassword.Password);
-                            textbox_CurrentPassword.Password = null;
-                            TextBox_NewPassword.Password = null;
-                            TextBox_RepeatPassword.Password = null;
-                            MessageBox.Show("Password was succesfully changed", "Operation", MessageBoxButton.OK, MessageBoxImage.Information);
+                            if (CheckLengthOfString(TextBox_NewPassword.Password))
+                            {
+                                _usersdata.ChangeUserInformation(null, TextBox_NewPassword.Password);
+                                textbox_CurrentPassword.Password = null;
+                                TextBox_NewPassword.Password = null;
+                                TextBox_RepeatPassword.Password = null;
+                                MessageBox.Show("Password was succesfully changed", "Operation", MessageBoxButton.OK, MessageBoxImage.Information);
+                            }
+                            else
+                                MessageBox.Show("Your password must have more than 3 letters and less than 50 letters", "Limitations", MessageBoxButton.OK, MessageBoxImage.Error);
+
+
                         }
                         else
                             MessageBox.Show("Passwords are not equal", "Repeat password != new Password", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -86,6 +93,15 @@ namespace CrossyWords
             }
         }
 
+        private bool CheckLengthOfString(string text)
+        {
+            if (text.Length > 3 && text.Length <= 50)
+                return true;
+            else
+                return false;
+  
+        }
+
         private void AcceptChangesWithName()
         {
             if (string.IsNullOrWhiteSpace(textbox_NickName.Text))
@@ -94,7 +110,7 @@ namespace CrossyWords
             {
                 if (textbox_NickName.Text != _usersdata.User.Name)
                 {
-                    if (textbox_NickName.Text.Length < 3 || textbox_NickName.Text.Length > 50)
+                    if (CheckLengthOfString(textbox_NickName.Text))
                     {
                         if (_usersdata.UniqueName(textbox_NickName.Text))
                             _usersdata.ChangeUserInformation(textbox_NickName.Text);
@@ -107,6 +123,8 @@ namespace CrossyWords
                 }
             }
         }
+
+        
 
 
         private void Button_SendReview_Click(object sender, RoutedEventArgs e)

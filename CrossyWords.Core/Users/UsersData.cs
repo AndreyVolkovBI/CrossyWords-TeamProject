@@ -200,6 +200,15 @@ namespace CrossyWords.Core
             }
         }
 
+        public Battle FindCertainBattle(BattleForInfo battleForInfo) 
+        {
+            using (var context = new Context())
+            {
+                var battle = context.Battles.First(b => b.User_1.Id == User.Id && b.User_2.Id == battleForInfo.Opponent.Id || b.User_1.Id == battleForInfo.Opponent.Id && b.User_2.Id == User.Id);
+                return battle;
+            }
+        }
+
         
   
     }

@@ -1,4 +1,5 @@
 ﻿using CrossyWords.Core;
+using CrossyWords.Core.Users;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -54,6 +55,16 @@ namespace CrossyWords
         {
             NavigationService.Navigate(new SettingsPage());
 
+        }
+
+        private void DataGrid_MouseDoubleCLick(object sender, MouseButtonEventArgs e)
+        {
+            var battleForInfo = DataGridInfoBattles.SelectedItem as BattleForInfo;
+            if (battleForInfo != null)
+            {
+                var battle = _usersData.FindCertainBattle(battleForInfo);
+                NavigationService.Navigate(new WatchInfoAboutCertainBattle(battle));
+            }
         }
     }
 }

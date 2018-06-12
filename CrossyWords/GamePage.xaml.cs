@@ -193,7 +193,7 @@ namespace CrossyWords
             {
                 foreach (var button in _chosenButtons)
                 {
-                    button.Background = Brushes.LightGray;
+                    button.Background = Brushes.White;
                 }
                 _chosenButtons = new List<Button>();
                 //find currentwordtextbox in database

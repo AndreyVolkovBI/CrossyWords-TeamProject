@@ -74,6 +74,11 @@ namespace CrossyWords
             }
         }
 
+        private void SendUserToGame()
+        {
+
+        }
+
         private void Button_MakeRandomBattle_Click(object sender, RoutedEventArgs e)
         {
             if (_usersdata.IsMakingBattleAllowable())
