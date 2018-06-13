@@ -302,6 +302,7 @@ namespace CrossyWords.Core
                 context.Users.First(u => _user.Id == u.Id).Rating = 3 * _user.Win + _user.Draw - 2 * _user.Lose;
                 context.SaveChanges();
             }
+            UpdateUser();
         }
 
         private void UpdateUser()
