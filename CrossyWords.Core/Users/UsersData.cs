@@ -313,6 +313,26 @@ namespace CrossyWords.Core
             }
         }
 
+
+        public List<RatingUser> GetRatingOfUsers()
+        {
+            using (var context = new Context())
+            {
+                List<RatingUser> topUsers = new List<RatingUser>();
+                int count = context.Users.Count();
+
+                for (int i = 0; i < 20; i++)
+                {
+                    var user = context.Users.OrderByDescending(u => u.Rating).ToList()[i];
+                    topUsers.Add(new RatingUser { Name = user.Name, Number = i + 1, Rating = user.Rating });
+                    if (count <= i + 1)
+                        break;
+                }
+                return topUsers;
+
+            }
+        }
+
         
   
     }

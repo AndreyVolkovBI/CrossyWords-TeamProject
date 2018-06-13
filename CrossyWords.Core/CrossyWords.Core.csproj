@@ -139,6 +139,7 @@
     <Compile Include="Repository.cs" />
     <Compile Include="Users\Battle.cs" />
     <Compile Include="Users\BattleForInfo.cs" />
+    <Compile Include="Users\RatingUser.cs" />
     <Compile Include="Users\Review.cs" />
     <Compile Include="Users\User.cs" />
     <Compile Include="Users\UsersData.cs" />

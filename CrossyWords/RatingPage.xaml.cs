@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CrossyWords.Core;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,18 @@ namespace CrossyWords
     /// </summary>
     public partial class RatingPage : Page
     {
+        UsersData _usersdata = Factory.Default.GetUsersData();
+
         public RatingPage()
         {
             InitializeComponent();
+            FillRating();
+        }
+
+        private void FillRating()
+        {
+            DataGridRating.ItemsSource = _usersdata.GetRatingOfUsers();
+
         }
 
         private void Button_Game_Click(object sender, RoutedEventArgs e)
