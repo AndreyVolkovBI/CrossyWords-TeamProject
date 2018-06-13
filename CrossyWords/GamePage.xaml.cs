@@ -27,7 +27,7 @@ namespace CrossyWords
         DispatcherTimer _disptchertimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
 
 
-        int _timeForGameLeft = 91;
+        int _timeForGameLeft = 10;
         int _points = 0;
         bool _trackOn = false;
         List<Cell> cells = new List<Cell>(); // all the cells (id, button)
@@ -35,6 +35,8 @@ namespace CrossyWords
 
         int idOfCell = 1;
 
+
+        List<string> foundWords = new List<string>();
         List<char> _currentWord = new List<char>();
         List<Button> _chosenButtons = new List<Button>();
         //currentword_textblock
@@ -239,11 +241,12 @@ namespace CrossyWords
 
         private void CheckFinalWord()
         {
-            bool isWordInList = _repo.IsWordInList(CurrentWord_textblock.Text.ToString()); //here we check the final word and give balls
-            if (isWordInList)
+            bool isWordInList = _repo.IsWordInList(CurrentWord_textblock.Text); //here we check the final word and give balls
+            if (isWordInList && !foundWords.Contains(CurrentWord_textblock.Text))
             {
                 _points = _points + CurrentWord_textblock.Text.Length * 2;
                 TextBlock_Points.Text = "Points: \n" + _points.ToString();
+                foundWords.Add(CurrentWord_textblock.Text);
             }
         }
 

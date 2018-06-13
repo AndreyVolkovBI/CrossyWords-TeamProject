@@ -31,6 +31,7 @@ namespace CrossyWords
 
         private void ShowAllInformation()
         {
+            _usersData.UpdateUser();
             TextBlock_Win.Text = "Win: " + _usersData.User.Win.ToString();
             TextBlock_Draw.Text = "Draw: " + _usersData.User.Draw.ToString();
             TextBlock_Loss.Text = "Loss: " + _usersData.User.Lose.ToString();

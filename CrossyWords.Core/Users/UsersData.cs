@@ -12,10 +12,18 @@ namespace CrossyWords.Core
     {
         public User User { get; set; }
 
-
+        int i = 0;
         public UsersData()
         {
-                       
+            
+        }
+
+        public void UpdateUser()
+        {
+            using (var context = new Context())
+            {
+                User = context.Users.First(u => u.Id == User.Id);
+            }
         }
 
         public void AddNewUser(string name, string password)
@@ -48,7 +56,6 @@ namespace CrossyWords.Core
         }        
 
        
-
         public void ChangeUserInformation(string name = null, string password = null)
         {
             if (password !=null)
@@ -121,8 +128,7 @@ namespace CrossyWords.Core
         {
             using (var context = new Context())
             {
-                var users = context.Users.Where(u => u.Id != User.Id && context.Battles.FirstOrDefault(b => b.User_1.Id == User.Id && b.User_2.Id == u.Id || b.User_1.Id == u.Id && b.User_2.Id == User.Id) == null).ToList();
-                if (users.Count == 0)
+                if (context.Users.Where(u => u.Id != User.Id && context.Battles.FirstOrDefault(b => (b.User_1.Id == User.Id && b.User_2.Id == u.Id || b.User_1.Id == u.Id && b.User_2.Id == User.Id) && (b.Points_User1 == null || b.Points_User2 == null)) == null).Count() == 0)
                     return false;
                 else
                     return true;
@@ -134,9 +140,7 @@ namespace CrossyWords.Core
         {
             using (var context = new Context())
             {
-                var battles = context.Battles.Where(b => b.User_1.Id == User.Id || b.User_2.Id == User.Id).ToList();
-
-                if (battles.Count > 4)
+                if (context.Battles.Where(b => (b.User_1.Id == User.Id || b.User_2.Id == User.Id) && (b.Points_User1 == null || b.Points_User2 == null)).Count() > 4)
                     return false;
                 else
                     return true;
@@ -150,11 +154,13 @@ namespace CrossyWords.Core
             using (var context = new Context())
             {
                 Random r = new Random();
-                do
-                {
-                    int random = r.Next(0, context.Users.Count());
-                    opponent = context.Users.ToList()[random];
-                } while (opponent.Id == User.Id || context.Battles.FirstOrDefault(b => b.User_1.Id == User.Id && b.User_2.Id == opponent.Id || b.User_1.Id == opponent.Id && b.User_2.Id == User.Id) != null);
+                //do
+                //{
+                //    int random = r.Next(0, context.Users.Count());
+                //    opponent = context.Users.ToList()[random];
+                //} while (opponent.Id == User.Id || context.Battles.FirstOrDefault(b => b.User_1.Id == User.Id && b.User_2.Id == opponent.Id || b.User_1.Id == opponent.Id && b.User_2.Id == User.Id) != null);
+                int randomMax = r.Next(0, context.Users.Where(u => u.Id != User.Id && context.Battles.FirstOrDefault(b => (b.User_1.Id == User.Id && b.User_2.Id == u.Id || b.User_1.Id == u.Id && b.User_2.Id == User.Id) && (b.Points_User1 == null || b.Points_User2 == null)) == null).Count());
+                opponent = context.Users.Where(u => u.Id != User.Id && context.Battles.FirstOrDefault(b => (b.User_1.Id == User.Id && b.User_2.Id == u.Id || b.User_1.Id == u.Id && b.User_2.Id == User.Id) && (b.Points_User1 == null || b.Points_User2 == null)) == null).ToList()[r.Next(0, randomMax)];
             }
             return MakeBattle(opponent);
         }
@@ -330,17 +336,7 @@ namespace CrossyWords.Core
                 context.SaveChanges();
             }
         }
-
         
-        private void UpdateUser()
-        {
-            using (var context = new Context())
-            {
-                User = context.Users.First(u => u.Id == User.Id);
-            }
-        }
-
-
         public List<RatingUser> GetRatingOfUsers()
         {
             using (var context = new Context())
