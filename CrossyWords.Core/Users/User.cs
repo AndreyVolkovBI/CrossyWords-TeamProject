@@ -23,7 +23,6 @@ namespace CrossyWords.Core.Users
         public int Win { get; set; }
         public int Draw { get; set; }
         public int Lose { get; set; }
-        public int Rating { get; set; }
 
     }
 }

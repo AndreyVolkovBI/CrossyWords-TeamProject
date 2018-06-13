@@ -52,11 +52,8 @@ namespace CrossyWords
             Init();
             FillButtons();
             MakeHandlerForTimer();
-            TextBlock_Points.Text = "Points: 0";
+            TextBlock_Points.Text = "Points: \n 0";
 
-            
-
-            
         }
 
         private void MakeHandlerForTimer()
@@ -78,19 +75,7 @@ namespace CrossyWords
             if (_timeForGameLeft == 0)
             {
                 _disptchertimer.Stop();
-                if (_battle != null && _battle.AllWords == null)
-                {
-                    string allwords = null;
-                    for (int i = 0; i < cells.Count(); i++)
-                    {
-                        allwords = allwords + cells[i].Button.Content;
-                    }
-                    _usersdata.SaveAllInformationAboutBattle(_battle, _points, allwords);
-                }
-                else if (_battle != null)
-                {
-                    _usersdata.SaveAllInformationAboutBattle(_battle, _points);
-                }
+                SaveInfoAboutBattle();
                 NavigationService.Navigate(new AccountPage()); 
             }
             else
@@ -99,6 +84,23 @@ namespace CrossyWords
                 ShowTimerToUser();
             }
 
+        }
+
+        private void SaveInfoAboutBattle()
+        {
+            if (_battle != null && _battle.AllWords == null)
+            {
+                string allwords = null;
+                for (int i = 0; i < cells.Count(); i++)
+                {
+                    allwords = allwords + cells[i].Button.Content;
+                }
+                _usersdata.SaveAllInformationAboutBattle(_battle, _points, allwords);
+            }
+            else if (_battle != null)
+            {
+                _usersdata.SaveAllInformationAboutBattle(_battle, _points);
+            }
         }
 
         private void ShowTimerToUser()
@@ -256,8 +258,10 @@ namespace CrossyWords
             CurrentWord_textblock.Text = currentword;
         }
 
-        private void Header_Click(object sender, RoutedEventArgs e)
+        private void Header_Click(object sender, RoutedEventArgs e) //do not need
         {
+            _disptchertimer.Stop();
+            SaveInfoAboutBattle();
             NavigationService.Navigate(new LogInPage());
         }
 
@@ -266,13 +270,11 @@ namespace CrossyWords
             List<int> count = _repo.GetIds(10); // метод, который возвращает id-s ячеек соседей заданной ячейки
         }
 
-        private void Click_Button_btn1(object sender, RoutedEventArgs e)
-        {
-            // CurrentWord_textblock.Text = btn1.Content.ToString();
-        }
-
+        
         private void ToSettingsPage_Click(object sender, RoutedEventArgs e)
         {
+            _disptchertimer.Stop();
+            SaveInfoAboutBattle();
             NavigationService.Navigate(new GameSettingsPage());
         }
     }

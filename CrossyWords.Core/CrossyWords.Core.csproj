@@ -134,6 +134,10 @@
     <Compile Include="Migrations\201806130809354_ChangeDetailsBattle2.Designer.cs">
       <DependentUpon>201806130809354_ChangeDetailsBattle2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201806131607198_DeleteUselessParts.cs" />
+    <Compile Include="Migrations\201806131607198_DeleteUselessParts.Designer.cs">
+      <DependentUpon>201806131607198_DeleteUselessParts.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository.cs" />
@@ -195,6 +199,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201806130809354_ChangeDetailsBattle2.resx">
       <DependentUpon>201806130809354_ChangeDetailsBattle2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806131607198_DeleteUselessParts.resx">
+      <DependentUpon>201806131607198_DeleteUselessParts.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

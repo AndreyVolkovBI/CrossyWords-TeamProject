@@ -23,7 +23,6 @@ namespace CrossyWords
     public partial class ChallangePage : Page
     {
         UsersData _usersdata = Factory.Default.GetUsersData();
-        Battle _createdbattle;
         public ChallangePage()
         {
             InitializeComponent();
@@ -65,17 +64,14 @@ namespace CrossyWords
             else
             {
                 if (_usersdata.CheckLimitationsInGames())
-                {
-                    _createdbattle = _usersdata.MakeBattle(selectedUser);
-                    SendUserToGame();
-                }
+                    SendUserToGame(_usersdata.MakeBattle(selectedUser));
                 else
                     MessageBox.Show("You already have more than 4 games. Please, finish them.", "Limitations", MessageBoxButton.OK, MessageBoxImage.Hand);
                 
             }
         }
 
-        private void SendUserToGame()
+        private void SendUserToGame(Battle _createdbattle)
         {
             NavigationService.Navigate(new GamePage(_createdbattle));
         }
@@ -85,10 +81,7 @@ namespace CrossyWords
             if (_usersdata.IsMakingBattleAllowable())
             {
                 if (_usersdata.CheckLimitationsInGames())
-                {
-                    _createdbattle = _usersdata.MakeRandomBattle();
-                    SendUserToGame();
-                }
+                    SendUserToGame(_usersdata.MakeRandomBattle());
                 else
                     MessageBox.Show("You already have more than 4 games. Please, finish them.", "Limitations", MessageBoxButton.OK, MessageBoxImage.Hand);               
             }
