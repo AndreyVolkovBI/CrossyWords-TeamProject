@@ -36,17 +36,18 @@
                     </StackPanel>
                 </Grid>
 
+                <Button Content="Save Changes" FontSize="20" Margin="0 20" FontFamily="./#FARRAY" IsDefault="True" Background="White" Foreground="Black" Height="40"  Click="Button_SaveChanges"/>
+
                 <TextBlock Text="Review to the application:" Margin="0 10 0 0" FontSize="15" FontFamily="./#FARRAY"/>
                 <Grid Margin="0 10 0 20">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="2*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
 
-                        <TextBox Grid.Column="0" x:Name="TextBox_Review" Padding="2" FontSize="25"/>
-                        <Button Grid.Column="1" Content="Send Review" FontSize="20" FontFamily="./#FARRAY" IsDefault="True" Background="White" Foreground="Black" Height="40"  Click="Button_SendReview_Click"/>
-                    </Grid>
-                    <Button Content="Save Changes" FontSize="20" FontFamily="./#FARRAY" IsDefault="True" Background="White" Foreground="Black" Height="40"  Click="Button_SaveChanges"/>
+                    <TextBox Grid.Column="0" x:Name="TextBox_Review" Padding="2" FontSize="25"/>
+                    <Button Grid.Column="1" Content="Send Review" FontSize="20" FontFamily="./#FARRAY" IsDefault="True" Background="White" Foreground="Black" Height="40"  Click="Button_SendReview_Click"/>
+                </Grid>
 
             </StackPanel>
         </Grid>

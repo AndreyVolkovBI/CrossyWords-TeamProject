@@ -78,6 +78,7 @@ namespace CrossyWords
             {
                 _disptchertimer.Stop();
                 SaveInfoAboutBattle();
+                _repo.GameOn = false;
                 NavigationService.Navigate(new AccountPage()); 
             }
             else
@@ -245,7 +246,7 @@ namespace CrossyWords
             if (isWordInList && !foundWords.Contains(CurrentWord_textblock.Text))
             {
                 _points = _points + CurrentWord_textblock.Text.Length * 2;
-                TextBlock_Points.Text = "Points: \n" + _points.ToString();
+                TextBlock_Points.Text = "Points: " + _points.ToString();
                 foundWords.Add(CurrentWord_textblock.Text);
             }
         }

@@ -15,6 +15,8 @@ namespace CrossyWords.Core
         List<BasicWord> BasicWords { get; set; }
         List<Cell> Cells { get; set; }
 
+        bool GameOn { get; set; }
+
         List<int> GetIds(int id);
         List<Cell> FillAllCells();
         List<BasicWord> ReadWords();

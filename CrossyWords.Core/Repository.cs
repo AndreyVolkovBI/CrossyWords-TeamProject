@@ -26,8 +26,7 @@ namespace CrossyWords.Core
 
     public class Repository : IRepository
     {
-
-
+        public bool GameOn { get; set; } = false;
 
         public int Dimension { get; set; } = 5;
 

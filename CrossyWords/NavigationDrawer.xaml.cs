@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CrossyWords.Core;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,6 +21,8 @@ namespace CrossyWords
     /// </summary>
     public partial class NavigationDrawer : Page
     {
+        IRepository _repo = Factory.Default.GetRepository<Repository>();
+
         public NavigationDrawer()
         {
             InitializeComponent();
@@ -41,35 +44,39 @@ namespace CrossyWords
         {
             Page usc = null;
 
-            switch (((ListViewItem)((ListView)sender).SelectedItem).Name)
+            if (!_repo.GameOn)
             {
-                case "AccountItem":
-                    usc = new AccountPage();
-                    GridMain_Frame.Navigate(usc);
-                    break;
-                case "GameItem":
-                    usc = new GamePage();
-                    GridMain_Frame.Navigate(usc);
-                    break;
-                case "ChallangeItem":
-                    usc = new ChallangePage();
-                    GridMain_Frame.Navigate(usc);
-                    break;
-                case "RatingItem":
-                    usc = new RatingPage();
-                    GridMain_Frame.Navigate(usc);
-                    break;
-                case "SettingsItem":
-                    usc = new SettingsPage();
-                    GridMain_Frame.Navigate(usc);
-                    break;
-                default:
-                    break;
-            }
+                switch (((ListViewItem)((ListView)sender).SelectedItem).Name)
+                {
+                    case "AccountItem":
+                        usc = new AccountPage();
+                        GridMain_Frame.Navigate(usc);
+                        break;
+                    case "GameItem":
+                        usc = new GamePage();
+                        GridMain_Frame.Navigate(usc);
+                        _repo.GameOn = true;
+                        break;
+                    case "ChallangeItem":
+                        usc = new ChallangePage();
+                        GridMain_Frame.Navigate(usc);
+                        break;
+                    case "RatingItem":
+                        usc = new RatingPage();
+                        GridMain_Frame.Navigate(usc);
+                        break;
+                    case "SettingsItem":
+                        usc = new SettingsPage();
+                        GridMain_Frame.Navigate(usc);
+                        break;
+                    default:
+                        break;
+                }
 
-            foreach (var item in listView.Items)
-                (item as ListViewItem).Background = Brushes.DarkBlue;
-            (listView.SelectedItem as ListViewItem).Background = Brushes.White;
+                foreach (var item in listView.Items)
+                    (item as ListViewItem).Background = Brushes.DarkBlue;
+                (listView.SelectedItem as ListViewItem).Background = Brushes.White;
+            }
         }
     }
 }

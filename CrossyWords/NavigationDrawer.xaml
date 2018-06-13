@@ -55,6 +55,7 @@
                         <materialDesign:PackIcon Foreground="Red" Kind="Menu" Width="25" Height="25" />
                     </Button>
                 </Grid>
+
                 <ListView ScrollViewer.HorizontalScrollBarVisibility="Disabled" Name="listView" Foreground="Red" Background="White" SelectionChanged="ListView_SelectionChanged" SelectedIndex="0">
                     <ListViewItem Height="60" Name="AccountItem">
                         <StackPanel Orientation="Horizontal">
