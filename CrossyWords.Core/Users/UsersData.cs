@@ -76,6 +76,7 @@ namespace CrossyWords.Core
             using (var context = new Context())
             {
                 context.Reviews.Add(_review);
+                context.SaveChanges();
             }
         }
 
@@ -142,7 +143,7 @@ namespace CrossyWords.Core
         }
 
 
-        public void MakeRandomBattle()
+        public Battle MakeRandomBattle()
         {
             User opponent;
             using (var context = new Context())
@@ -154,15 +155,18 @@ namespace CrossyWords.Core
                     opponent = context.Users.ToList()[random];
                 } while (opponent.Id == User.Id || context.Battles.FirstOrDefault(b => b.User_1.Id == User.Id && b.User_2.Id == opponent.Id || b.User_1.Id == opponent.Id && b.User_2.Id == User.Id) != null);
             }
-            MakeBattle(opponent);
+            return MakeBattle(opponent);
         }
 
-        public void MakeBattle(User opponent)
+        public Battle MakeBattle(User opponent)
         {  
             using (var context = new Context())
             {
-                context.Battles.Add(new Battle { User_1 = context.Users.First(u => u.Id == User.Id), User_2 = context.Users.First(u => u.Id == opponent.Id)});
+                
+                context.Battles.Add(new Battle { User_1 = context.Users.First(u => u.Id == User.Id), User_2 = context.Users.First(u => u.Id == opponent.Id), DateOfChallenge = DateTime.Now });
                 context.SaveChanges();
+                Battle createdbattle = context.Battles.Include("User_1").Include("User_2").First(b => b.User_1.Id == User.Id && b.User_2.Id == opponent.Id || b.User_1.Id == opponent.Id && b.User_2.Id == User.Id);
+                return createdbattle;
             }
         }
 
@@ -178,21 +182,43 @@ namespace CrossyWords.Core
                 {
                     User opponent;
                     string score;
+                    string points;
+                    string status = null;
+
+                    if (battle.IsPlayedUser1 && battle.IsPlayedUser2)
+                    {
+                        status = "finished";
+                    }
+
                     if (battle.User_1.Id == User.Id)
                     {
                         opponent = battle.User_2;
                         score = battle.Score_User1.ToString() + ":" + battle.Score_User2.ToString();
+                        points = battle.Points_User1.ToString() + ":" + battle.Points_User2.ToString();
+                        if (string.IsNullOrWhiteSpace(status) && battle.IsPlayedUser1)
+                            status = "waiting opponent";
+                        else if (string.IsNullOrWhiteSpace(status))
+                            status = "your raund";
+                            
                     }
                     else
                     {
                         opponent = battle.User_1;
                         score = battle.Score_User2.ToString() + ":" + battle.Score_User1.ToString();
+                        points = battle.Points_User2.ToString() + ":" + battle.Points_User1.ToString();
+                        if (string.IsNullOrWhiteSpace(status) && battle.IsPlayedUser2)
+                            status = "waiting opponent";
+                        else if(string.IsNullOrWhiteSpace(status))
+                            status = "your round";
                     }
+
 
                     var batfori = new BattleForInfo
                     {
                         Opponent = opponent,
-                        Score = score
+                        Score = score,
+                        Points = points,
+                        Status = status
                     };
                     battleForInfos.Add(batfori);
                 }
@@ -206,6 +232,83 @@ namespace CrossyWords.Core
             {
                 var battle = context.Battles.First(b => b.User_1.Id == User.Id && b.User_2.Id == battleForInfo.Opponent.Id || b.User_1.Id == battleForInfo.Opponent.Id && b.User_2.Id == User.Id);
                 return battle;
+            }
+        }
+
+        public void SaveAllInformationAboutBattle(Battle battle, int points, string allwords = null) //know user1, user2, dateofchallenge
+        {
+            using (var context = new Context())
+            {
+
+                if (context.Battles.Include("User_1").First(b => b.Id == battle.Id).User_1.Id == User.Id)
+                {
+                    context.Battles.First(b => b.Id == battle.Id).Points_User1 = points;
+                    context.Battles.First(b => b.Id == battle.Id).IsPlayedUser1 = true;
+                }
+                else
+                {
+                    context.Battles.First(b => b.Id == battle.Id).Points_User2 = points;
+                    context.Battles.First(b => b.Id == battle.Id).IsPlayedUser2 = true;
+                }
+
+                if (allwords != null)
+                {
+                    context.Battles.First(b => b.Id == battle.Id).AllWords = allwords;
+                }
+                else
+                {
+
+                    User user1 = context.Battles.Include("User_1").First(b => b.Id == battle.Id).User_1;
+                    User user2 = context.Battles.Include("User_2").First(b => b.Id == battle.Id).User_2;
+                    if (context.Battles.First(b => b.Id == battle.Id).Points_User1 < context.Battles.First(b => b.Id == battle.Id).Points_User2)
+                    {
+                        context.Battles.First(b => b.Id == battle.Id).Score_User2 = 1;
+                        context.Users.First(u => u.Id == user1.Id).Lose = user1.Lose + 1;
+                        context.Users.First(u => u.Id == user2.Id).Win = user2.Win + 1;
+                        
+                    }
+                    else if(context.Battles.First(b => b.Id == battle.Id).Points_User1 > context.Battles.First(b => b.Id == battle.Id).Points_User2)
+                    {
+                        context.Battles.First(b => b.Id == battle.Id).Score_User1 = 1;
+                        context.Users.First(u => u.Id == user1.Id).Win = user1.Win + 1;
+                        context.Users.First(u => u.Id == user2.Id).Lose = user2.Lose + 1;
+                       
+                    }
+                    else
+                    {
+                        context.Battles.First(b => b.Id == battle.Id).Score_User2 = 1;
+                        context.Battles.First(b => b.Id == battle.Id).Score_User1 = 1;
+
+                        context.Users.First(u => u.Id == user1.Id).Draw = user1.Draw + 1;
+                        context.Users.First(u => u.Id == user2.Id).Draw = user2.Draw + 1;
+                        
+                    }
+
+
+                    context.SaveChanges();
+                    UpdateRating(user1);
+                    UpdateRating(user2);
+                }
+                context.SaveChanges();
+                
+            }
+        }
+
+        private void UpdateRating(User user)
+        {
+            using (var context = new Context())
+            {
+                User _user = context.Users.First(u => u.Id == user.Id);
+                context.Users.First(u => _user.Id == u.Id).Rating = 3 * _user.Win + _user.Draw - 2 * _user.Lose;
+                context.SaveChanges();
+            }
+        }
+
+        private void UpdateUser()
+        {
+            using (var context = new Context())
+            {
+                User = context.Users.First(u => u.Id == User.Id);
             }
         }
 

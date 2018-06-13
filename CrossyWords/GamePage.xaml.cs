@@ -1,4 +1,5 @@
 ﻿using CrossyWords.Core;
+using CrossyWords.Core.Users;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,16 +40,22 @@ namespace CrossyWords
         //currentword_textblock
 
         IRepository _repo = Factory.Default.GetRepository<Repository>();
+        UsersData _usersdata = Factory.Default.GetUsersData();
 
-        //List<Button> _butons;
+        Battle _battle;
 
-        public GamePage()
+        public GamePage(Battle battle = null)
         {
             InitializeComponent();
+            if (battle != null)
+                _battle = battle;
             Init();
             FillButtons();
             MakeHandlerForTimer();
             TextBlock_Points.Text = "Points: 0";
+
+            
+
             
         }
 
@@ -71,6 +78,19 @@ namespace CrossyWords
             if (_timeForGameLeft == 0)
             {
                 _disptchertimer.Stop();
+                if (_battle != null && _battle.AllWords == null)
+                {
+                    string allwords = null;
+                    for (int i = 0; i < cells.Count(); i++)
+                    {
+                        allwords = allwords + cells[i].Button.Content;
+                    }
+                    _usersdata.SaveAllInformationAboutBattle(_battle, _points, allwords);
+                }
+                else if (_battle != null)
+                {
+                    _usersdata.SaveAllInformationAboutBattle(_battle, _points);
+                }
                 NavigationService.Navigate(new AccountPage()); 
             }
             else
@@ -103,10 +123,21 @@ namespace CrossyWords
 
         private void FillButtons() 
         {
-            List<Cell> cellsTemp = _repo.FillAllCells(); 
+            if (_battle == null || _battle.AllWords == null)
+            {
+                List<Cell> cellsTemp = _repo.FillAllCells();
+                for (int i = 0; i < cells.Count; i++)
+                    cells[i].Button.Content = cellsTemp[i].Value;
+            } 
+            else
+            {
+                for (int i = 0; i < cells.Count; i++)
+                {
+                    cells[i].Button.Content = _battle.AllWords[i];
+                }
+            }
 
-            for (int i = 0; i < cells.Count; i++)
-                cells[i].Button.Content = cellsTemp[i].Value;
+      
         }
 
         private void Init()

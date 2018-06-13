@@ -129,7 +129,13 @@ namespace CrossyWords
 
         private void Button_SendReview_Click(object sender, RoutedEventArgs e)
         {
-            _usersdata.SendReview(TextBox_Review.Text);
+            if (string.IsNullOrWhiteSpace(TextBox_Review.Text))
+                MessageBox.Show("You must write smth for sending review", "Emptry string", MessageBoxButton.OK, MessageBoxImage.None);
+            else
+            {
+                _usersdata.SendReview(TextBox_Review.Text);
+                MessageBox.Show("Thank you for review! Your opinion is very important for us.", "Succesful sending", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
         }
     }
 }

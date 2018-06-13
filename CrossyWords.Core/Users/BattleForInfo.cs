@@ -10,5 +10,7 @@ namespace CrossyWords.Core.Users
     {
         public User Opponent { get; set; }
         public string Score { get; set; }
+        public string Status { get; set; }
+        public string Points { get; set; }
     }
 }

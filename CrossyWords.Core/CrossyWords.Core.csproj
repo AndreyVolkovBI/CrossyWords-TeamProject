@@ -118,6 +118,22 @@
     <Compile Include="Migrations\201806112210553_FixFeatures.Designer.cs">
       <DependentUpon>201806112210553_FixFeatures.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201806121843294_ChangesInBattleStructure.cs" />
+    <Compile Include="Migrations\201806121843294_ChangesInBattleStructure.Designer.cs">
+      <DependentUpon>201806121843294_ChangesInBattleStructure.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201806121947431_Optimization1.cs" />
+    <Compile Include="Migrations\201806121947431_Optimization1.Designer.cs">
+      <DependentUpon>201806121947431_Optimization1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201806130754494_ChangeDetailsBattle.cs" />
+    <Compile Include="Migrations\201806130754494_ChangeDetailsBattle.Designer.cs">
+      <DependentUpon>201806130754494_ChangeDetailsBattle.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201806130809354_ChangeDetailsBattle2.cs" />
+    <Compile Include="Migrations\201806130809354_ChangeDetailsBattle2.Designer.cs">
+      <DependentUpon>201806130809354_ChangeDetailsBattle2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository.cs" />
@@ -166,6 +182,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201806112210553_FixFeatures.resx">
       <DependentUpon>201806112210553_FixFeatures.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806121843294_ChangesInBattleStructure.resx">
+      <DependentUpon>201806121843294_ChangesInBattleStructure.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806121947431_Optimization1.resx">
+      <DependentUpon>201806121947431_Optimization1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806130754494_ChangeDetailsBattle.resx">
+      <DependentUpon>201806130754494_ChangeDetailsBattle.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806130809354_ChangeDetailsBattle2.resx">
+      <DependentUpon>201806130809354_ChangeDetailsBattle2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

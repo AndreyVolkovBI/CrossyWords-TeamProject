@@ -60,10 +60,10 @@ namespace CrossyWords
         private void DataGrid_MouseDoubleCLick(object sender, MouseButtonEventArgs e)
         {
             var battleForInfo = DataGridInfoBattles.SelectedItem as BattleForInfo;
-            if (battleForInfo != null)
+            if (battleForInfo != null && battleForInfo.Status == "your round")
             {
                 var battle = _usersData.FindCertainBattle(battleForInfo);
-                //NavigationService.Navigate(new WatchInfoAboutCertainBattle(battle));
+                NavigationService.Navigate(new GamePage(battle));
             }
         }
     }
