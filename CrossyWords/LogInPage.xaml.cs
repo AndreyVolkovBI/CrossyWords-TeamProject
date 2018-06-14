@@ -34,7 +34,7 @@ namespace CrossyWords
                 MessageBox.Show("You should fill all fields");
             else
             {
-                string text = textbox_Password.Password;
+                //string text = textbox_Password.Password;
                 try
                 {                    
                     if (_usersdata.FindUser(textbox_NickName.Text, textbox_Password.Password))

@@ -23,9 +23,7 @@ namespace CrossyWords
     /// </summary>
     public partial class GamePage : Page
     {
-
         DispatcherTimer _disptchertimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
-
 
         int _timeForGameLeft = 10;
         int _points = 0;
@@ -43,6 +41,7 @@ namespace CrossyWords
 
         IRepository _repo = Factory.Default.GetRepository<Repository>();
         UsersData _usersdata = Factory.Default.GetUsersData();
+        DatabaseRepository _dbRepository = Factory.Default.GetDatabaseRepository();
 
         Battle _battle;
 
@@ -54,7 +53,7 @@ namespace CrossyWords
             Init();
             FillButtons();
             MakeHandlerForTimer();
-            TextBlock_Points.Text = "Points: \n 0";
+            TextBlock_Points.Text = "Points: 0";
 
         }
 
@@ -242,7 +241,7 @@ namespace CrossyWords
 
         private void CheckFinalWord()
         {
-            bool isWordInList = _repo.IsWordInList(CurrentWord_textblock.Text); //here we check the final word and give balls
+            bool isWordInList = _dbRepository.IsWordInList(CurrentWord_textblock.Text); //here we check the final word and give balls
             if (isWordInList && !foundWords.Contains(CurrentWord_textblock.Text))
             {
                 _points = _points + CurrentWord_textblock.Text.Length * 2;
@@ -269,12 +268,6 @@ namespace CrossyWords
             NavigationService.Navigate(new LogInPage());
         }
 
-        public void GetNeighbours()
-        {
-            List<int> count = _repo.GetIds(10); // метод, который возвращает id-s ячеек соседей заданной ячейки
-        }
-
-        
         private void ToSettingsPage_Click(object sender, RoutedEventArgs e)
         {
             _disptchertimer.Stop();

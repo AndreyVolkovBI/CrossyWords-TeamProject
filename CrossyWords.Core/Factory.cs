@@ -23,7 +23,7 @@ namespace CrossyWords.Core
         UsersData _usersdata = new UsersData(); //repo ?
 
         IRepository _Repository = new Repository();
-        //IRepository _dbRepository = new DatabaseRepository();
+        DatabaseRepository _dbRepository = new DatabaseRepository();
 
         public IRepository GetRepository<T>()
         {
@@ -37,6 +37,11 @@ namespace CrossyWords.Core
         public UsersData GetUsersData()
         {
             return _usersdata;
+        }
+
+        public DatabaseRepository GetDatabaseRepository()
+        {
+            return _dbRepository;
         }
     }
 }

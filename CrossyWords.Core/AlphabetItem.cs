@@ -5,13 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CrossyWords.Core.API.OxfordDictionary
+namespace CrossyWords.Core
 {
-    [Table("Categories")]
-    public class Word
+    [Table("Alphabet")]
+    public class AlphabetItem
     {
         public int Id { get; set; }
-        public string Name { get; set; }
-        public string En { get; set; }
+        public string Letter { get; set; }
     }
 }

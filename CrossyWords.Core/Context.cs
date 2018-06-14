@@ -11,12 +11,13 @@ namespace CrossyWords.Core
 {
     public class Context : DbContext
     {
-
         public DbSet<User> Users { get; set; }
         public DbSet<Battle> Battles { get; set; }
-        public DbSet<BasicWord> BasicWords { get; set; }
         public DbSet<Word> Categories { get; set; }
         public DbSet<Review> Reviews { get; set; }
+
+        public DbSet<WordItem> Words { get; set; }
+        public DbSet<AlphabetItem> Alphabet { get; set; }
 
         // To specify an explicit connection or DB name call the base class constructor
         public Context()
@@ -36,31 +37,18 @@ namespace CrossyWords.Core
                 RequestManager request = new RequestManager();
                 IRepository repo = Factory.Default.GetRepository<Repository>();
 
-                foreach(var item in request.GetCategories())
+                foreach (var item in request.GetCategories())
                     context.Categories.Add(item);
 
-                foreach (var item in repo.ReadWords())
-                    context.BasicWords.Add(item);
+                foreach (var item in repo.GetWords())
+                    context.Words.Add(item);
+
+                foreach (var item in repo.GetAlphabet())
+                    context.Alphabet.Add(item);
 
                 context.SaveChanges();
 
             }
-        }
-
-        public static void DeleteSpaces(List<WordsResult> list) // delete spaces in words
-        {
-            for (int i = 0; i < list.Count - 1; i++)
-            {
-                foreach (var el in list[i].Word)
-                {
-                    if (el == ' ' || el == ',')
-                    {
-                        list.Remove(list[i]);
-                        DeleteSpaces(list);
-                    }
-                }
-            }
-
         }
     }
 }

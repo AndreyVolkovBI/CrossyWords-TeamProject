@@ -21,10 +21,10 @@
                 <TextBlock Text="It's free and always will be." Margin="0 10 0 0" TextAlignment="Center" FontSize="15"  FontFamily="./#FARRAY"/>
 
                 <TextBlock Text="Nickname:" Margin="0 30 0 0" FontSize="15" FontFamily="./#FARRAY"/>
-                <TextBox Name="textbox_NickName" FontSize="25" Foreground="Gray"/>
+                <TextBox Name="textbox_NickName" FontSize="25" Foreground="Black"/>
 
                 <TextBlock Text="Password:" Margin="0 10 0 0" FontSize="15" FontFamily="./#FARRAY"/>
-                <TextBox Name="textbox_Password" Padding="2" FontSize="25" Foreground="Gray"/>
+                <TextBox Name="textbox_Password" Padding="2" FontSize="25" Foreground="Black"/>
                 <Button Name="CreateAccount" Content="Create Account" Margin="0 20 0 0" FontSize="20" IsDefault="True" Background="White" Foreground="Black" Height="40" FontFamily="./#FARRAY" Click="CreateAccount_Click"/>
 
             </StackPanel>

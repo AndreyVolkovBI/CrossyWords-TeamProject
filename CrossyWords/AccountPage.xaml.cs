@@ -43,19 +43,16 @@ namespace CrossyWords
         private void Button_ChallengePage_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new ChallangePage());
-
         }
 
         private void Button_Rating_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new RatingPage());
-
         }
 
         private void Button_Settings_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new SettingsPage());
-
         }
 
         private void DataGrid_MouseDoubleCLick(object sender, MouseButtonEventArgs e)

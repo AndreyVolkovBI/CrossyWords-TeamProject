@@ -57,6 +57,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AlphabetItem.cs" />
     <Compile Include="API\OxfordDictionary\DTO_Categories\ResultItem.cs" />
     <Compile Include="API\OxfordDictionary\DTO_Categories\WordsResult.cs" />
     <Compile Include="API\OxfordDictionary\DTO_Words\ResultItem.cs" />
@@ -64,7 +65,12 @@
     <Compile Include="API\OxfordDictionary\RequestManager.cs" />
     <Compile Include="API\OxfordDictionary\Word.cs" />
     <Compile Include="API\OxfordDictionary\WordsResult.cs" />
-    <Compile Include="BasicWord.cs" />
+    <Compile Include="DatabaseRepository.cs" />
+    <Compile Include="Migrations\201806140346308_changesInClassStructure.cs" />
+    <Compile Include="Migrations\201806140346308_changesInClassStructure.Designer.cs">
+      <DependentUpon>201806140346308_changesInClassStructure.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WordItem.cs" />
     <Compile Include="BruteForce\Algorithm.cs" />
     <Compile Include="BruteForce\WordsHelper.cs" />
     <Compile Include="Context.cs" />
@@ -139,6 +145,7 @@
       <DependentUpon>201806131607198_DeleteUselessParts.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="NeighboursHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository.cs" />
     <Compile Include="Users\Battle.cs" />
@@ -202,6 +209,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201806131607198_DeleteUselessParts.resx">
       <DependentUpon>201806131607198_DeleteUselessParts.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806140346308_changesInClassStructure.resx">
+      <DependentUpon>201806140346308_changesInClassStructure.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

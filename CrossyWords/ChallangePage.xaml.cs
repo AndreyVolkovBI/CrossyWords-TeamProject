@@ -32,23 +32,17 @@ namespace CrossyWords
         private void Button_Game_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new AccountPage());
-
         }
 
         private void Button_Rating_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new RatingPage());
-
         }
 
         private void Button_Settings_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new SettingsPage());
-
         }
-
-        
-
       
         private void UpdateDataGrid()
         {
@@ -97,7 +91,6 @@ namespace CrossyWords
             }
             else
                 UpdateDataGrid();
-
         }
 
 
