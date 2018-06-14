@@ -12,7 +12,6 @@ namespace CrossyWords.Core
     {
         public User User { get; set; }
 
-        int i = 0;
         public UsersData()
         {
             
@@ -47,6 +46,8 @@ namespace CrossyWords.Core
 
             using (var context = new Context())
             {
+                var user = context.Users.FirstOrDefault(u => u.Id == 12);
+
                 if (context.Users.FirstOrDefault(u => u.Name == name) == null)
                     return true;
                 else

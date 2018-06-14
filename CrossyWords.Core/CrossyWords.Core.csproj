@@ -70,6 +70,10 @@
     <Compile Include="Migrations\201806140346308_changesInClassStructure.Designer.cs">
       <DependentUpon>201806140346308_changesInClassStructure.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201806140546231_CheckingMigration.cs" />
+    <Compile Include="Migrations\201806140546231_CheckingMigration.Designer.cs">
+      <DependentUpon>201806140546231_CheckingMigration.cs</DependentUpon>
+    </Compile>
     <Compile Include="WordItem.cs" />
     <Compile Include="BruteForce\Algorithm.cs" />
     <Compile Include="BruteForce\WordsHelper.cs" />
@@ -212,6 +216,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201806140346308_changesInClassStructure.resx">
       <DependentUpon>201806140346308_changesInClassStructure.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806140546231_CheckingMigration.resx">
+      <DependentUpon>201806140546231_CheckingMigration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

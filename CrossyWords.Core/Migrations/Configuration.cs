@@ -1,5 +1,6 @@
 namespace CrossyWords.Core.Migrations
 {
+    using CrossyWords.Core.API.OxfordDictionary;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
@@ -10,11 +11,25 @@ namespace CrossyWords.Core.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
-            ContextKey = "CrossyWords.Core.Context";
+            ContextKey = "CrossyWords.Core.Migrations.Configuration"; //change it!!!!!
         }
 
         protected override void Seed(CrossyWords.Core.Context context)
         {
+
+            //RequestManager request = new RequestManager();
+            //IRepository repo = Factory.Default.GetRepository<Repository>();
+
+            //foreach (var item in request.GetCategories())
+            //    context.Categories.Add(item);
+
+            //foreach (var item in repo.GetWords())
+            //    context.Words.Add(item);
+
+            //foreach (var item in repo.GetAlphabet())
+            //    context.Alphabet.Add(item);
+
+            //context.SaveChanges();
             //  This method will be called after migrating to the latest version.
 
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
