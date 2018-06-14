@@ -21,19 +21,19 @@ namespace CrossyWords.Core.API.OxfordDictionary
         //string language = "en";
         //string filters = "domains=Art";
 
-        private string GetRequestUrlWords(string language, string filters)
-            => $"https://od-api.oxforddictionaries.com/api/v1/wordlist/{language}/{filters}";
+        private string GetRequestUrlWords(string filters)
+            => $"https://od-api.oxforddictionaries.com/api/v1/wordlist/en/{filters}";
 
         private string GetRequestUrlCategories()
             => $"https://od-api.oxforddictionaries.com:443/api/v1/domains/en";
 
-        public List<WordsResult> GetWords(string language, string filters)
+        public List<WordsResult> GetWords(string filters)
         {
             using (HttpClient client = new HttpClient())
             {
                 client.DefaultRequestHeaders.Add("app_id", _appId);
                 client.DefaultRequestHeaders.Add("app_key", _key);
-                var result = client.GetAsync(GetRequestUrlWords(language, filters)).Result;
+                var result = client.GetAsync(GetRequestUrlWords(filters)).Result;
                 Console.WriteLine(result);
 
                 if (!result.IsSuccessStatusCode)

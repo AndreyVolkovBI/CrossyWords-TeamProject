@@ -9,18 +9,34 @@ namespace CrossyWords.Core
 {
     public class DatabaseRepository
     {
-        public List<WordItem> Words { get; set; } = new List<WordItem>();
-        public List<AlphabetItem> Alphabet { get; set; } = new List<AlphabetItem>();
+        RequestManager rm = new RequestManager();
+
+        public List<WordItem> Words { get; set; } = new List<WordItem>(); // the words are currently in use
 
         public List<Level> Levels { get; set; } = new List<Level>();
         public List<Category> Categories { get; set; } = new List<Category>();
 
-        public Level SelectedLevel { get; set; } // chosen level or category
+        public Level SelectedLevel { get; set; } = new Level { Id = 1, Name = "Beginner - 1000 words" }; // chosen level or category
         public Category SelectedCategory { get; set; }
 
-        public DatabaseRepository()
+        public List<WordItem> GetListChosenWords()
         {
-            FillWordsAndAlphabet();
+            if (SelectedCategory != null)
+            {
+                Words = new List<WordItem>();
+
+                foreach (var item in rm.GetWords(SelectedCategory.Name))
+                    Words.Add(new WordItem() { Word = item.Word });
+            }
+            else
+            {
+                Words = new List<WordItem>();
+
+                foreach(var item in GetWords())
+                    if (item.Level != null && item.Level.Id == SelectedLevel.Id)
+                        Words.Add(new WordItem() { Word = item.Word });
+            }
+            return Words;
         }
 
         public void FillCategories()
@@ -41,34 +57,31 @@ namespace CrossyWords.Core
             SelectedLevel = Levels.FirstOrDefault(x => x.Id == 1);
         }
 
-        public void FillWordsAndAlphabet()
+        public List<WordItem> GetWords()
         {
             using (var context = new Context())
             {
-                foreach (var item in context.Words)
-                    Words.Add(item);
-
-                foreach (var item in context.Alphabet)
-                    Alphabet.Add(item);
+                return context.Words.ToList();
             }
-        }
-
-        public List<WordItem> GetWords()
-        {
-            return Words;
         }
 
         public List<AlphabetItem> GetAlphabet()
         {
-            return Alphabet;
+            using (var context = new Context())
+            {
+                return context.Alphabet.ToList();
+            }
         }
 
         public bool IsWordInList(string word)
         {
-            foreach (var item in Words)
-                if (item.Word == word)
-                    return true;
-            return false;
+            using (var context = new Context())
+            {
+                foreach (var item in context.Words)
+                    if (item.Word == word)
+                        return true;
+                return false;
+            }
         }
 
     }
