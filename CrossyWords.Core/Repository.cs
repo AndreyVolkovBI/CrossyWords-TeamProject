@@ -26,11 +26,12 @@ namespace CrossyWords.Core
         public int Dimension { get; set; } = 5;
 
         public List<WordItem> Words { get; set; } = new List<WordItem>();
+        public List<AlphabetItem> Alphabet { get; set; } = new List<AlphabetItem>();
+
         public List<Cell> Cells { get; set; } = new List<Cell>(); // список всех ячеек
 
         public Repository()
         {
-            Words = _db.Words;
             FullIdCells();
         }
 
@@ -42,14 +43,38 @@ namespace CrossyWords.Core
                     cell.Value = _db.Alphabet[r.Next(25)].Letter;
         }
 
+        public void NewAttempt()
+        {
+            List<string> listFinal = new List<string>();
+
+            Random r = new Random();
+            string word = _db.Words[r.Next(0, _db.Words.Count - 1)].Word;
+
+
+        }
+
+        public bool TryFillIn(string word)
+        {
+            Cell currentCell = new Cell();
+            foreach (var item in Cells) // если есть первая буква, то начни строить от неё
+            {
+                if (item.Value == word[0].ToString())
+                    currentCell = item;
+            }
+
+
+
+            return false;
+        }
+
         public List<Cell> FillAllCells()
         {
             Random r = new Random();
-            string word = Words[r.Next(0, Words.Count - 1)].Word;
+            string word = _db.Words[r.Next(0, _db.Words.Count - 1)].Word;
 
             for (int l = 0; l < 5; l++)
             {
-                string currentWord = Words[l].Word;
+                string currentWord = _db.Words[l].Word;
                 Cell currentCell = new Cell();
 
                 foreach (var item in Cells) // если есть первая буква, то начни строить от неё
@@ -109,13 +134,28 @@ namespace CrossyWords.Core
                 Cells.Add(new Cell { Id = i });
         }
 
+        public static List<string> ReadFromJson(string name)
+        {
+            try
+            {
+                using (var reader = new StreamReader($"../../../Words/{name}.json"))
+                {
+                    return JsonConvert.DeserializeObject<List<string>>(reader.ReadToEnd());
+                }
+            }
+            catch
+            {
+                throw new Exception("Error reading data");
+            }
+        }
+
         public List<WordItem> GetWords()
         {
             List<WordItem> list = new List<WordItem>();
 
-            foreach (var item in _db.Words)
+            foreach (var item in ReadFromJson("Words12000"))
             {
-                var word = new WordItem() { Word = item.Word };
+                var word = new WordItem() { Word = item };
                 list.Add(word);
             }
             return list;
@@ -125,9 +165,9 @@ namespace CrossyWords.Core
         {
             List<AlphabetItem> list = new List<AlphabetItem>();
 
-            foreach (var item in _db.Alphabet)
+            foreach (var item in ReadFromJson("Alphabet"))
             {
-                var letter = new AlphabetItem() { Letter = item.Letter };
+                var letter = new AlphabetItem() { Letter = item };
                 list.Add(letter);
             }
             return list;

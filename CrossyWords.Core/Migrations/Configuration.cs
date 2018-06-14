@@ -16,20 +16,6 @@ namespace CrossyWords.Core.Migrations
 
         protected override void Seed(CrossyWords.Core.Context context)
         {
-
-            //RequestManager request = new RequestManager();
-            //IRepository repo = Factory.Default.GetRepository<Repository>();
-
-            //foreach (var item in request.GetCategories())
-            //    context.Categories.Add(item);
-
-            //foreach (var item in repo.GetWords())
-            //    context.Words.Add(item);
-
-            //foreach (var item in repo.GetAlphabet())
-            //    context.Alphabet.Add(item);
-
-            //context.SaveChanges();
             //  This method will be called after migrating to the latest version.
 
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 

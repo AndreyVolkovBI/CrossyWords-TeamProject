@@ -56,23 +56,30 @@ namespace CrossyWords.Core.API.OxfordDictionary
         {
             using (HttpClient client = new HttpClient())
             {
-                client.DefaultRequestHeaders.Add("app_id", _appId);
-                client.DefaultRequestHeaders.Add("app_key", _key);
-                var result = client.GetAsync(GetRequestUrlCategories()).Result;
-                Console.WriteLine(result);
-
-                if (!result.IsSuccessStatusCode)
-                    throw new Exception("Invalid server reply");
-                else
+                try
                 {
-                    var jsonResult = result.Content.ReadAsStringAsync().Result;
-                    var searchResult = JsonConvert.DeserializeObject<DTO_Categories.WordsResult>(jsonResult);
-                    return searchResult.Results
-                        .Select(x => new Word()
-                        {
-                            Name = x.Key,
-                            En = x.Value.en
-                        }).ToList();
+                    client.DefaultRequestHeaders.Add("app_id", _appId);
+                    client.DefaultRequestHeaders.Add("app_key", _key);
+                    var result = client.GetAsync(GetRequestUrlCategories()).Result;
+                    Console.WriteLine(result);
+
+                    if (!result.IsSuccessStatusCode)
+                        throw new Exception("Invalid server reply");
+                    else
+                    {
+                        var jsonResult = result.Content.ReadAsStringAsync().Result;
+                        var searchResult = JsonConvert.DeserializeObject<DTO_Categories.WordsResult>(jsonResult);
+                        return searchResult.Results
+                            .Select(x => new Word()
+                            {
+                                Name = x.Key,
+                                En = x.Value.en
+                            }).ToList();
+                    }
+                }
+                catch
+                {
+                    return null;
                 }
 
             }
