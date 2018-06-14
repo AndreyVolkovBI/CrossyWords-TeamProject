@@ -41,88 +41,72 @@ namespace CrossyWords.Core
             Random r = new Random();
             foreach (var cell in Cells)
                 if (cell.Value == null)
-                    cell.Value = _db.Alphabet[r.Next(25)].Letter;
+                    cell.Value = _db.GetAlphabet()[r.Next(25)].Letter;
         }
 
-        public void NewAttempt()
+        public List<Cell> FillAllCells(List<WordItem> list)
         {
-            List<string> listFinal = new List<string>();
-
-            Random r = new Random();
-            string word = _db.Words[r.Next(0, _db.Words.Count - 1)].Word;
-
-
-        }
-
-        public bool TryFillIn(string word)
-        {
-            Cell currentCell = new Cell();
-            foreach (var item in Cells) // если есть первая буква, то начни строить от неё
-            {
-                if (item.Value == word[0].ToString())
-                    currentCell = item;
-            }
-
-
-
-            return false;
-        }
-
-        public List<Cell> FillAllCells()
-        {
-            Random r = new Random();
-            string word = _db.Words[r.Next(0, _db.Words.Count - 1)].Word;
-
-            Cells = new List<Cell>();
-            FullIdCells();
-
-            for (int l = 0; l < 5; l++)
-            {
-                string currentWord = _db.Words[l].Word;
-                Cell currentCell = new Cell();
-
-                foreach (var item in Cells) // если есть первая буква, то начни строить от неё
-                {
-                    if (item.Value == currentWord[0].ToString())
-                        currentCell = item;
-                }
-
-                do // проверка на занятость ячейки
-                {
-                    currentCell = Cells[r.Next(25)];
-
-                } while (currentCell.Value != null);
-
-
-                for (int i = 0; i < currentWord.Length; i++)
-                {
-                    currentCell.Value = currentWord[i].ToString();
-                    List<int> idOfCurrentCell = GetIds(currentCell.Id);
-
-                    Stack<List<Cell>> st = new Stack<List<Cell>>();
-
-
-                    for (int k = 0; k < idOfCurrentCell.Count; k++)
-                    {
-                        if (Cells[idOfCurrentCell[k] - 1].Value == null)
-                        {
-                            currentCell = Cells[idOfCurrentCell[k] - 1];
-                            break;
-                        }
-                    }
-                }
-            }
+            foreach(var item in list)
+                FillWord(item.Word);
 
             FillBlankCells();
             return Cells;
+
         }
 
-        public bool IsWordInList(string word)
+        public bool FillWord(string word)
         {
-            foreach (var item in Words)
-                if (item.Word == word)
+            Random r = new Random();
+            Stack<List<Cell>> stackListCells = new Stack<List<Cell>>();
+            stackListCells.Push(Cells);
+
+            bool flag = false;
+
+            Cell currentCell = GetVacantCells()[r.Next(0, GetVacantCells().Count - 1)];
+            currentCell.Value = word[0].ToString();
+
+            for (int i = 1; i < word.Length; i++)
+            {
+                foreach(var item in GetIds(currentCell.Id))
+                {
+                    if (Cells.FirstOrDefault(x => x.Id == item).Value == null && FillLetter(word[i].ToString(), Cells.FirstOrDefault(x => x.Id == item)))
+                    {
+                        currentCell = Cells.FirstOrDefault(x => x.Id == item);
+                        flag = true;
+                        break;
+                    }
+                }
+
+                if (!flag)
+                {
+                    Cells = stackListCells.Pop();
+                    return false;
+                }
+
+                flag = false;
+            }
+            return true;
+        }
+
+        public bool FillLetter(string letter, Cell currentCell)
+        {
+            currentCell.Value = letter.ToString();
+
+            foreach (var item in GetIds(currentCell.Id))
+                if (Cells.FirstOrDefault(x => x.Id == item).Value == null)
                     return true;
+            
             return false;
+        }
+
+        public List<Cell> GetVacantCells()
+        {
+            List<Cell> VacantCells = new List<Cell>();
+
+            foreach (var item in Cells)
+                if (item.Value == null)
+                    VacantCells.Add(item);
+            return VacantCells;
         }
 
         public List<int> GetIds(int id)

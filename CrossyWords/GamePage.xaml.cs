@@ -59,8 +59,8 @@ namespace CrossyWords
 
         private void Init()
         {
-            if (_dbRepository.Words.Count == 0 || _dbRepository.Alphabet.Count == 0)
-                _dbRepository.FillWordsAndAlphabet();
+            //if (_dbRepository.GetWords().Count == 0 || _dbRepository.GetAlphabet().Count == 0)
+            //    _dbRepository.FillWordsAndAlphabet();
         }
 
         private void MakeHandlerForTimer()
@@ -136,7 +136,7 @@ namespace CrossyWords
         {
             if (_battle == null || _battle.AllWords == null)
             {
-                List<Cell> cellsTemp = _repo.FillAllCells();
+                List<Cell> cellsTemp = _repo.FillAllCells(_dbRepository.GetListChosenWords());
                 for (int i = 0; i < cells.Count; i++)
                     cells[i].Button.Content = cellsTemp[i].Value;
             } 
