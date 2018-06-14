@@ -66,6 +66,7 @@
     <Compile Include="API\OxfordDictionary\Category.cs" />
     <Compile Include="API\OxfordDictionary\WordsResult.cs" />
     <Compile Include="DatabaseRepository.cs" />
+    <Compile Include="Level.cs" />
     <Compile Include="Migrations\201806140346308_changesInClassStructure.cs" />
     <Compile Include="Migrations\201806140346308_changesInClassStructure.Designer.cs">
       <DependentUpon>201806140346308_changesInClassStructure.cs</DependentUpon>

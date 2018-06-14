@@ -51,10 +51,16 @@ namespace CrossyWords
             if (battle != null)
                 _battle = battle;
             Init();
+            AddButtons();
             FillButtons();
             MakeHandlerForTimer();
             TextBlock_Points.Text = "Points: 0";
+        }
 
+        private void Init()
+        {
+            if (_dbRepository.Words.Count == 0 || _dbRepository.Alphabet.Count == 0)
+                _dbRepository.FillWordsAndAlphabet();
         }
 
         private void MakeHandlerForTimer()
@@ -145,7 +151,7 @@ namespace CrossyWords
       
         }
 
-        private void Init()
+        private void AddButtons()
         {
             for (int i = 0; i < _repo.Dimension; i++)
             {

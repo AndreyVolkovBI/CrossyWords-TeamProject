@@ -55,11 +55,7 @@
                     </Grid.ColumnDefinitions>
                     <StackPanel Grid.Column="0">
                         <TextBlock Text="Level:" FontSize="15" FontFamily="./#FARRAY"/>
-                        <ComboBox Name="levelComboBox" Padding="2" FontSize="20" Foreground="Black" Margin="0 4" SelectionChanged="levelComboBox_SelectionChanged">
-                            <ComboBoxItem Content="Beginner - 1000 words"/>
-                            <ComboBoxItem Content="Intermediate - 5000 words"/>
-                            <ComboBoxItem Content="Advanced - 12000 words"/>
-                        </ComboBox>
+                        <ComboBox Name="levelComboBox" Padding="2" FontSize="20" Foreground="Black" Margin="0 4" DisplayMemberPath="Name" SelectionChanged="levelComboBox_SelectionChanged"/>
                     </StackPanel>
                     <StackPanel Grid.Column="2">
                         <TextBlock Text="Category:" FontSize="15" FontFamily="./#FARRAY"/>
