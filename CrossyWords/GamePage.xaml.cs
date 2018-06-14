@@ -37,7 +37,6 @@ namespace CrossyWords
         List<string> foundWords = new List<string>();
         List<char> _currentWord = new List<char>();
         List<Button> _chosenButtons = new List<Button>();
-        //currentword_textblock
 
         Repository _repo = Factory.Default.GetRepository();
         UsersData _usersdata = Factory.Default.GetUsersData();

@@ -168,7 +168,7 @@ namespace CrossyWords
 
             if (categoryComboBox.SelectedIndex != -1)
             {
-                _repo.SelectedCategory = levelComboBox.SelectedItem as Category;
+                _repo.SelectedCategory = categoryComboBox.SelectedItem as Category;
                 _repo.SelectedLevel = null;
             }
         }
