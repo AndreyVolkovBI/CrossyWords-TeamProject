@@ -13,7 +13,7 @@ namespace CrossyWords.Core
     {
         public DbSet<User> Users { get; set; }
         public DbSet<Battle> Battles { get; set; }
-        public DbSet<Word> Categories { get; set; }
+        public DbSet<Category> Categories { get; set; }
         public DbSet<Review> Reviews { get; set; }
 
         public DbSet<WordItem> Words { get; set; }
@@ -35,7 +35,7 @@ namespace CrossyWords.Core
             protected override void Seed(Context context)
             {
                 RequestManager request = new RequestManager();
-                IRepository repo = Factory.Default.GetRepository<Repository>();
+                Repository repo = Factory.Default.GetRepository();
 
                 foreach (var item in request.GetCategories())
                     context.Categories.Add(item);

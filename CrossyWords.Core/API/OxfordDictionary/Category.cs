@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace CrossyWords.Core.API.OxfordDictionary
 {
     [Table("Categories")]
-    public class Word
+    public class Category
     {
         public int Id { get; set; }
         public string Name { get; set; }

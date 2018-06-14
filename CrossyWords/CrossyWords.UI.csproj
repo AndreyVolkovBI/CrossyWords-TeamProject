@@ -79,9 +79,6 @@
     <Compile Include="NavigationDrawer.xaml.cs">
       <DependentUpon>NavigationDrawer.xaml</DependentUpon>
     </Compile>
-    <Compile Include="GameSettingsPage.xaml.cs">
-      <DependentUpon>GameSettingsPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="SignUpPage.xaml.cs">
       <DependentUpon>SignUpPage.xaml</DependentUpon>
     </Compile>
@@ -121,10 +118,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="NavigationDrawer.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="GameSettingsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

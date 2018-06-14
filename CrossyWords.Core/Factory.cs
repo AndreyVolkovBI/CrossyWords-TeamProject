@@ -22,21 +22,17 @@ namespace CrossyWords.Core
 
         UsersData _usersdata = new UsersData(); //repo ?
 
-        IRepository _Repository = new Repository();
+        Repository _Repository = new Repository();
         DatabaseRepository _dbRepository = new DatabaseRepository();
-
-        public IRepository GetRepository<T>()
-        {
-            if (typeof(T) == typeof(Repository))
-                return _Repository;
-            //if (typeof(T) == typeof(DatabaseRepository))
-            //    return _dbRepository;
-            return null;
-        }
 
         public UsersData GetUsersData()
         {
             return _usersdata;
+        }
+
+        public Repository GetRepository()
+        {
+            return _Repository;
         }
 
         public DatabaseRepository GetDatabaseRepository()

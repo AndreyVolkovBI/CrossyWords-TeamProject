@@ -52,7 +52,7 @@ namespace CrossyWords.Core.API.OxfordDictionary
             }
         }
 
-        public List<Word> GetCategories()
+        public List<Category> GetCategories()
         {
             using (HttpClient client = new HttpClient())
             {
@@ -70,7 +70,7 @@ namespace CrossyWords.Core.API.OxfordDictionary
                         var jsonResult = result.Content.ReadAsStringAsync().Result;
                         var searchResult = JsonConvert.DeserializeObject<DTO_Categories.WordsResult>(jsonResult);
                         return searchResult.Results
-                            .Select(x => new Word()
+                            .Select(x => new Category()
                             {
                                 Name = x.Key,
                                 En = x.Value.en

@@ -18,7 +18,7 @@ namespace CrossyWords.Core
         public Button Button { get; set; } = new Button();
     }
 
-    public class Repository : IRepository
+    public class Repository
     {
         DatabaseRepository _db = new DatabaseRepository();
 

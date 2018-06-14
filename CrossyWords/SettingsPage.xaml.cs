@@ -1,4 +1,5 @@
 ﻿using CrossyWords.Core;
+using CrossyWords.Core.API.OxfordDictionary;
 using CrossyWords.Core.Users;
 using System;
 using System.Collections.Generic;
@@ -22,7 +23,7 @@ namespace CrossyWords
     /// </summary>
     public partial class SettingsPage : Page
     {
-        
+        DatabaseRepository _repo = Factory.Default.GetDatabaseRepository();
 
         UsersData _usersdata = Factory.Default.GetUsersData();
 
@@ -30,15 +31,21 @@ namespace CrossyWords
         {
             InitializeComponent();
             textbox_NickName.Text = _usersdata.User.Name;
-
+            Init();
         }
 
-        
+        private void Init()
+        {
+            if (_repo.Categories.Count == 0)
+                _repo.FillCategories();
+
+            foreach (var item in _repo.Categories)
+                categoryComboBox.Items.Add(item);
+        }
 
         private void Button_Game_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new AccountPage());
-
         }
 
         private void Button_ChallengePage_Click(object sender, RoutedEventArgs e)
@@ -50,7 +57,6 @@ namespace CrossyWords
         private void Button_Rating_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new RatingPage());
-
         }
 
         private void Button_SaveChanges(object sender, RoutedEventArgs e)
@@ -99,7 +105,7 @@ namespace CrossyWords
                 return true;
             else
                 return false;
-  
+
         }
 
         private void AcceptChangesWithName()
@@ -119,13 +125,10 @@ namespace CrossyWords
                     }
                     else
                         MessageBox.Show("Your name must have more than 3 letters and less than 50 letters", "Limitations", MessageBoxButton.OK, MessageBoxImage.Error);
-                    
+
                 }
             }
         }
-
-        
-
 
         private void Button_SendReview_Click(object sender, RoutedEventArgs e)
         {
@@ -136,6 +139,16 @@ namespace CrossyWords
                 _usersdata.SendReview(TextBox_Review.Text);
                 MessageBox.Show("Thank you for review! Your opinion is very important for us.", "Succesful sending", MessageBoxButton.OK, MessageBoxImage.Information);
             }
+        }
+
+        private void levelComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            categoryComboBox.SelectedIndex = -1;
+        }
+
+        private void categoryComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            levelComboBox.SelectedIndex = -1;
         }
     }
 }

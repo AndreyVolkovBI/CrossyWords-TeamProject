@@ -21,7 +21,7 @@ namespace CrossyWords
     /// </summary>
     public partial class NavigationDrawer : Page
     {
-        IRepository _repo = Factory.Default.GetRepository<Repository>();
+        Repository _repo = Factory.Default.GetRepository();
 
         public NavigationDrawer()
         {

@@ -39,7 +39,7 @@ namespace CrossyWords
         List<Button> _chosenButtons = new List<Button>();
         //currentword_textblock
 
-        IRepository _repo = Factory.Default.GetRepository<Repository>();
+        Repository _repo = Factory.Default.GetRepository();
         UsersData _usersdata = Factory.Default.GetUsersData();
         DatabaseRepository _dbRepository = Factory.Default.GetDatabaseRepository();
 
@@ -260,20 +260,6 @@ namespace CrossyWords
                 currentword = currentword + _currentWord[i];
             }
             CurrentWord_textblock.Text = currentword;
-        }
-
-        private void Header_Click(object sender, RoutedEventArgs e) //do not need
-        {
-            _disptchertimer.Stop();
-            SaveInfoAboutBattle();
-            NavigationService.Navigate(new LogInPage());
-        }
-
-        private void ToSettingsPage_Click(object sender, RoutedEventArgs e)
-        {
-            _disptchertimer.Stop();
-            SaveInfoAboutBattle();
-            NavigationService.Navigate(new GameSettingsPage());
         }
     }
 }

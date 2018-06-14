@@ -14,12 +14,22 @@
             <StackPanel Orientation="Vertical" Margin="20 10">
                 <TextBlock Text="Settings" TextAlignment="Center" FontSize="25" FontFamily="./#FARRAY" Margin="0 10"/>
 
-                <TextBlock Text="Nickname:" Margin="0 10 0 0" FontSize="15" FontFamily="./#FARRAY"/>
-                <TextBox Name="textbox_NickName" FontSize="25"/>
+                <!--<TextBlock Text="Change password" FontSize="20" FontFamily="./#FARRAY" TextAlignment="Center"/>-->
 
-                <TextBlock Text="Change password" FontSize="20" FontFamily="./#FARRAY" TextAlignment="Center"/>
-                <TextBlock Text="Current password:" Margin="0 10 0 0" FontSize="15" FontFamily="./#FARRAY"/>
-                <PasswordBox Name="textbox_CurrentPassword" Padding="2" FontSize="25"/>
+                <Grid Margin="0 20 0 0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0">
+                        <TextBlock Text="Nickname:" FontSize="15" FontFamily="./#FARRAY"/>
+                        <TextBox Name="textbox_NickName" FontSize="25"/>
+                    </StackPanel>
+                    <StackPanel Grid.Column="1">
+                        <TextBlock Text="Current password:" FontSize="15" FontFamily="./#FARRAY"/>
+                        <PasswordBox Name="textbox_CurrentPassword" FontSize="25"/>
+                    </StackPanel>
+                </Grid>
 
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -36,10 +46,31 @@
                     </StackPanel>
                 </Grid>
 
+                <TextBlock Text="Way of filling in" Margin="0 20" FontSize="20" FontFamily="./#FARRAY" TextAlignment="Center"/>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="0.02*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0">
+                        <TextBlock Text="Level:" FontSize="15" FontFamily="./#FARRAY"/>
+                        <ComboBox Name="levelComboBox" Padding="2" FontSize="20" Foreground="Black" Margin="0 4" SelectionChanged="levelComboBox_SelectionChanged">
+                            <ComboBoxItem Content="Beginner - 1000 words"/>
+                            <ComboBoxItem Content="Intermediate - 5000 words"/>
+                            <ComboBoxItem Content="Advanced - 12000 words"/>
+                        </ComboBox>
+                    </StackPanel>
+                    <StackPanel Grid.Column="2">
+                        <TextBlock Text="Category:" FontSize="15" FontFamily="./#FARRAY"/>
+                        <ComboBox Name="categoryComboBox" Padding="2" FontSize="20" Foreground="Black" Margin="0 4" DisplayMemberPath="En" SelectionChanged="categoryComboBox_SelectionChanged"/>
+                    </StackPanel>
+                </Grid>
+
                 <Button Content="Save Changes" FontSize="20" Margin="0 20" FontFamily="./#FARRAY" IsDefault="True" Background="White" Foreground="Black" Height="40"  Click="Button_SaveChanges"/>
 
-                <TextBlock Text="Review to the application:" Margin="0 10 0 0" FontSize="15" FontFamily="./#FARRAY"/>
-                <Grid Margin="0 10 0 20">
+                <TextBlock Text="Review to the application:" FontSize="15" FontFamily="./#FARRAY"/>
+                <Grid Margin="0 0 0 15">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="2*"/>
                         <ColumnDefinition Width="*"/>

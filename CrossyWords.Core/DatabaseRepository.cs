@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CrossyWords.Core.API.OxfordDictionary;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,9 +12,20 @@ namespace CrossyWords.Core
         public List<WordItem> Words { get; set; } = new List<WordItem>();
         public List<AlphabetItem> Alphabet { get; set; } = new List<AlphabetItem>();
 
+        public List<Category> Categories { get; set; } = new List<Category>();
+
         public DatabaseRepository()
         {
             FillWordsAndAlphabet();
+        }
+
+        public void FillCategories()
+        {
+            using (var context = new Context())
+            {
+                foreach (var item in context.Categories)
+                    Categories.Add(item);
+            }
         }
 
         public void FillWordsAndAlphabet()
