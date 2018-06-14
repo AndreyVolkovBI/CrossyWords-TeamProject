@@ -72,6 +72,9 @@ namespace CrossyWords.Core
             Random r = new Random();
             string word = _db.Words[r.Next(0, _db.Words.Count - 1)].Word;
 
+            Cells = new List<Cell>();
+            FullIdCells();
+
             for (int l = 0; l < 5; l++)
             {
                 string currentWord = _db.Words[l].Word;

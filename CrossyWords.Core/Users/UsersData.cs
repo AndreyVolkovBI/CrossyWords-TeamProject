@@ -182,7 +182,7 @@ namespace CrossyWords.Core
         {
             using (var context = new Context())
             {
-                var battles = context.Battles.Include("User_1").Include("User_2").Where(b => b.User_1.Id == User.Id || b.User_2.Id == User.Id).ToList();
+                var battles = context.Battles.Include("User_1").Include("User_2").Where(b => b.User_1.Id == User.Id || b.User_2.Id == User.Id).ToList(); //(b.Points_User1 != null && b.Points_User2 != null && b.DateOfChallenge - DateTime.Now() 
 
                 List<BattleForInfo> battleForInfos = new List<BattleForInfo>();
 

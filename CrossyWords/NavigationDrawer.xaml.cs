@@ -44,6 +44,7 @@ namespace CrossyWords
         {
             Page usc = null;
 
+
             if (!_repo.GameOn)
             {
                 switch (((ListViewItem)((ListView)sender).SelectedItem).Name)
@@ -55,7 +56,6 @@ namespace CrossyWords
                     case "GameItem":
                         usc = new GamePage();
                         GridMain_Frame.Navigate(usc);
-                        _repo.GameOn = true;
                         break;
                     case "ChallangeItem":
                         usc = new ChallangePage();

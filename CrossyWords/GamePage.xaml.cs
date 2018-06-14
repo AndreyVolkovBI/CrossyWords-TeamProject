@@ -65,6 +65,7 @@ namespace CrossyWords
             };
 
             _disptchertimer.Tick += handler;
+            _repo.GameOn = true;
             _disptchertimer.Start();
             handler(null, null);
             ShowTimerToUser(); //and show info
