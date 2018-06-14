@@ -49,22 +49,7 @@ namespace CrossyWords
                 levelComboBox.Items.Add(item);
         }
 
-        private void Button_Game_Click(object sender, RoutedEventArgs e)
-        {
-            NavigationService.Navigate(new AccountPage());
-        }
-
-        private void Button_ChallengePage_Click(object sender, RoutedEventArgs e)
-        {
-            NavigationService.Navigate(new ChallangePage());
-
-        }
-
-        private void Button_Rating_Click(object sender, RoutedEventArgs e)
-        {
-            NavigationService.Navigate(new RatingPage());
-        }
-
+        
         private void Button_SaveChanges(object sender, RoutedEventArgs e)
         {
             AcceptChangesWithName();
@@ -140,10 +125,14 @@ namespace CrossyWords
         private void Button_SendReview_Click(object sender, RoutedEventArgs e)
         {
             if (string.IsNullOrWhiteSpace(TextBox_Review.Text))
+            {
                 MessageBox.Show("You must write smth for sending review", "Emptry string", MessageBoxButton.OK, MessageBoxImage.None);
+                TextBox_Review.Text = null;
+            }
             else
             {
                 _usersdata.SendReview(TextBox_Review.Text);
+                TextBox_Review.Text = null;
                 MessageBox.Show("Thank you for review! Your opinion is very important for us.", "Succesful sending", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
