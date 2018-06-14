@@ -25,7 +25,7 @@ namespace CrossyWords
     {
         DispatcherTimer _disptchertimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
 
-        int _timeForGameLeft = 131;
+        int _timeForGameLeft = 91;
         int _points = 0;
         bool _trackOn = false;
         List<Cell> cells = new List<Cell>(); // all the cells (id, button)

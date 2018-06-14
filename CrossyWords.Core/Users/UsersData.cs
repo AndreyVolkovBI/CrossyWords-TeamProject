@@ -122,7 +122,7 @@ namespace CrossyWords.Core
         {
             using (var context = new Context())
             {
-                var users = context.Users.Where(u => u.Name.Contains(begginingOfName) && u.Id != User.Id && context.Battles.FirstOrDefault(b => b.User_1.Id == User.Id && b.User_2.Id == u.Id || b.User_1.Id == u.Id && b.User_2.Id == User.Id) == null).ToList();
+                var users = context.Users.Where(u => u.Name.Contains(begginingOfName) && u.Id != User.Id && context.Battles.FirstOrDefault(b => (b.User_1.Id == User.Id && b.User_2.Id == u.Id || b.User_1.Id == u.Id && b.User_2.Id == User.Id) && (b.Points_User1 == null || b.Points_User2 == null)) == null).ToList();
                 return users;
             }
         }
