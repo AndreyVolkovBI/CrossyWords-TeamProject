@@ -75,6 +75,14 @@
     <Compile Include="Migrations\201806140546231_CheckingMigration.Designer.cs">
       <DependentUpon>201806140546231_CheckingMigration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201806141533094_wordChanges.cs" />
+    <Compile Include="Migrations\201806141533094_wordChanges.Designer.cs">
+      <DependentUpon>201806141533094_wordChanges.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201806141606093_addLevels.cs" />
+    <Compile Include="Migrations\201806141606093_addLevels.Designer.cs">
+      <DependentUpon>201806141606093_addLevels.cs</DependentUpon>
+    </Compile>
     <Compile Include="WordItem.cs" />
     <Compile Include="BruteForce\Algorithm.cs" />
     <Compile Include="BruteForce\WordsHelper.cs" />
@@ -219,6 +227,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201806140546231_CheckingMigration.resx">
       <DependentUpon>201806140546231_CheckingMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806141533094_wordChanges.resx">
+      <DependentUpon>201806141533094_wordChanges.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806141606093_addLevels.resx">
+      <DependentUpon>201806141606093_addLevels.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
