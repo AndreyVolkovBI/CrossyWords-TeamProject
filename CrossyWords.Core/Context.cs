@@ -16,6 +16,7 @@ namespace CrossyWords.Core
         public DbSet<Category> Categories { get; set; }
         public DbSet<Review> Reviews { get; set; }
 
+        public DbSet<Level> Levels { get; set; }
         public DbSet<WordItem> Words { get; set; }
         public DbSet<AlphabetItem> Alphabet { get; set; }
 
@@ -40,8 +41,33 @@ namespace CrossyWords.Core
                 foreach (var item in request.GetCategories())
                     context.Categories.Add(item);
 
-                foreach (var item in repo.GetWords())
-                    context.Words.Add(item);
+                context.SaveChanges();
+
+                context.Levels.Add(new Level { Id = 1, Name = "Beginner - 1000 words" });
+                context.Levels.Add(new Level { Id = 2, Name = "Intermediate - 5000 words" });
+
+                context.SaveChanges();
+
+                foreach (var item in repo.ReadFromJson("Words1000"))
+                {
+                    context.Words.Add(new WordItem { Word = item, Level = context.Levels.First(l => l.Name == "Beginner - 1000 words") });
+                }
+
+                context.SaveChanges();
+
+                foreach (var item in repo.ReadFromJson("Words5000"))
+                {
+                    context.Words.Add(new WordItem { Word = item, Level = context.Levels.First(l => l.Name == "Intermediate - 5000 words") });
+                }
+
+                context.SaveChanges();
+
+                //foreach (var item in repo.GetWords("Words12000"))
+                //{
+                //    context.Words.Add(new WordItem { Word = item, Level = context.Levels.First(l => l.Name == "Advanced - 12000 words") });
+                //}
+
+                context.SaveChanges();
 
                 foreach (var item in repo.GetAlphabet())
                     context.Alphabet.Add(item);

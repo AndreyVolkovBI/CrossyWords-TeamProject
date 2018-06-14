@@ -12,5 +12,6 @@ namespace CrossyWords.Core
     {
         public int Id { get; set; }
         public string Word { get; set; }
+        public Level Level { get; set; }
     }
 }

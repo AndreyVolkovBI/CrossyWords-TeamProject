@@ -138,7 +138,7 @@ namespace CrossyWords.Core
                 Cells.Add(new Cell { Id = i });
         }
 
-        public static List<string> ReadFromJson(string name)
+        public List<string> ReadFromJson(string name)
         {
             try
             {
@@ -151,18 +151,6 @@ namespace CrossyWords.Core
             {
                 throw new Exception("Error reading data");
             }
-        }
-
-        public List<WordItem> GetWords()
-        {
-            List<WordItem> list = new List<WordItem>();
-
-            foreach (var item in ReadFromJson("Words12000"))
-            {
-                var word = new WordItem() { Word = item };
-                list.Add(word);
-            }
-            return list;
         }
 
         public List<AlphabetItem> GetAlphabet()
