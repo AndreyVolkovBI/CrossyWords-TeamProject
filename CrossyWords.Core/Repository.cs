@@ -46,10 +46,20 @@ namespace CrossyWords.Core
 
         public List<Cell> FillAllCells(List<WordItem> list)
         {
+            Random r = new Random();
             Cells = new List<Cell>();
             FullIdCells();
 
-            foreach (var item in list)
+            List<WordItem> cellWords = new List<WordItem>();
+
+            foreach (var word in list)
+            {
+                WordItem witem = list[r.Next(0, list.Count - 1)];
+                if (!cellWords.Contains(witem))
+                    cellWords.Add(witem);
+            }
+
+            foreach (var item in cellWords)
                 FillWord(item.Word);
 
             FillBlankCells();
