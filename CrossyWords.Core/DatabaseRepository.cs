@@ -8,8 +8,13 @@ namespace CrossyWords.Core
 {
     public class DatabaseRepository
     {
-        public List<WordItem> Words { get; set; }
-        public List<AlphabetItem> Alphabet { get; set; }
+        public List<WordItem> Words { get; set; } = new List<WordItem>();
+        public List<AlphabetItem> Alphabet { get; set; } = new List<AlphabetItem>();
+
+        public DatabaseRepository()
+        {
+            FillWordsAndAlphabet();
+        }
 
         public void FillWordsAndAlphabet()
         {

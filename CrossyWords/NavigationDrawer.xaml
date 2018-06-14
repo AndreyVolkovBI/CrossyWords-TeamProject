@@ -93,6 +93,12 @@
                             <TextBlock Text="Settings" VerticalAlignment="Center" Margin="20 10"/>
                         </StackPanel>
                     </ListViewItem>
+                    <ListViewItem Height="60" Name="Logout">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="Logout" Width="25" Margin="10" Height="25" VerticalAlignment="Center"/>
+                            <TextBlock Text="Log out" VerticalAlignment="Center" Margin="20 10"/>
+                        </StackPanel>
+                    </ListViewItem>
                 </ListView>
             </StackPanel>
         </Grid>

@@ -17,7 +17,6 @@ namespace CrossyWords.Core
 
         List<int> GetIds(int id);
         List<Cell> FillAllCells();
-        List<string> ReadJson(string name);
         bool IsWordInList(string word);
 
         List<WordItem> GetWords();

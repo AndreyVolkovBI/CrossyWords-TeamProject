@@ -20,35 +20,26 @@ namespace CrossyWords.Core
 
     public class Repository : IRepository
     {
-        public bool GameOn { get; set; } = false;
+        DatabaseRepository _db = new DatabaseRepository();
 
+        public bool GameOn { get; set; } = false;
         public int Dimension { get; set; } = 5;
 
         public List<WordItem> Words { get; set; } = new List<WordItem>();
-
         public List<Cell> Cells { get; set; } = new List<Cell>(); // список всех ячеек
 
         public Repository()
         {
-            //FilterWords();
-
-            //BasicWords = ReadJson("Words");
+            Words = _db.Words;
             FullIdCells();
         }
-
-        //public void FillGaps()
-        //{
-        //    Random r = new Random();
-        //    string word = Words[r.Next(0, Words.Count - 1)].Word;
-        //    Word_DB currentWord = new Word_DB { Value = word, Count = word.Length };
-        //}
 
         public void FillBlankCells()
         {
             Random r = new Random();
             foreach (var cell in Cells)
                 if (cell.Value == null)
-                    cell.Value = ReadJson("Aplphabet")[r.Next(25)];
+                    cell.Value = _db.Alphabet[r.Next(25)].Letter;
         }
 
         public List<Cell> FillAllCells()
@@ -118,28 +109,13 @@ namespace CrossyWords.Core
                 Cells.Add(new Cell { Id = i });
         }
 
-        public List<string> ReadJson(string name)
-        {
-            try
-            {
-                using (var reader = new StreamReader($"../../../{name}.json"))
-                {
-                    return JsonConvert.DeserializeObject<List<string>>(reader.ReadToEnd());
-                }
-            }
-            catch
-            {
-                throw new Exception("Error reading data");
-            }
-        }
-
         public List<WordItem> GetWords()
         {
             List<WordItem> list = new List<WordItem>();
 
-            foreach (var item in ReadJson("Words"))
+            foreach (var item in _db.Words)
             {
-                var word = new WordItem() { Word = item };
+                var word = new WordItem() { Word = item.Word };
                 list.Add(word);
             }
             return list;
@@ -149,9 +125,9 @@ namespace CrossyWords.Core
         {
             List<AlphabetItem> list = new List<AlphabetItem>();
 
-            foreach (var item in ReadJson("Alphabet"))
+            foreach (var item in _db.Alphabet)
             {
-                var letter = new AlphabetItem() { Letter = item };
+                var letter = new AlphabetItem() { Letter = item.Letter };
                 list.Add(letter);
             }
             return list;

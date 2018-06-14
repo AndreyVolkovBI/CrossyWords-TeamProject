@@ -35,7 +35,6 @@ namespace CrossyWords
             if (CheckNullFields())
                 if (CheckLengthOfFields())
                 {
-
                     if (DetermineUniquiness())
                     {
                         try
@@ -58,7 +57,6 @@ namespace CrossyWords
         {
             NavigationService.Navigate(new LogInPage()); //nul or get optimization
         }
-
 
         private bool CheckNullFields()
         {

@@ -69,6 +69,10 @@ namespace CrossyWords
                         usc = new SettingsPage();
                         GridMain_Frame.Navigate(usc);
                         break;
+                    case "Logout":
+                        usc = new LogInPage();
+                        NavigationService.Navigate(usc);
+                        break;
                     default:
                         break;
                 }
