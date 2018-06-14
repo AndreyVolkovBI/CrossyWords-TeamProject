@@ -1,4 +1,5 @@
-﻿using CrossyWords.Core.BruteForce;
+﻿using CrossyWords.Core.API.OxfordDictionary;
+using CrossyWords.Core.BruteForce;
 using CrossyWords.Core.Users;
 using Newtonsoft.Json;
 using System;

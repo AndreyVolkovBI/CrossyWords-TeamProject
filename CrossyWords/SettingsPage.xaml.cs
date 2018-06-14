@@ -41,6 +41,12 @@ namespace CrossyWords
 
             foreach (var item in _repo.Categories)
                 categoryComboBox.Items.Add(item);
+
+            if (_repo.Levels.Count == 0)
+                _repo.FillLevels();
+
+            foreach (var item in _repo.Levels)
+                levelComboBox.Items.Add(item);
         }
 
         private void Button_Game_Click(object sender, RoutedEventArgs e)
@@ -63,6 +69,7 @@ namespace CrossyWords
         {
             AcceptChangesWithName();
             AcceptChangesWithPassword();
+            AcceptChangesWayOfFillingIn();
         }
 
         private void AcceptChangesWithPassword()
@@ -143,12 +150,29 @@ namespace CrossyWords
 
         private void levelComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            categoryComboBox.SelectedIndex = -1;
+            if (levelComboBox.SelectedIndex != -1)
+                categoryComboBox.SelectedIndex = -1;
         }
 
         private void categoryComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            levelComboBox.SelectedIndex = -1;
+            if (categoryComboBox.SelectedIndex != -1)
+                levelComboBox.SelectedIndex = -1;
+        }
+
+        private void AcceptChangesWayOfFillingIn()
+        {
+            if (levelComboBox.SelectedIndex != -1)
+            {
+                _repo.SelectedLevel = levelComboBox.SelectedItem as Level;
+                _repo.SelectedCategory = null;
+            }
+
+            if (categoryComboBox.SelectedIndex != -1)
+            {
+                _repo.SelectedCategory = levelComboBox.SelectedItem as Category;
+                _repo.SelectedLevel = null;
+            }
         }
     }
 }

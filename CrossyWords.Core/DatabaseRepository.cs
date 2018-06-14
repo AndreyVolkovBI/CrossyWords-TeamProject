@@ -12,7 +12,11 @@ namespace CrossyWords.Core
         public List<WordItem> Words { get; set; } = new List<WordItem>();
         public List<AlphabetItem> Alphabet { get; set; } = new List<AlphabetItem>();
 
+        public List<Level> Levels { get; set; } = new List<Level>();
         public List<Category> Categories { get; set; } = new List<Category>();
+
+        public Level SelectedLevel { get; set; } // chosen level or category
+        public Category SelectedCategory { get; set; }
 
         public DatabaseRepository()
         {
@@ -26,6 +30,15 @@ namespace CrossyWords.Core
                 foreach (var item in context.Categories)
                     Categories.Add(item);
             }
+        }
+
+        public void FillLevels()
+        {
+            Levels.Add(new Level { Id = 1, Name = "Beginner - 1000 words" });
+            Levels.Add(new Level { Id = 2, Name = "Intermediate - 5000 words" });
+            Levels.Add(new Level { Id = 3, Name = "Advanced - 12000 words" });
+
+            SelectedLevel = Levels.FirstOrDefault(x => x.Id == 1);
         }
 
         public void FillWordsAndAlphabet()
