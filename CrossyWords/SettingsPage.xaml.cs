@@ -32,6 +32,15 @@ namespace CrossyWords
             InitializeComponent();
             textbox_NickName.Text = _usersdata.User.Name;
             Init();
+            SelectedItem();
+        }
+
+        private void SelectedItem()
+        {
+            if (_repo.SelectedLevel != null)
+                levelComboBox.SelectedItem = _repo.SelectedLevel.Name;
+            if (_repo.SelectedCategory != null)
+                categoryComboBox.SelectedItem = _repo.SelectedCategory.Name;
         }
 
         private void Init()

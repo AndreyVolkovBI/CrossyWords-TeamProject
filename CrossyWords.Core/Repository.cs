@@ -46,7 +46,10 @@ namespace CrossyWords.Core
 
         public List<Cell> FillAllCells(List<WordItem> list)
         {
-            foreach(var item in list)
+            Cells = new List<Cell>();
+            FullIdCells();
+
+            foreach (var item in list)
                 FillWord(item.Word);
 
             FillBlankCells();
@@ -62,28 +65,31 @@ namespace CrossyWords.Core
 
             bool flag = false;
 
-            Cell currentCell = GetVacantCells()[r.Next(0, GetVacantCells().Count - 1)];
-            currentCell.Value = word[0].ToString();
-
-            for (int i = 1; i < word.Length; i++)
+            if (GetVacantCells().Count > 1)
             {
-                foreach(var item in GetIds(currentCell.Id))
+                Cell currentCell = GetVacantCells()[r.Next(0, GetVacantCells().Count - 1)];
+                currentCell.Value = word[0].ToString();
+
+                for (int i = 1; i < word.Length; i++)
                 {
-                    if (Cells.FirstOrDefault(x => x.Id == item).Value == null && FillLetter(word[i].ToString(), Cells.FirstOrDefault(x => x.Id == item)))
+                    foreach (var item in GetIds(currentCell.Id))
                     {
-                        currentCell = Cells.FirstOrDefault(x => x.Id == item);
-                        flag = true;
-                        break;
+                        if (Cells.FirstOrDefault(x => x.Id == item).Value == null && FillLetter(word[i].ToString(), Cells.FirstOrDefault(x => x.Id == item)))
+                        {
+                            currentCell = Cells.FirstOrDefault(x => x.Id == item);
+                            flag = true;
+                            break;
+                        }
                     }
-                }
 
-                if (!flag)
-                {
-                    Cells = stackListCells.Pop();
-                    return false;
-                }
+                    if (!flag)
+                    {
+                        Cells = stackListCells.Pop();
+                        return false;
+                    }
 
-                flag = false;
+                    flag = false;
+                }
             }
             return true;
         }
