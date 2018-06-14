@@ -15,8 +15,10 @@ namespace CrossyWords.Core
         public UsersData()
         {
             
+            
         }
 
+        
         public void UpdateUser()
         {
             using (var context = new Context())
@@ -182,50 +184,12 @@ namespace CrossyWords.Core
         {
             using (var context = new Context())
             {
-                var battles = context.Battles.Include("User_1").Include("User_2").Where(b => b.User_1.Id == User.Id || b.User_2.Id == User.Id).ToList(); //(b.Points_User1 != null && b.Points_User2 != null && b.DateOfChallenge - DateTime.Now() 
+                var battles = context.Battles.Include("User_1").Include("User_2").Where(b => b.User_1.Id == User.Id || b.User_2.Id == User.Id).ToList(); 
 
                 List<BattleForInfo> battleForInfos = new List<BattleForInfo>();
 
                 foreach (var battle in battles)
-                {
-                    //User opponent;
-                    //string score;
-                    //string points;
-                    //string status = null;
-
-                    //if (battle.IsPlayedUser1 && battle.IsPlayedUser2)
-                    //{
-                    //    status = "finished";
-                    //}
-
-                    
-                    //var battleforinfo = new BattleForInfo(User, battle);
-
-
-                    //if (battle.User_1.Id == User.Id)
-                    //{
-                    //    opponent = battle.User_2;
-                    //    score = battle.Score_User1.ToString() + ":" + battle.Score_User2.ToString();
-                    //    points = battle.Points_User1.ToString() + ":" + battle.Points_User2.ToString();
-                    //    if (string.IsNullOrWhiteSpace(status) && battle.IsPlayedUser1)
-                    //        status = "waiting opponent";
-                    //    else if (string.IsNullOrWhiteSpace(status))
-                    //        status = "your raund";
-
-                    //}
-                    //else
-                    //{
-                    //    opponent = battle.User_1;
-                    //    score = battle.Score_User2.ToString() + ":" + battle.Score_User1.ToString();
-                    //    points = battle.Points_User2.ToString() + ":" + battle.Points_User1.ToString();
-                    //    if (string.IsNullOrWhiteSpace(status) && battle.IsPlayedUser2)
-                    //        status = "waiting opponent";
-                    //    else if(string.IsNullOrWhiteSpace(status))
-                    //        status = "your round";
-                    //}
-
-
-                   
+                {                   
                     battleForInfos.Add(new BattleForInfo(User, battle));
                 }
                 return battleForInfos;
@@ -236,7 +200,7 @@ namespace CrossyWords.Core
         {
             using (var context = new Context())
             {
-                var battle = context.Battles.First(b => b.User_1.Id == User.Id && b.User_2.Id == battleForInfo.Opponent.Id || b.User_1.Id == battleForInfo.Opponent.Id && b.User_2.Id == User.Id);
+                var battle = context.Battles.First(b => b.Id == battleForInfo.Id);
                 return battle;
             }
         }
@@ -247,57 +211,29 @@ namespace CrossyWords.Core
             {
 
                 if (context.Battles.Include("User_1").First(b => b.Id == battle.Id).User_1.Id == User.Id)
-                {
                     context.Battles.First(b => b.Id == battle.Id).Points_User1 = points;
-                    //context.Battles.First(b => b.Id == battle.Id).IsPlayedUser1 = true;
-                }
                 else
-                {
                     context.Battles.First(b => b.Id == battle.Id).Points_User2 = points;
-                    //context.Battles.First(b => b.Id == battle.Id).IsPlayedUser2 = true;
-                }
 
                 if (allwords != null)
-                {
                     context.Battles.First(b => b.Id == battle.Id).AllWords = allwords;
-                }
                 else
                 {
-
                     User user1 = context.Battles.Include("User_1").First(b => b.Id == battle.Id).User_1;
                     User user2 = context.Battles.Include("User_2").First(b => b.Id == battle.Id).User_2;
                     if (context.Battles.First(b => b.Id == battle.Id).Points_User1 < context.Battles.First(b => b.Id == battle.Id).Points_User2)
-                    {
-                        //context.Battles.First(b => b.Id == battle.Id).Score_User2 = 1;
-                        //context.Users.First(u => u.Id == user1.Id).Lose = user1.Lose + 1;
-                        //context.Users.First(u => u.Id == user2.Id).Win = user2.Win + 1;
+                    {                       
                         AddWIn(user2);
                         AddLose(user1);
-
                     }
                     else if(context.Battles.First(b => b.Id == battle.Id).Points_User1 > context.Battles.First(b => b.Id == battle.Id).Points_User2)
                     {
-                        //context.Battles.First(b => b.Id == battle.Id).Score_User1 = 1;
-                        //context.Users.First(u => u.Id == user1.Id).Win = user1.Win + 1;
-                        //context.Users.First(u => u.Id == user2.Id).Lose = user2.Lose + 1;
                         AddWIn(user1);
-                        AddLose(user2);
-                       
+                        AddLose(user2);                       
                     }
                     else
-                    {
-                        //context.Battles.First(b => b.Id == battle.Id).Score_User2 = 1;
-                        //context.Battles.First(b => b.Id == battle.Id).Score_User1 = 1;
                         AddDraws(user1, user2);
-                        //context.Users.First(u => u.Id == user1.Id).Draw = user1.Draw + 1;
-                        //context.Users.First(u => u.Id == user2.Id).Draw = user2.Draw + 1;
-                        
-                    }
-
-
-                    //context.SaveChanges();
-                    //UpdateRating(user1);
-                    //UpdateRating(user2);
+                    UpdateUser();
                 }
                 context.SaveChanges();
                 
@@ -345,13 +281,17 @@ namespace CrossyWords.Core
                 List<RatingUser> topUsers = new List<RatingUser>();
                 int count = context.Users.Count();
                
-                for (int i = 0; i < 20; i++)
+                for (int i = 0; i < 21; i++)
                 {
                     var user = context.Users.OrderByDescending(r => r.Win * 3 + r.Draw - 2 * r.Lose).ToList()[i];
                     topUsers.Add(new RatingUser { Name = user.Name, Number = i + 1, Rating = user.Win * 3 + user.Draw - 2 * user.Lose });
                     if (count <= i + 1)
                         break;
                 }
+
+                if (topUsers.FirstOrDefault(u => u.Name == User.Name) == null)
+                      topUsers.Add(new RatingUser {Name = User.Name, Rating = 3 * User.Win + User.Draw - 2 * User.Lose, Number = context.Users.OrderByDescending(r => r.Win * 3 + r.Draw - 2 * r.Lose).ToList().FindIndex(u => u.Id == User.Id)});
+
                 return topUsers;
 
             }

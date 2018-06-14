@@ -32,25 +32,8 @@ namespace CrossyWords
         private void FillRating()
         {
             DataGridRating.ItemsSource = _usersdata.GetRatingOfUsers();
-
         }
 
-        private void Button_Game_Click(object sender, RoutedEventArgs e)
-        {
-            NavigationService.Navigate(new AccountPage());
-
-        }
-
-        private void Button_ChallengePage_Click(object sender, RoutedEventArgs e)
-        {
-            NavigationService.Navigate(new ChallangePage());
-
-        }
-
-        private void Button_Settings_Click(object sender, RoutedEventArgs e)
-        {
-            NavigationService.Navigate(new SettingsPage());
-
-        }
+        
     }
 }

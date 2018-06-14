@@ -8,6 +8,7 @@ namespace CrossyWords.Core.Users
 {
     public class BattleForInfo
     {
+        public int Id { get; set; }
         public User Opponent { get; set; } //
         public string Score { get; set; }
         public string Status { get; set; } //
@@ -34,6 +35,7 @@ namespace CrossyWords.Core.Users
 
         public BattleForInfo(User user, Battle battle)
         {
+            Id = battle.Id;
             if (battle.User_1.Id == user.Id) //you are user1
             {
                 Opponent = battle.User_2;

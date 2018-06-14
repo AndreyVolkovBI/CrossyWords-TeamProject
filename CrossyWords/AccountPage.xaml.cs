@@ -27,38 +27,22 @@ namespace CrossyWords
         {
             InitializeComponent();
             ShowAllInformation();
+
         }
 
         private void ShowAllInformation()
         {
-            _usersData.UpdateUser();
             TextBlock_Win.Text = "Win: " + _usersData.User.Win.ToString();
             TextBlock_Draw.Text = "Draw: " + _usersData.User.Draw.ToString();
             TextBlock_Loss.Text = "Loss: " + _usersData.User.Lose.ToString();
-
             DataGridInfoBattles.ItemsSource = _usersData.GetAllCurrentBattles();
 
-        }
-
-        private void Button_ChallengePage_Click(object sender, RoutedEventArgs e)
-        {
-            NavigationService.Navigate(new ChallangePage());
-        }
-
-        private void Button_Rating_Click(object sender, RoutedEventArgs e)
-        {
-            NavigationService.Navigate(new RatingPage());
-        }
-
-        private void Button_Settings_Click(object sender, RoutedEventArgs e)
-        {
-            NavigationService.Navigate(new SettingsPage());
         }
 
         private void DataGrid_MouseDoubleCLick(object sender, MouseButtonEventArgs e)
         {
             var battleForInfo = DataGridInfoBattles.SelectedItem as BattleForInfo;
-            if (battleForInfo != null && battleForInfo.Status == "your round")
+            if (battleForInfo != null && battleForInfo.AllowPlayBattle())
             {
                 var battle = _usersData.FindCertainBattle(battleForInfo);
                 NavigationService.Navigate(new GamePage(battle));
