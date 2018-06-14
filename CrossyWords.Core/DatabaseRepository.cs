@@ -52,16 +52,13 @@ namespace CrossyWords.Core
         {
             Levels.Add(new Level { Id = 1, Name = "Beginner - 1000 words" });
             Levels.Add(new Level { Id = 2, Name = "Intermediate - 5000 words" });
-            Levels.Add(new Level { Id = 3, Name = "Advanced - 12000 words" });
-
-            SelectedLevel = Levels.FirstOrDefault(x => x.Id == 1);
         }
 
         public List<WordItem> GetWords()
         {
             using (var context = new Context())
             {
-                return context.Words.ToList();
+                return context.Words.Include("Level").ToList();
             }
         }
 
