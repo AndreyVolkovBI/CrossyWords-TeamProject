@@ -15,6 +15,8 @@
                 <RowDefinition Height="3.5*"/>
             </Grid.RowDefinitions>
 
+            <TextBlock Grid.Row="0" Text="Rating" TextAlignment="Center" VerticalAlignment="Center" FontSize="45" FontFamily="./#FARRAY"/>
+
             <DataGrid x:Name="DataGridRating" Grid.Row="1" Margin="30 0 15 15" AutoGenerateColumns="False" IsReadOnly="True">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="№" Width="1*" Binding="{Binding Number}" />

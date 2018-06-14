@@ -156,12 +156,7 @@ namespace CrossyWords.Core
             User opponent;
             using (var context = new Context())
             {
-                Random r = new Random();
-                //do
-                //{
-                //    int random = r.Next(0, context.Users.Count());
-                //    opponent = context.Users.ToList()[random];
-                //} while (opponent.Id == User.Id || context.Battles.FirstOrDefault(b => b.User_1.Id == User.Id && b.User_2.Id == opponent.Id || b.User_1.Id == opponent.Id && b.User_2.Id == User.Id) != null);
+                Random r = new Random();                
                 int randomMax = r.Next(0, context.Users.Where(u => u.Id != User.Id && context.Battles.FirstOrDefault(b => (b.User_1.Id == User.Id && b.User_2.Id == u.Id || b.User_1.Id == u.Id && b.User_2.Id == User.Id) && (b.Points_User1 == null || b.Points_User2 == null)) == null).Count());
                 opponent = context.Users.Where(u => u.Id != User.Id && context.Battles.FirstOrDefault(b => (b.User_1.Id == User.Id && b.User_2.Id == u.Id || b.User_1.Id == u.Id && b.User_2.Id == User.Id) && (b.Points_User1 == null || b.Points_User2 == null)) == null).ToList()[r.Next(0, randomMax)];
             }
