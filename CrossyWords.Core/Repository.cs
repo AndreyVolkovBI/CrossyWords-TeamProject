@@ -60,7 +60,8 @@ namespace CrossyWords.Core
             }
 
             foreach (var item in cellWords)
-                FillWord(item.Word);
+                if (!FillWord(item.Word))
+                    break;
 
             FillBlankCells();
             return Cells;
